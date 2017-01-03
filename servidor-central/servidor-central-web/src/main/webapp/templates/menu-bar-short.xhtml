@@ -1,0 +1,26 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:form>
+	    <p:menubar autoDisplay="false" styleClass="shortScreen">
+		    <p:submenu label="#{msg['menu.administracion']}" rendered="#{facesContext.externalContext.isUserInRole('ROLE_ADM_CLIENTES') || facesContext.externalContext.isUserInRole('ROLE_ADM_PRODUCTOS')}">
+	            <p:menuitem value="#{msg['menu.clientes']}" url="/ui/clientes.xhtml" rendered="#{facesContext.externalContext.isUserInRole('ROLE_ADM_CLIENTES')}"/>
+	            <p:menuitem value="#{msg['menu.productos']}" url="/ui/productos.xhtml" rendered="#{facesContext.externalContext.isUserInRole('ROLE_ADM_PRODUCTOS')}"/>
+	        </p:submenu>
+	        <p:submenu label="#{msg['menu.operaciones']}" rendered="#{facesContext.externalContext.isUserInRole('ROLE_ADM_PRESUPUESTOS') || facesContext.externalContext.isUserInRole('ROLE_ADM_PEDIDOS') || facesContext.externalContext.isUserInRole('ROLE_ADM_ORDENES_TRABAJO')}">
+	            <p:menuitem value="#{msg['menu.presupuestos']}" url="/ui/presupuestos.xhtml" rendered="#{facesContext.externalContext.isUserInRole('ROLE_ADM_PRESUPUESTOS')}"/>   
+	            <p:menuitem value="#{msg['menu.pedidos']}" url="/ui/pedidos.xhtml" rendered="#{facesContext.externalContext.isUserInRole('ROLE_ADM_PEDIDOS')}"/>
+	            <p:menuitem value="#{msg['menu.ordenesTrabajo']}" url="/ui/ordenesTrabajo.xhtml" rendered="#{facesContext.externalContext.isUserInRole('ROLE_ADM_ORDENES_TRABAJO')}"/>   
+	        </p:submenu>
+	 
+	        <f:facet name="options">
+	            <p:button href="${request.contextPath}/logout" value="Logout" icon="ui-icon-extlink"></p:button>
+	        </f:facet>
+	    </p:menubar>
+   	  </h:form>
+</ui:composition>

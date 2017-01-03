@@ -1,0 +1,226 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../templates/ui.xhtml">
+        <f:metadata>
+		    <f:viewParam name="presupuestoId" value="#{presupuestoController.presupuestoId}" />
+		    <f:event type="preRenderView" listener="#{presupuestoController.init}"/>
+		</f:metadata>
+
+
+    <ui:define name="content">
+   	
+        <h:form id="form">  
+            <p:growl id="messages" showDetail="true" life="4000" />
+
+            <p:outputPanel style="padding-top: 18px; padding-bottom: 8px;">
+                <h:outputText value="#{msg['presupuesto.titulo']}" styleClass="title"/>
+            </p:outputPanel>
+          
+			<p:outputPanel id="outputPanelEdit" style="text-align:center;">
+            
+	            <p:panelGrid columns="3">	      
+					<p:outputLabel for="fechaCreacion" value="#{msg['presupuesto.fecha']}:" />  
+	                <p:calendar id="fechaCreacion" value="#{presupuestoController.editableFechaCreacion}" effect="fold" 
+	                			locale="es" pattern="dd-MMM-yyyy" disabled="true"/>
+					<p:message for="fechaCreacion" />
+	                
+	                <p:outputLabel for="presupuestoCliente" value="#{msg['presupuesto.cliente']}:" />  
+	                <p:autoComplete id="presupuestoCliente" forceSelection="true" dropdown="true" 
+	                				var="presupuestoCliente"  
+	                				value="#{presupuestoController.editable.cliente}"
+	                				itemLabel="#{presupuestoCliente.nombreCompleto}"
+	                				itemValue="#{presupuestoCliente}"
+	                				converter="clienteConverter"
+	               	 			    completeMethod="#{presupuestoController.completarCliente}" 
+	               	 			    required="true"
+	               	 			    disabled="#{presupuestoController.editable.presupuestoEstado.id != presupuestoController.presupuestoEstadoEnumCreado}"/>
+	               	<p:message for="presupuestoCliente" /> 			    
+	                
+	                <p:outputLabel for="fechaValidoHasta" value="#{msg['presupuesto.fechaValidoHasta']}:" />  
+	                <p:calendar id="fechaValidoHasta" value="#{presupuestoController.editableFechaValidoHasta}" effect="fold" 
+	                			locale="es" pattern="dd-MMM-yyyy" required="true" 
+	                			disabled="#{presupuestoController.editable.presupuestoEstado.id != presupuestoController.presupuestoEstadoEnumCreado}"/>
+					<p:message for="fechaValidoHasta" />
+					
+					<p:outputLabel for="estado" value="#{msg['presupuesto.estado']}:" />  
+	                <p:outputLabel id="estado" value="#{presupuestoController.editable.presupuestoEstado.nombre}"/>
+					<p:message for="estado" />
+	            </p:panelGrid>                                                         
+           	</p:outputPanel>
+           	
+           	<p:outputPanel style="padding-top: 25px; padding-bottom: 25px;">
+                <p:commandButton id="new" value="#{msg['boton.agregar.detalle']}" icon="ui-icon-plusthick" style="float:right" 
+                				 rendered="#{presupuestoController.editable.presupuestoEstado.id == presupuestoController.presupuestoEstadoEnumCreado}"
+                                 actionListener="#{presupuestoController.prepareNewDetalle}" process="@this" immediate="true" update=":form:panelEdit"
+                                 oncomplete="PF('dialogEdit').show()" />
+            </p:outputPanel>
+            
+           	<p:dataTable id="detalles" var="detalle" value="#{presupuestoController.editable.detalles.detallePresupuesto}" editable="true" style="margin-bottom:20px"
+           				 sortBy="#{detalle.producto.id}">
+		       <f:facet name="header">
+		           <h:outputText value="#{msg['presupuesto.detalle.titulo']}" />  
+		       </f:facet>
+		 
+		       <p:ajax event="rowEdit" listener="#{presupuestoController.onRowEdit}" update=":form:messages,:form:montoTotal"/>
+		       <p:ajax event="rowEditCancel" listener="#{presupuestoController.onRowCancel}" update=":form:messages" />
+		       
+		       <p:column headerText="#{msg['presupuesto.detalle.codigoProducto']}" style="text-align:center;">
+		           <p:cellEditor>
+		               <f:facet name="output"><h:outputText value="#{detalle.producto.id}" /></f:facet>
+		               <f:facet name="input"><h:outputText value="#{detalle.producto.id}" /></f:facet>
+		           </p:cellEditor>
+		       </p:column>
+		       
+		       <p:column headerText="#{msg['presupuesto.detalle.cantidad']}" style="text-align:center;">
+		           <p:cellEditor>
+		               <f:facet name="output"><h:outputText value="#{detalle.cantidad}" /></f:facet>
+		               <f:facet name="input"><h:inputText value="#{detalle.cantidad}" size="10"/></f:facet>
+		           </p:cellEditor>
+		       </p:column>
+		       
+		       <p:column headerText="#{msg['presupuesto.detalle.nombreProducto']}">
+		           <p:cellEditor>
+		               <f:facet name="output"><h:outputText value="#{detalle.nombre}" /></f:facet>
+		               <f:facet name="input"><h:inputText value="#{detalle.nombre}" /></f:facet>
+		           </p:cellEditor>
+		       </p:column>
+		       
+		       <p:column headerText="#{msg['presupuesto.detalle.descripcionProducto']}">
+		           <p:cellEditor>
+		               <f:facet name="output"><h:outputText value="#{detalle.descripcion}" /></f:facet>
+		               <f:facet name="input"><h:inputTextarea value="#{detalle.descripcion}" rows="3" cols="25" maxlength="1000"/></f:facet>
+		           </p:cellEditor>
+		       </p:column>
+		       
+		 	   <p:column headerText="#{msg['presupuesto.detalle.medida']}" style="text-align:center;">
+		           <p:cellEditor>
+		               <f:facet name="output"><h:outputText value="#{detalle.medida}" /><h:outputLabel value=" (#{detalle.producto.unidadMedida.simbolo})" /></f:facet>
+		               <f:facet name="input"><h:inputText value="#{detalle.medida}" size="10"/></f:facet>
+		           </p:cellEditor>
+		       </p:column>
+		 
+		       <p:column headerText="#{msg['presupuesto.detalle.precioUnitario']}" style="text-align:center;">
+		           <p:cellEditor>
+		               <f:facet name="output">
+		               		<h:outputText value="#{detalle.precioUnitario}">
+				                    <f:convertNumber type="currency" currencySymbol="$" />
+		               		</h:outputText>
+		               </f:facet>
+		               <f:facet name="input"><h:inputText value="#{detalle.precioUnitario}" size="10"/></f:facet>
+		           </p:cellEditor>
+		       </p:column>
+		       
+		       <p:column headerText="#{msg['presupuesto.detalle.monto']}" style="text-align:center;">
+		           <p:cellEditor>
+		               <f:facet name="output">
+		               		<h:outputText value="#{detalle.precioUnitario * detalle.cantidad * detalle.medida}">
+			                    <f:convertNumber type="currency" currencySymbol="$" />
+		               		</h:outputText>
+		               </f:facet>
+		               <f:facet name="input"><p:inputText value="#{detalle.precioUnitario * detalle.cantidad * detalle.medida}" size="10" disabled="true"/></f:facet>
+		           </p:cellEditor>
+		       </p:column>
+		 
+		       <p:column id="editColumn" style="width:4%;" rendered="#{presupuestoController.editable.presupuestoEstado.id == presupuestoController.presupuestoEstadoEnumCreado}">
+		            <p:rowEditor rendered="#{detalle.id > 0}"/>
+		       </p:column>
+		       
+		       <p:column id="deleteColumn" style="width:4%;" rendered="#{presupuestoController.editable.presupuestoEstado.id == presupuestoController.presupuestoEstadoEnumCreado}">
+		       		<p:commandButton id="deleteDetalle" action="#{presupuestoController.deleteDetalle}" icon="ui-icon-trash" immediate="true" update=":form:messages">
+			       		 <f:setPropertyActionListener value="#{detalle}" target="#{presupuestoController.detalleEditable}" />  			
+			       		 <p:confirm header="#{msg['eliminar.confirmDialog.header']}" message="#{msg['eliminar.confirmDialog.message']}" icon="ui-icon-alert" />
+			        </p:commandButton>
+		       </p:column>
+		       
+		   </p:dataTable>
+		   
+		   <p:outputPanel style="float:right;padding-right: 180px;" styleClass="ui-montoTotal">
+	   			<p:outputLabel for="montoTotal" value="#{msg['columna.total']}: " /> 
+	   		   	<p:outputLabel id="montoTotal" value="#{presupuestoController.montoTotal}">
+			    	<f:convertNumber type="currency" currencySymbol="$" />
+			    </p:outputLabel>
+		   </p:outputPanel>
+		   
+		   <p:spacer height="20"/>
+		   
+		   <p:panelGrid columns="6" styleClass="panelGridCenter">
+	             <p:commandButton id="save" value="#{msg['boton.guardar']}" icon="ui-icon-pencil"
+	                              action="#{presupuestoController.save}"
+	                              rendered="#{presupuestoController.editable.presupuestoEstado.id == presupuestoController.presupuestoEstadoEnumCreado}"/>    
+	             <p:commandButton id="delete" action="#{presupuestoController.delete}" icon="ui-icon-trash" value="#{msg['boton.eliminar']}" 
+			       				  rendered="#{facesContext.externalContext.isUserInRole('ROLE_DELETE_PRESUPUESTO') and presupuestoController.editable.id > 0 and presupuestoController.editable.presupuestoEstado.id == presupuestoController.presupuestoEstadoEnumCreado}">
+			       		 <p:confirm header="#{msg['eliminar.confirmDialog.header']}" message="#{msg['eliminar.confirmDialog.message']}" icon="ui-icon-alert" />
+			     </p:commandButton> 			  	
+	             <p:commandButton id="print" value="#{msg['boton.imprimir']}" icon="ui-icon-print" 
+                    			  action="#{presupuestoController.saveAndExportToPDF}" ajax="false"
+                    			  onclick="form.target='_blank'"/>                 
+ 				 <p:commandButton id="aprobar" value="#{msg['boton.aprobar']}" icon="ui-icon-check" 
+ 				 				  rendered="#{presupuestoController.editable.presupuestoEstado.id == presupuestoController.presupuestoEstadoEnumCreado}"
+                    			  action="#{presupuestoController.approve}">
+			       		 		  <p:confirm header="#{msg['presupuesto.approve.confirmDialog.header']}" message="#{msg['presupuesto.approve.confirmDialog.message']}" icon="ui-icon-alert" />
+                 </p:commandButton>   			  
+    			 <p:commandButton id="noaprobar" value="#{msg['boton.no.aprobar']}" icon="ui-icon-close" 
+    			 				  rendered="#{presupuestoController.editable.presupuestoEstado.id == presupuestoController.presupuestoEstadoEnumCreado}"
+                    			  action="#{presupuestoController.disapprove}">
+                    	 		  <p:confirm header="#{msg['presupuesto.no.approve.confirmDialog.header']}" message="#{msg['presupuesto.no.approve.confirmDialog.message']}" icon="ui-icon-alert" />		  
+                 </p:commandButton>   			     			     			  
+ 				 <p:commandButton id="cancel" value="#{msg['boton.volver']}" icon="ui-icon-arrowreturnthick-1-w" 
+                    			  immediate="true" action="#{presupuestoController.cancel}"/>
+           </p:panelGrid>
+		   
+		   <p:dialog id="dialogEdit" widgetVar="dialogEdit" header="#{msg['presupuesto.detalle.dialog.header']}"
+                     showEffect="explode" hideEffect="explode" resizable="false">  
+
+                <p:outputPanel id="panelEdit" style="text-align:center;">
+            
+                    <p:panelGrid id="gridEdit" columns="3" rendered="#{presupuestoController.detalleEditable != null}">
+              
+                        <p:outputLabel for="productoNombre" value="#{msg['presupuesto.detalle.nombreProducto']}:" />
+                        <p:autoComplete id="productoNombre" forceSelection="true" dropdown="true"
+	                				var="detallePresupuestoProducto"  
+	                				value="#{presupuestoController.detalleEditable.producto}"
+	                				itemLabel="#{detallePresupuestoProducto.nombre}"
+	                				itemValue="#{detallePresupuestoProducto}"
+	                				converter="productoConverter"
+	               	 			    completeMethod="#{presupuestoController.completarProducto}" 
+	               	 			    required="true">
+	               	 		<p:ajax event="itemSelect" process="@form" update=":form:precioUnitario,:form:medida" render="precioUnitario, medida" listener="#{presupuestoController.onProductoChange}"/>
+	               	 	</p:autoComplete>		    
+                        <p:message for="productoNombre" />
+                        
+                        <p:outputLabel for="precioUnitario" value="#{msg['presupuesto.detalle.precioUnitario']}:" />
+                        <p:inputText id="precioUnitario" value="#{presupuestoController.detalleEditable.precioUnitario}" maxlength="10" size="10"/>
+                        <p:message for="precioUnitario" />
+                        
+						<p:outputLabel for="medida" value="#{msg['presupuesto.detalle.medida']}:" />
+						<h:panelGroup id="medida"> 
+	                        <p:inputText value="#{presupuestoController.detalleEditable.medida}" maxlength="5" size="5"/>
+	                        <h:outputLabel value=" (#{presupuestoController.detalleEditable.producto.unidadMedida.simbolo})" rendered="#{presupuestoController.detalleEditable.producto != null}"/>
+                        </h:panelGroup>
+                        <p:message for="medida" />
+
+                        <p:outputLabel for="cantidad" value="#{msg['presupuesto.detalle.cantidad']}:" />
+                        <p:inputText id="cantidad" value="#{presupuestoController.detalleEditable.cantidad}" maxlength="5" size="5"/>
+                        <p:message for="cantidad" />
+                    </p:panelGrid>
+                </p:outputPanel>
+
+                <p:outputPanel style="padding-top: 5px;">
+                    <p:commandButton id="add" value="#{msg['boton.agregar']}" icon="ui-icon-disk"
+                                     actionListener="#{presupuestoController.addDetalle}" 
+                                     update=":form:panelEdit" />
+                    <p:commandButton id="cancelAdd" value="#{msg['boton.cancelar']}" icon="ui-icon-close" 
+                                     onclick="PF('dialogEdit').hide()" immediate="true" style="float:right" />
+                </p:outputPanel>
+            
+            </p:dialog>
+		   
+
+        </h:form>  
+        
+    </ui:define>
+     
+</ui:composition>

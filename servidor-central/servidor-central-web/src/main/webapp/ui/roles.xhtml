@@ -1,0 +1,84 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../templates/ui.xhtml">
+    
+    <ui:define name="content">
+        
+        <h:form id="form">  
+            <p:growl id="messages" showDetail="true" life="2500" />
+          	
+          	<p:outputPanel>
+            	<h:outputText value="#{msg['roles.titulo']}" styleClass="title"/>
+            </p:outputPanel>
+            
+            <p:outputPanel style="padding-bottom: 25px;">
+                <p:commandButton id="new" value="#{msg['boton.nuevo']}" icon="ui-icon-plusthick" style="float:right"
+                                 actionListener="#{rolesController.prepareNew}" process="@this" immediate="true" update=":form:panelEdit"
+                                 oncomplete="PF('dialogEdit').show()" rendered="#{facesContext.externalContext.isUserInRole('ROLE_NEW_ROL')}"/>
+            </p:outputPanel>
+          
+            <p:dataTable id="rolesTable" var="rol" value="#{rolesController.lazyModel}" lazy="true"
+                         paginator="true" rows="30"  
+                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"  
+                         rowsPerPageTemplate="10,15,20,25,50" 
+                         selectionMode="single" selection="#{rolesController.seleccionado}" rowKey="#{rol.idRol}"
+                         sortBy="#{rol.idRol}" reflow="true">  
+
+                <p:ajax event="rowSelect" listener="#{rolesController.prepareEdit}" update=":form:panelEdit" oncomplete="PF('dialogEdit').show()"/>
+				                
+                <p:column headerText="#{msg['rol.nombre']}" sortBy="#{rol.nombre}" filterBy="#{rol.nombre}" width="20%">  
+                    <h:outputText value="#{rol.nombre}" />  
+                </p:column>  
+
+                <p:column headerText="#{msg['rol.descripcion']}" sortBy="#{rol.descripcion}" filterBy="#{rol.descripcion}" width="20%">  
+                    <h:outputText value="#{rol.descripcion}" />  
+                </p:column>                
+			</p:dataTable>  
+
+           <p:dialog id="dialogEdit" widgetVar="dialogEdit" header="#{msg['rol.dialog.header']}"
+                     showEffect="explode" hideEffect="explode" resizable="false">  
+
+                <p:outputPanel id="panelEdit" style="text-align:center;">
+            
+                    <p:panelGrid id="gridEdit" columns="3" rendered="#{rolesController.editable != null}">
+
+                        <p:outputLabel for="rolNombre" value="#{msg['rol.nombre']}:" />
+                        <p:inputText id="rolNombre" value="#{rolesController.editable.nombre}" required="true" size="30" label="#{msg['rol.nombre']}"/>
+                        <p:message for="rolNombre" />
+                       
+                        <p:outputLabel for="rolDescripcion" value="#{msg['rol.descripcion']}:" />
+                        <p:inputTextarea id="rolDescripcion" value="#{rolesController.editable.descripcion}" label="#{msg['rol.descripcion']}"
+                        				 cols="80" rows="3"/>
+                        <p:message for="rolDescripcion" />
+                       	
+                       	<h:outputLabel for="permisos" value="#{msg['rol.permisos']}:" />
+				        <p:selectCheckboxMenu id="permisos" value="#{rolesController.selectedPermisos}" label="#{msg['rol.seleccione']}" 
+				        					  filter="false" required="true">
+				            <f:selectItems value="#{rolesController.permisos}" var="permiso" itemLabel="#{permiso.descripcion}" itemValue="#{permiso.idPermiso}"/>
+				        </p:selectCheckboxMenu>
+						<p:message for="permisos" />
+                    </p:panelGrid>
+                </p:outputPanel>
+
+                <p:outputPanel style="padding-top: 5px;">
+                    <p:commandButton id="save" value="#{msg['boton.guardar']}" icon="ui-icon-disk"
+                                     actionListener="#{rolesController.save}" 
+                                     update=":form:panelEdit" />
+                    <p:commandButton id="delete" value="#{msg['boton.eliminar']}" icon="ui-icon-trash" actionListener="#{rolesController.delete}" immediate="true" 
+                    			     update="messages" rendered="#{facesContext.externalContext.isUserInRole('ROLE_DELETE_ROL')}"> 
+                        <p:confirm header="#{msg['eliminar.confirmDialog.header']}" message="#{msg['eliminar.confirmDialog.message']}" icon="ui-icon-alert" />
+                    </p:commandButton>                 
+                    <p:commandButton id="cancel" value="#{msg['boton.cancelar']}" icon="ui-icon-close" 
+                                     onclick="PF('dialogEdit').hide()" immediate="true" style="float:right" />
+                </p:outputPanel>
+            
+            </p:dialog>
+            
+        </h:form>  
+
+    </ui:define>
+     
+</ui:composition>

@@ -1,0 +1,81 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../templates/ui.xhtml">
+    
+    <ui:define name="content">
+    
+        <h:form id="form">  
+            <p:growl id="messages" showDetail="true" life="4000" />
+            
+            <p:outputPanel style="padding-top: 18px; padding-bottom: 8px;">
+                <h:outputText value="#{msg['presupuestos.titulo']}" styleClass="title"/>
+            </p:outputPanel>
+            
+            <p:panel>
+		        <h:panelGrid columns="4" cellpadding="10" id="filterGrid">        
+			        <p:outputLabel value="#{msg['presupuesto.filtro.fechaCreacionDesde']}:" />
+			  		<p:calendar id="filtroFechaDesde" value="#{presupuestosController.filtroFechaCreacionDesde}" 
+                                locale="es" pattern="dd-MMM-yyyy" effect="explode" />
+			        
+			        <p:outputLabel value="#{msg['presupuesto.filtro.fechaCreacionHasta']}:" />
+			  		<p:calendar id="filtroFechaHasta" value="#{presupuestosController.filtroFechaCreacionHasta}" 
+                                locale="es" pattern="dd-MMM-yyyy" effect="explode" />
+                                
+			        <p:outputLabel value="#{msg['presupuesto.filtro.estado']}:" />
+			 		<p:selectCheckboxMenu id="menu" value="#{presupuestosController.filtroPresupuestoEstados}" label="#{msg['presupuesto.filtro.seleccionarEstados']}">
+			            <f:selectItems value="#{presupuestosController.presupuestoEstados}" var="estado" itemLabel="#{estado.nombre}" itemValue="#{estado.id}"/>
+			        </p:selectCheckboxMenu>
+                     
+                    <p:outputLabel value="" />            		 			
+	 				<p:commandButton id="search" value="#{msg['boton.buscar']}" icon="ui-icon-search" style="float:right;"
+		                             actionListener="#{presupuestosController.search}"
+		                             update=":form:presupuestosTable"/>           
+		        </h:panelGrid>
+		    </p:panel>
+		    
+            <p:outputPanel style="padding-top: 18px; padding-bottom: 8px; text-align:right;">
+                <p:button id="new"  outcome="editPresupuesto"  ajax="false" value="#{msg['boton.nuevo']}" icon="ui-icon-plusthick"
+                		  rendered="#{facesContext.externalContext.isUserInRole('ROLE_NEW_PRESUPUESTO')}"/>
+            </p:outputPanel>
+          
+            <p:dataTable id="presupuestosTable" var="presupuesto" value="#{presupuestosController.lazyModel}" lazy="true"
+                         paginator="true" rows="25" 
+                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"  
+                         rowsPerPageTemplate="10,15,20,25,50"  rowKey="#{presupuesto.id}" sortBy="#{presupuesto.id}" sortOrder="descending"
+                         selectionMode="single">
+                <p:ajax event="rowSelect" listener="#{presupuestosController.onRowSelect}"
+				        rendered="#{facesContext.externalContext.isUserInRole('ROLE_EDIT_PRESUPUESTO')}">
+				</p:ajax>          
+                
+                <p:column headerText="#{msg['presupuesto.numero']}" sortBy="#{presupuesto.id}" filterBy="#{presupuesto.id}" width="50%" priority="1">  
+                    <h:outputText value="#{presupuesto.id}" />  
+                </p:column>  
+                
+                <p:column headerText="#{msg['presupuesto.cliente']}" sortBy="#{presupuesto.cliente.apellido}" filterBy="#{presupuesto.cliente.apellido}" width="50%" priority="1">  
+                    <h:outputText value="#{presupuesto.cliente.apellido} #{presupuesto.cliente.nombre}" />  
+                </p:column>  
+          
+                <p:column headerText="#{msg['presupuesto.estado']}" sortBy="#{presupuesto.presupuestoEstado.nombre}" filterBy="#{presupuesto.presupuestoEstado.nombre}" width="30%" style="text-align:center;" priority="1">  
+                    <h:outputText value="#{presupuesto.presupuestoEstado.nombre}" />  
+                </p:column>  
+                
+                <p:column headerText="#{msg['presupuesto.fechaCreacion']}" sortBy="#{presupuesto.fechaCreacion}" filterBy="#{presupuesto.fechaCreacion}" width="40%" style="text-align:center;" priority="2">  
+                    <h:outputText value="#{presupuesto.fechaCreacion.toGregorianCalendar().time}">
+                    	 <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>  
+                </p:column>  
+                
+                <p:column headerText="#{msg['presupuesto.fechaValidoHasta']}" sortBy="#{presupuesto.fechaValidoHasta}" filterBy="#{presupuesto.fechaValidoHasta}" width="40%" style="text-align:center;" priority="2">  
+                    <h:outputText value="#{presupuesto.fechaValidoHasta.toGregorianCalendar().time}">
+                    	<f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>  
+                </p:column>  
+            </p:dataTable>  
+        </h:form>  
+        
+    </ui:define>
+     
+</ui:composition>

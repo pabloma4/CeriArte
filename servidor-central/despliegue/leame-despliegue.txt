@@ -1,0 +1,20 @@
+Despliegue del Servidor Central
+-------------------------------
+
+Para el correcto funcionamiento de la aplicacion es necesario, aparte de desplegar la aplicacion web, realizar las siguientes configuraciones.
+
+1) Crear el directorio donde se alojarán los archivos de configuración
+2) Crear una variable de entorno del sistema operativo que se llame 'CONFIG_HOME', con el valor del path absoluto al directorio de archivos de configuracion, creados en el punto anterior.
+3) En el directorio de archivos de configuración crear una carpeta que se llame 'log'.
+4) En el directorio de archivos de configuración crear una carpeta que se llame 'servidor-central'.
+5) Crear en el directorio 'log', el archivo de configuracion de log4j, el archivo deberá llamarse 'log4j.properties'.
+6) Crear en el directorio 'servidor-central', el archivo de configuracion del acceso a la base de datos, el archivo deberá llamarse 'datos.properties'.
+7) En ambientes de desarrollo, o en cualquier caso que se use Tomcat, es necesario crear un datasource, con los datos de ubicacion de la base de datos.
+
+En el mismo directorio, donde se encuentra este documento de desplieuge,  de copian archivos de ejemplo de :
+
+a) archivo de configuración de log4j.
+b) archivo de configuración del acceso a la base de datos.
+c) archivo de configuración del dataSource para Tomcat 7. (context.xml).
+
+FIN DEL DOCUMENTO.

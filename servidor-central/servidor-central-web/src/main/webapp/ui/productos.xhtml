@@ -1,0 +1,157 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../templates/ui.xhtml">
+    
+    <ui:define name="content">
+    
+        <h:form id="form">  
+            <p:growl id="messages" showDetail="true" life="2500" />
+                        
+            <p:outputPanel>
+                <h:outputText value="#{msg['productos.titulo']}" styleClass="title"/>
+            </p:outputPanel>
+            
+            <p:outputPanel style="padding-bottom: 25px;">
+                <p:commandButton id="new" value="#{msg['boton.nuevo']}" icon="ui-icon-plusthick" style="float:right"
+                                 actionListener="#{productosController.prepareNew}" process="@this" immediate="true" update=":form:panelEdit"
+                                 oncomplete="PF('dialogEdit').show()" rendered="#{facesContext.externalContext.isUserInRole('ROLE_NEW_PRODUCTO')}"/>
+            </p:outputPanel>
+          
+            <p:dataTable id="productosTable" var="producto" value="#{productosController.lazyModel}" lazy="true"
+                         paginator="true" rows="25"
+                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"  
+                         rowsPerPageTemplate="10,15,20,25,50" 
+                         selectionMode="single" selection="#{productosController.seleccionado}" rowKey="#{producto.id}"
+                         sortBy="#{producto.id}" sortOrder="descending">  
+
+                <p:ajax event="rowSelect" listener="#{productosController.prepareEdit}" update=":form:panelEdit" oncomplete="PF('dialogEdit').show()"/>
+                
+                <p:column headerText="#{msg['producto.codigo']}" sortBy="#{producto.id}" filterBy="#{producto.id}" width="35%" style="text-align:center;" priority="1">  
+                    <h:outputText value="#{producto.id}"/>  
+                </p:column>  
+                
+                <p:column headerText="#{msg['producto.nombre']}" sortBy="#{producto.nombre}" filterBy="#{producto.nombre}" width="40%" priority="1">  
+                    <h:outputText value="#{producto.nombre}" />  
+                </p:column>  
+          
+                <p:column headerText="#{msg['producto.descripcion']}" sortBy="#{producto.descripcion}" filterBy="#{producto.descripcion}" width="60%" priority="2">  
+                    <h:outputText value="#{producto.descripcion}" />  
+                </p:column>
+                
+				<p:column headerText="#{msg['producto.elaborado']}" sortBy="#{producto.elaborado}" filterBy="#{producto.elaborado}" width="40%" style="text-align:center;"
+				          priority="2">  
+                    <h:outputText value="#{producto.elaborado ? msg['boolean.true'] : msg['boolean.false']}" />  
+                </p:column>  
+                
+                <p:column headerText="#{msg['producto.stock']}" sortBy="#{producto.stock}" filterBy="#{producto.stock}" width="35%" style="text-align:center;" priority="1">  
+                    <h:outputText value="#{producto.stock}" />  
+                </p:column>
+                
+                <p:column headerText="#{msg['producto.unidadMedida']}" sortBy="#{producto.unidadMedida.nombre}" filterBy="#{producto.unidadMedida.nombre}" width="40%" priority="2">  
+                    <h:outputText value="#{producto.unidadMedida.nombre}" />  
+                </p:column>  
+                                
+                <p:column headerText="#{msg['producto.medida']}" sortBy="#{producto.medida}" filterBy="#{producto.medida}" width="40%" style="text-align:center;" priority="2">  
+                    <h:outputText value="#{producto.medida}" />  
+                </p:column>  
+                
+                <p:column headerText="#{msg['producto.precioUnitario']}" sortBy="#{producto.precioUnitario}" filterBy="#{producto.precioUnitario}" width="40%" style="text-align:center;" priority="2">  
+                    <h:outputText value="#{producto.precioUnitario}">
+                    	<f:convertNumber type="currency" currencySymbol="$" />
+                    </h:outputText>  
+                </p:column>
+                
+				<p:column headerText="#{msg['producto.precio']}" sortBy="#{producto.precio}" filterBy="#{producto.precio}" width="40%" style="text-align:center;" priority="1">  
+                    <h:outputText value="#{producto.precio}">
+                    	<f:convertNumber type="currency" currencySymbol="$" />
+                    </h:outputText>  
+                </p:column>    
+            </p:dataTable>  
+				        
+           <p:dialog id="dialogEdit" widgetVar="dialogEdit" header="#{msg['producto.dialog.header']}"
+                     showEffect="explode" hideEffect="explode" resizable="false">  
+
+                <p:outputPanel id="panelEdit" style="text-align:center;">
+            
+                    <p:panelGrid id="gridEdit" columns="3" rendered="#{productosController.editable != null}">
+
+                        <p:outputLabel for="productoCodigo" value="#{msg['producto.codigo']}:" />
+                        <p:outputLabel  id="productoCodigo" value="#{productosController.editable.id}" size="10"/>
+                        <p:message for="productoCodigo" />
+              
+                        <p:outputLabel for="productoNombre" value="#{msg['producto.nombre']}:" />
+                        <p:inputText id="productoNombre" value="#{productosController.editable.nombre}" required="true" size="50" maxlength="128"/>
+                        <p:message for="productoNombre" />
+                        
+                        <p:outputLabel for="productoDescripcion" value="#{msg['producto.descripcion']}:" />
+                        <p:inputTextarea id="productoDescripcion" value="#{productosController.editable.descripcion}" rows="5" cols="50" maxlength="1000" autoResize="false"/>
+                        <p:message for="productoDescripcion" />
+
+						<p:outputLabel for="productoUnidadMedida" value="#{msg['producto.unidadMedida']}:" />
+				        <p:selectOneMenu id="productoUnidadMedida" value="#{productosController.editable.unidadMedida}" 
+				                         converter="omnifaces.SelectItemsConverter" required="true">
+				            <f:selectItem itemLabel="" />
+				            <f:selectItems value="#{productosController.unidadesMedida}" var="unidadMedida" itemLabel="#{unidadMedida.nombre}" itemValue="#{unidadMedida}" />
+				            <p:ajax event="change" execute="@this" update=":form:productoUnidadMedidaSimbolo" render="productoUnidadMedidaSimbolo" listener="#{productosController.onUnidadMedidaChange}"/>
+				        </p:selectOneMenu>
+                        <p:message for="productoUnidadMedida" />
+                                                             
+                        <p:outputLabel for="productoMedida" value="#{msg['producto.medida']}:" />
+                        <p:columnGroup id="productoMedida">
+	                        <p:inputText id="productoMedidaText" value="#{productosController.editable.medida}" size="5">
+	                        	<p:ajax event="blur" update="productoPrecio,productoPrecioUnitario" listener="#{productosController.onProductoMedidaBlur}"/>
+	                        </p:inputText>
+							<p:outputLabel id="productoUnidadMedidaSimbolo" value="#{productosController.editable.unidadMedida.simbolo}" />
+                        </p:columnGroup>
+                        <p:message for="productoMedida" />
+                                            
+						<p:outputLabel for="productoPrecioUnitario" value="#{msg['producto.precioUnitario']}:" />
+                        <p:inputText id="productoPrecioUnitario" value="#{productosController.editable.precioUnitario}" size="8">
+                        	<p:ajax event="blur" update="productoPrecio" listener="#{productosController.onProductoPrecioUnitarioBlur}"/>
+                        </p:inputText>
+                        <p:message for="productoPrecioUnitario" />
+                    
+    					<p:outputLabel for="productoPrecio" value="#{msg['producto.precio']}:" />
+                        <p:inputText id="productoPrecio" value="#{productosController.editable.precio}" size="10">
+                        	<p:ajax event="blur" update="productoPrecioUnitario" listener="#{productosController.onProductoPrecioBlur}"/>
+                        </p:inputText>
+                        <p:message for="productoPrecio" />
+                        
+                        <p:outputLabel for="productoStock" value="#{msg['producto.stock']}:" />
+                        <p:inputText id="productoStock" value="#{productosController.editable.stock}" size="10"/>
+                        <p:message for="productoStock" />
+                        
+                        <p:outputLabel for="productoStockMinimo" value="#{msg['producto.stockMinimo']}:" />
+                        <p:inputText id="productoStockMinimo" value="#{productosController.editable.stockMinimo}" size="10"/>
+                        <p:message for="productoStockMinimo" />
+                                   
+                        <p:outputLabel for="productoElaborado" value="#{msg['producto.elaborado']}:" />
+                        <p:selectBooleanButton id="productoElaborado" value="#{productosController.editable.elaborado}" 
+                                               onLabel="#{msg['boolean.true']}" offLabel="#{msg['boolean.false']}" 
+                                               onIcon="ui-icon-check" offIcon="ui-icon-close" />
+                        
+                    </p:panelGrid>
+                </p:outputPanel>
+
+                <p:outputPanel style="padding-top: 5px;">
+                    <p:commandButton id="save" value="#{msg['boton.guardar']}" icon="ui-icon-disk"
+                                     actionListener="#{productosController.save}" 
+                                     update=":form:panelEdit" />
+					<p:commandButton id="delete" value="#{msg['boton.eliminar']}" icon="ui-icon-trash" actionListener="#{productosController.delete}" immediate="true" 
+                    				 update="messages" rendered="#{facesContext.externalContext.isUserInRole('ROLE_DELETE_PRODUCTO')}"> 
+                        <p:confirm header="#{msg['eliminar.confirmDialog.header']}" message="#{msg['eliminar.confirmDialog.message']}" icon="ui-icon-alert" />
+                    </p:commandButton>                 
+                    <p:commandButton id="cancel" value="#{msg['boton.cancelar']}" icon="ui-icon-close" 
+                                     onclick="PF('dialogEdit').hide()" immediate="true" style="float:right" />
+                </p:outputPanel>
+            
+            </p:dialog>
+            
+        </h:form>  
+
+    </ui:define>
+     
+</ui:composition>

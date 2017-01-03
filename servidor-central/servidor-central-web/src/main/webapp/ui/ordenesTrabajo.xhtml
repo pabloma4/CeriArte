@@ -1,0 +1,100 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../templates/ui.xhtml">
+    
+    <ui:define name="content">
+    
+        <h:form id="form">  
+            <p:growl id="messages" showDetail="true" life="2500" />
+
+            <p:outputPanel style="padding-top: 18px; padding-bottom: 8px;">
+                <h:outputText value="#{msg['ordenesTrabajo.titulo']}" styleClass="title"/>
+            </p:outputPanel>
+            
+            <p:panel>
+		        <h:panelGrid columns="6" cellpadding="10" id="filterGrid">        
+			        <p:outputLabel value="#{msg['ordenTrabajo.filtro.fechaCreacionDesde']}:" />
+			  		<p:calendar id="filtroFechaDesde" value="#{ordenesTrabajoController.filtroFechaCreacionDesde}" 
+                                locale="es" pattern="dd-MMM-yyyy" effect="explode" />
+			        
+			        <p:outputLabel value="#{msg['ordenTrabajo.filtro.fechaCreacionHasta']}:" />
+			  		<p:calendar id="filtroFechaHasta" value="#{ordenesTrabajoController.filtroFechaCreacionHasta}" 
+                                locale="es" pattern="dd-MMM-yyyy" effect="explode" />
+                                
+			        <p:outputLabel value="#{msg['ordenTrabajo.filtro.estado']}:" />
+			 		<p:selectCheckboxMenu id="filtrOrdenTrabajoEstado" value="#{ordenesTrabajoController.filtroOrdenTrabajoEstados}" label="#{msg['ordenTrabajo.filtro.seleccionarEstados']}">
+			            <f:selectItems value="#{ordenesTrabajoController.ordenTrabajoEstados}" var="estado" itemLabel="#{estado.nombre}" itemValue="#{estado.id}"/>
+			        </p:selectCheckboxMenu>
+                    
+                    <p:outputLabel value="#{msg['ordenTrabajo.filtro.asignadaA']}:" />
+                    <p:selectOneMenu id="filtroAsignadaA" value="#{ordenesTrabajoController.filtroAsignadaA}" 
+			        			     converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains">
+			            <f:selectItem itemLabel="" />
+			            <f:selectItems value="#{ordenesTrabajoController.usuarios}" var="usuario" itemLabel="#{usuario.nombreCompleto}" itemValue="#{usuario}" />
+			        </p:selectOneMenu>
+                    
+					<p:outputLabel value="" />
+					<p:outputLabel value="" />                    
+                    <p:outputLabel value="" />            		 			
+	 				<p:commandButton id="search" value="#{msg['boton.buscar']}" icon="ui-icon-search" style="float:right;"
+		                             actionListener="#{ordenesTrabajoController.search}"
+		                             update=":form:ordenesTrabajoTable"/>           
+		        </h:panelGrid>
+		    </p:panel>
+          
+            <p:dataTable id="ordenesTrabajoTable" var="ordenTrabajo" value="#{ordenesTrabajoController.lazyModel}" lazy="true"
+                         paginator="true" rows="25" 
+                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"  
+                         rowsPerPageTemplate="10,15,20,25,50"  rowKey="#{ordenTrabajo.id}" sortBy="#{ordenTrabajo.id}" 
+                         selectionMode="single" sortOrder="descending">
+                         
+				<p:ajax event="rowSelect" listener="#{ordenesTrabajoController.onRowSelect}"
+				        rendered="#{facesContext.externalContext.isUserInRole('ROLE_EDIT_ORDEN_TRABAJO')}">
+				</p:ajax>                   
+                
+                <p:column headerText="#{msg['ordenTrabajo.numero']}" sortBy="#{ordenTrabajo.id}" filterBy="#{ordenTrabajo.id}" width="10%" priority="1">  
+                    <h:outputText value="#{ordenTrabajo.id}" />  
+                </p:column>  
+                
+                <p:column headerText="#{msg['ordenTrabajo.cliente']}" sortBy="#{ordenTrabajo.detallePedido.pedido.cliente}" filterBy="#{ordenTrabajo.detallePedido.pedido.cliente}" width="15%">  
+                    <h:outputText value="#{ordenTrabajo.detallePedido.pedido.cliente.apellido} #{ordenTrabajo.detallePedido.pedido.cliente.nombre}" priority="1"/>  
+                </p:column>
+                
+                <p:column headerText="#{msg['ordenTrabajo.producto']}" sortBy="#{ordenTrabajo.detallePedido.producto.nombre}" filterBy="#{ordenTrabajo.detallePedido.producto.nombre}" width="15%">  
+                    <h:outputText value="#{ordenTrabajo.detallePedido.producto.nombre}" priority="1"/>  
+                </p:column>  
+          
+                <p:column headerText="#{msg['ordenTrabajo.estado']}" sortBy="#{ordenTrabajo.ordenTrabajoEstado.nombre}" filterBy="#{ordenTrabajo.ordenTrabajoEstado.nombre}" width="15%" style="text-align:center;">  
+                    <h:outputText value="#{ordenTrabajo.ordenTrabajoEstado.nombre}" priority="1"/>  
+                </p:column>  
+                
+                <p:column headerText="#{msg['ordenTrabajo.fechaCreacion']}" sortBy="#{ordenTrabajo.fechaCreacion}" filterBy="#{ordenTrabajo.fechaCreacion}" width="10%" 
+                		  style="text-align:center;" priority="2">  
+                    <h:outputText value="#{ordenTrabajo.fechaCreacion.toGregorianCalendar().time}">
+                    	 <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>  
+                </p:column>
+                
+				<p:column headerText="#{msg['ordenTrabajo.creadaPor']}" sortBy="#{ordenTrabajo.creadaPor}" filterBy="#{ordenTrabajo.creadaPor}" width="10%" 
+						  style="text-align:center;" priority="2">  
+                    <h:outputText value="#{ordenTrabajo.creadaPor.nombreCompleto}" />  
+                </p:column>
+                
+                <p:column headerText="#{msg['ordenTrabajo.asignadaA']}" sortBy="#{ordenTrabajo.asignadaA}" filterBy="#{ordenTrabajo.asignadaA}" width="10%" 
+                		  style="text-align:center;" priority="2">  
+                    <h:outputText value="#{ordenTrabajo.asignadaA.nombreCompleto}" rendered="#{ordenTrabajo.asignadaA != null}"/>  
+                </p:column>  
+
+                <p:column headerText="#{msg['ordenTrabajo.pedido']}" sortBy="#{ordenTrabajo.detallePedido.pedido.id}" filterBy="#{ordenTrabajo.detallePedido.pedido.id}" 
+                		  width="10%" style="text-align:center;" priority="2">  
+                    <h:outputText value="#{ordenTrabajo.detallePedido.pedido.id}"/>  
+                </p:column>  
+            </p:dataTable>  
+        </h:form>  
+        
+    </ui:define>
+     
+</ui:composition>

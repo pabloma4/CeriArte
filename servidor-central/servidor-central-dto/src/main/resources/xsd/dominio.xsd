@@ -1,0 +1,549 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.autoentrada.com/ws/schemas/sc/ae/1_0" 
+           elementFormDefault="qualified" 
+		   xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           xmlns:ae="http://www.autoentrada.com/ws/schemas/sc/ae/1_0"
+           xmlns:equals="http://jaxb2-commons.dev.java.net/basic/equals"
+    	   xmlns:hashCode="http://jaxb2-commons.dev.java.net/basic/hashCode"
+    	   xmlns:toString="http://jaxb2-commons.dev.java.net/basic/toString"
+    	   jaxb:extensionBindingPrefixes="equals hashCode toString">
+
+	<xs:complexType name="clienteDTO">
+		<xs:sequence>
+			<xs:element name="id"                  				 type="xs:int" 				 	 minOccurs="1" maxOccurs="1"/>
+			<xs:element name="nombre"              				 type="xs:string" 			 	 minOccurs="1" maxOccurs="1"/>
+			<xs:element name="apellido"            				 type="xs:string"   		 	 minOccurs="1" maxOccurs="1"/>
+			<xs:element name="email"               				 type="xs:string"   		 	 minOccurs="0" maxOccurs="1"/>
+			<xs:element name="telefono"            				 type="xs:string"   		 	 minOccurs="0" maxOccurs="1"/>
+			<xs:element name="domicilio" 						 type="xs:string"   	 	 	 minOccurs="0" maxOccurs="1"/>
+			<xs:element name="localidad"           			 	 type="ae:localidadDTO"     	 minOccurs="0" maxOccurs="1"/>
+			<xs:element name="cuit"            				 	 type="xs:string"   		 	 minOccurs="0" maxOccurs="1"/>
+			<xs:element name="responsabilidadIVA"           	 type="ae:responsabilidadIVADTO" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="nombreCompleto"              		 type="xs:string" 			 	 minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+		
+    <xs:complexType name="localidadDTO">
+       <xs:annotation>
+           <xs:documentation>Representación de la Localidad</xs:documentation>
+       </xs:annotation>
+        <xs:all>
+            <xs:element name="idLocalidad"  type="xs:string"    minOccurs="1" maxOccurs="1" />
+            <xs:element name="nombre"       type="xs:string"    minOccurs="1" maxOccurs="1" />
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="provinciaDTO">
+       <xs:annotation>
+           <xs:documentation>Representación de la Provincia</xs:documentation>
+       </xs:annotation>
+        <xs:all>
+            <xs:element name="idProvincia"  type="xs:string"    minOccurs="1" maxOccurs="1" />
+            <xs:element name="nombre"       type="xs:string"    minOccurs="1" maxOccurs="1" />
+            <xs:element name="pais"         type="ae:paisDTO"   minOccurs="1" maxOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="paisDTO">
+       <xs:annotation>
+           <xs:documentation>Representación del Pais</xs:documentation>
+       </xs:annotation>
+        <xs:all>
+            <xs:element name="idPais"   type="xs:string"    minOccurs="1" maxOccurs="1" />
+            <xs:element name="nombre"   type="xs:string"    minOccurs="1" maxOccurs="1" />
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="responsabilidadIVADTO">
+       <xs:annotation>
+           <xs:documentation>Representación de la Responsabilidad frente al IVA</xs:documentation>
+       </xs:annotation>
+        <xs:all>
+            <xs:element name="idResponsabilidadIVA"  type="xs:int"    minOccurs="1" maxOccurs="1" />
+            <xs:element name="descripcion"       	 type="xs:string" minOccurs="1" maxOccurs="1" />
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="unidadMedidaDTO">
+       <xs:annotation>
+           <xs:documentation>Representación de la Unidad de Medida</xs:documentation>
+       </xs:annotation>
+        <xs:all>
+            <xs:element name="id"  					 type="xs:int"    minOccurs="1" maxOccurs="1" />
+            <xs:element name="nombre"       	 	 type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="simbolo"       	 	 type="xs:string" minOccurs="1" maxOccurs="1" />
+        </xs:all>
+    </xs:complexType>
+	
+	<xs:complexType name="productoDTO">
+	   <xs:annotation>
+	       <xs:documentation>Representación de un Producto Manufacturado o no</xs:documentation>
+	   </xs:annotation>
+		<xs:all>
+			<xs:element name="id" 					type="xs:int" 	 		  minOccurs="1" maxOccurs="1" />
+			<xs:element name="nombre"      			type="xs:string" 		  minOccurs="1" maxOccurs="1" />
+			<xs:element name="descripcion"      	type="xs:string" 		  minOccurs="0" maxOccurs="1" />
+			<xs:element name="unidadMedida"      	type="ae:unidadMedidaDTO" minOccurs="1" maxOccurs="1" />
+			<xs:element name="stock"      			type="xs:double" 		  minOccurs="0" maxOccurs="1" >
+				<xs:annotation>
+                    <xs:appinfo><equals:ignored/><hashCode:ignored/></xs:appinfo>
+                </xs:annotation>
+			</xs:element>
+			<xs:element name="stockMinimo"      	type="xs:double" 		  minOccurs="0" maxOccurs="1" >
+				<xs:annotation>
+                    <xs:appinfo><equals:ignored/><hashCode:ignored/></xs:appinfo>
+                </xs:annotation>
+			</xs:element>
+			<xs:element name="medida"      			type="xs:double" 		  minOccurs="0" maxOccurs="1" />
+			<xs:element name="precio"      			type="xs:double" 		  minOccurs="1" maxOccurs="1" />
+			<xs:element name="precioUnitario"      	type="xs:double" 		  minOccurs="1" maxOccurs="1" />
+			<xs:element name="elaborado"      		type="xs:boolean" 		  minOccurs="1" maxOccurs="1" />
+			<xs:element name="fechaCreacion" 		type="xs:date" 			  minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+                    <xs:appinfo><equals:ignored/><hashCode:ignored/></xs:appinfo>
+                </xs:annotation>
+			</xs:element>
+			<xs:element name="fechaModificacion" 	type="xs:date" 			  minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+                    <xs:appinfo><equals:ignored/><hashCode:ignored/></xs:appinfo>
+                </xs:annotation>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+	
+	<xs:complexType name="presupuestoDTO">
+	   <xs:annotation>
+	       <xs:documentation>Representación de un Presupuesto</xs:documentation>
+	   </xs:annotation>
+	   <xs:all>
+			<xs:element name="id" 					type="xs:int" 	 		  		minOccurs="1" maxOccurs="1" />
+			<xs:element name="cliente"      		type="ae:clienteDTO" 	  		minOccurs="1" maxOccurs="1" />
+			<xs:element name="presupuestoEstado"    type="ae:presupuestoEstadoDTO"  minOccurs="1" maxOccurs="1" />
+			<xs:element name="fechaCreacion" 		type="xs:date" 			  		minOccurs="1" maxOccurs="1" />
+			<xs:element name="fechaValidoHasta" 	type="xs:date" 			  		minOccurs="1" maxOccurs="1" />
+			<xs:element name="detalles"  			type="ae:detallesPresupuesto" 	minOccurs="1" maxOccurs="1" />
+	   </xs:all>
+	</xs:complexType>
+	
+
+	<xs:complexType name="detallePresupuestoDTO">
+	   <xs:annotation>
+	       <xs:documentation>Representación de un Detalle de Presupuesto</xs:documentation>
+	   </xs:annotation>
+	   <xs:all>
+			<xs:element name="id" 					type="xs:int" 	 		  		minOccurs="1" maxOccurs="1" >
+				<xs:annotation>
+                    <xs:appinfo><equals:ignored/><hashCode:ignored/></xs:appinfo>
+                </xs:annotation>
+			</xs:element>
+			<xs:element name="producto"      		type="ae:productoDTO" 	  		minOccurs="1" maxOccurs="1" />
+			<xs:element name="nombre"      			type="xs:string" 	  			minOccurs="1" maxOccurs="1" />
+			<xs:element name="descripcion"      	type="xs:string" 	  			minOccurs="1" maxOccurs="1" />
+			<xs:element name="medida"      			type="xs:double" 		  		minOccurs="1" maxOccurs="1" />
+			<xs:element name="cantidad"    			type="xs:double"  				    minOccurs="1" maxOccurs="1" >
+				<xs:annotation>
+                    <xs:appinfo><equals:ignored/><hashCode:ignored/></xs:appinfo>
+                </xs:annotation>
+			</xs:element>
+			<xs:element name="precioUnitario" 		type="xs:double"			  	minOccurs="1" maxOccurs="1" />
+			<xs:element name="monto" 				type="xs:double"			  	minOccurs="1" maxOccurs="1" >
+				<xs:annotation>
+                    <xs:appinfo><equals:ignored/><hashCode:ignored/></xs:appinfo>
+                </xs:annotation>
+			</xs:element>
+	   </xs:all>
+	</xs:complexType>
+	
+	<xs:complexType name="detallesPresupuesto">
+        <xs:sequence>
+            <xs:element name="detallePresupuesto" minOccurs="0" maxOccurs="unbounded" type="ae:detallePresupuestoDTO">
+                <xs:annotation>
+                    <xs:documentation>Lista de Detalles de Presupuesto</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+
+	<xs:complexType name="detallePresupuestoReporteDTO">
+	   <xs:annotation>
+	       <xs:documentation>Representación de un Detalle de Presupuesto para visualizar en un reporte</xs:documentation>
+	   </xs:annotation>
+	   <xs:all>
+			<xs:element name="id" 					type="xs:int" 	 		  		minOccurs="1" maxOccurs="1" />
+			<xs:element name="idProducto"      		type="xs:int" 	  			    minOccurs="1" maxOccurs="1" />
+			<xs:element name="nombreProducto"      	type="xs:string" 	  			minOccurs="1" maxOccurs="1" />
+			<xs:element name="descripcionProducto"  type="xs:string" 	  			minOccurs="1" maxOccurs="1" />
+			<xs:element name="medida"      			type="xs:string" 		  		minOccurs="1" maxOccurs="1" />
+			<xs:element name="cantidad"    			type="xs:double"  				minOccurs="1" maxOccurs="1" />
+			<xs:element name="precioUnitario" 		type="xs:double"			  	minOccurs="1" maxOccurs="1" />
+			<xs:element name="monto" 				type="xs:double"			  	minOccurs="1" maxOccurs="1" />
+	   </xs:all>
+	</xs:complexType>
+    
+	<xs:complexType name="presupuestoEstadoDTO">
+       <xs:annotation>
+           <xs:documentation>Representación del Estado de un Prespuesto</xs:documentation>
+       </xs:annotation>
+        <xs:all>
+            <xs:element name="id"  			type="xs:int"  		minOccurs="1" maxOccurs="1" />
+            <xs:element name="nombre"       type="xs:string"    minOccurs="1" maxOccurs="1" />
+			<xs:element name="descripcion"  type="xs:string"    minOccurs="0" maxOccurs="1" />
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="pedidoDTO">
+	   <xs:annotation>
+	       <xs:documentation>Representación de un Pedido</xs:documentation>
+	   </xs:annotation>
+	   <xs:all>
+			<xs:element name="id" 					type="xs:int" 	 		  		minOccurs="1" maxOccurs="1" />
+			<xs:element name="cliente"      		type="ae:clienteDTO" 	  		minOccurs="1" maxOccurs="1" />
+			<xs:element name="pedidoEstado"    		type="ae:pedidoEstadoDTO"  		minOccurs="1" maxOccurs="1" />
+			<xs:element name="fechaCreacion" 		type="xs:date" 			  		minOccurs="1" maxOccurs="1" />
+			<xs:element name="detalles"  			type="ae:detallesPedido" 		minOccurs="0" maxOccurs="1" />
+			<xs:element name="presupuesto"      	type="ae:presupuestoDTO" 	  	minOccurs="0" maxOccurs="1" />
+	   </xs:all>
+	</xs:complexType>
+	
+	<xs:complexType name="pedidoEstadoDTO">
+       <xs:annotation>
+           <xs:documentation>Representación del Estado de un Pedido</xs:documentation>
+       </xs:annotation>
+        <xs:all>
+            <xs:element name="id"  			type="xs:int"  		minOccurs="1" maxOccurs="1" />
+            <xs:element name="nombre"       type="xs:string"    minOccurs="1" maxOccurs="1" />
+			<xs:element name="descripcion"  type="xs:string"    minOccurs="0" maxOccurs="1" />
+        </xs:all>
+    </xs:complexType>
+	
+
+	<xs:complexType name="detallePedidoDTO">
+	   <xs:annotation>
+	       <xs:documentation>Representación de un Detalle de Pedido</xs:documentation>
+	   </xs:annotation>
+	   <xs:all>
+			<xs:element name="id" 					type="xs:int" 	 		  		minOccurs="1" maxOccurs="1" >
+				<xs:annotation>
+                    <xs:appinfo><equals:ignored/><hashCode:ignored/></xs:appinfo>
+                </xs:annotation>
+			</xs:element>
+			<xs:element name="producto"      		type="ae:productoDTO" 	  		minOccurs="1" maxOccurs="1" />
+			<xs:element name="nombre"      			type="xs:string" 	  			minOccurs="1" maxOccurs="1" />
+			<xs:element name="descripcion"      	type="xs:string" 	  			minOccurs="1" maxOccurs="1" />
+			<xs:element name="cantidad"    			type="xs:double"  				minOccurs="1" maxOccurs="1" >
+				<xs:annotation>
+                    <xs:appinfo><equals:ignored/><hashCode:ignored/></xs:appinfo>
+                </xs:annotation>
+			</xs:element>
+			<xs:element name="medida"    			type="xs:double"  				minOccurs="1" maxOccurs="1" />
+			<xs:element name="precioUnitario" 		type="xs:double"			  	minOccurs="1" maxOccurs="1" />
+			<xs:element name="monto" 				type="xs:double"			  	minOccurs="1" maxOccurs="1" >
+				<xs:annotation>
+                    <xs:appinfo><equals:ignored/><hashCode:ignored/></xs:appinfo>
+                </xs:annotation>
+			</xs:element>
+			<xs:element name="detallePedidoEstado"  type="ae:detallePedidoEstadoDTO" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="pedido"      			type="ae:pedidoDTO" 	  		 minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+                    <xs:appinfo><equals:ignored/><hashCode:ignored/></xs:appinfo>
+                </xs:annotation>
+			</xs:element>
+			<xs:element name="ordenTrabajo"      	type="ae:ordenTrabajoDTO" 	  	minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+                    <xs:appinfo><equals:ignored/><hashCode:ignored/></xs:appinfo>
+                </xs:annotation>
+			</xs:element>
+	   </xs:all>
+	</xs:complexType>
+	
+	<xs:complexType name="detallesPedido">
+        <xs:sequence>
+            <xs:element name="detallePedido" minOccurs="0" maxOccurs="unbounded" type="ae:detallePedidoDTO">
+                <xs:annotation>
+                    <xs:documentation>Lista de Detalles de Pedido</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="detallePedidoEstadoDTO">
+       <xs:annotation>
+           <xs:documentation>Representación del Estado de un Detalle de Pedido</xs:documentation>
+       </xs:annotation>
+        <xs:all>
+            <xs:element name="id"  			type="xs:int"  		minOccurs="1" maxOccurs="1" />
+            <xs:element name="nombre"       type="xs:string"    minOccurs="1" maxOccurs="1" />
+			<xs:element name="descripcion"  type="xs:string"    minOccurs="0" maxOccurs="1" />
+        </xs:all>
+    </xs:complexType>
+
+	<xs:complexType name="ordenTrabajoDTO">
+	   <xs:annotation>
+	       <xs:documentation>Representación de una Orden de Trabajo</xs:documentation>
+	   </xs:annotation>
+	   <xs:all>
+			<xs:element name="id" 					type="xs:int" 	 		  		minOccurs="1" maxOccurs="1" />
+			<xs:element name="creadaPor"      		type="ae:usuarioDTO" 	  		minOccurs="1" maxOccurs="1" />
+			<xs:element name="asignadaA"      		type="ae:usuarioDTO" 	  		minOccurs="0" maxOccurs="1" />
+			<xs:element name="ordenTrabajoEstado"   type="ae:ordenTrabajoEstadoDTO" minOccurs="1" maxOccurs="1" />
+			<xs:element name="fechaCreacion" 		type="xs:date" 			  		minOccurs="1" maxOccurs="1" />
+			<xs:element name="fechaEstimadaFin" 	type="xs:date" 			  		minOccurs="0" maxOccurs="1" />
+			<xs:element name="detalles"  			type="ae:detallesOrdenTrabajo" 	minOccurs="1" maxOccurs="1" />
+			<xs:element name="detallePedido"      	type="ae:detallePedidoDTO" 	  	minOccurs="1" maxOccurs="1" />
+	   </xs:all>
+	</xs:complexType>
+	
+
+	<xs:complexType name="detalleOrdenTrabajoDTO">
+	   <xs:annotation>
+	       <xs:documentation>Representación de un Detalle de Orden Trabajo</xs:documentation>
+	   </xs:annotation>
+	   <xs:all>
+			<xs:element name="id" 					type="xs:int" 	 		  		minOccurs="1" maxOccurs="1" >
+				<xs:annotation>
+                    <xs:appinfo><equals:ignored/><hashCode:ignored/></xs:appinfo>
+                </xs:annotation>
+			</xs:element>
+			<xs:element name="producto"      		type="ae:productoDTO" 	  		minOccurs="1" maxOccurs="1" />
+			<xs:element name="cantidad"    			type="xs:double"  				minOccurs="1" maxOccurs="1" >
+				<xs:annotation>
+                    <xs:appinfo><equals:ignored/><hashCode:ignored/></xs:appinfo>
+                </xs:annotation>
+			</xs:element>
+	   </xs:all>
+	</xs:complexType>
+	
+	<xs:complexType name="detalleOrdenTrabajoReporteDTO">
+	   <xs:annotation>
+	       <xs:documentation>Representación de un Detalle de Presupuesto para visualizar en un reporte</xs:documentation>
+	   </xs:annotation>
+	   <xs:all>
+			<xs:element name="id" 					type="xs:int" 	 		  		minOccurs="1" maxOccurs="1" />
+			<xs:element name="idProducto"      		type="xs:int" 	  			    minOccurs="1" maxOccurs="1" />
+			<xs:element name="nombreProducto"      	type="xs:string" 	  			minOccurs="1" maxOccurs="1" />
+			<xs:element name="descripcionProducto"  type="xs:string" 	  			minOccurs="1" maxOccurs="1" />
+			<xs:element name="cantidad"    			type="xs:string"  				minOccurs="1" maxOccurs="1" />
+	   </xs:all>
+	</xs:complexType>
+	
+	<xs:complexType name="detallesOrdenTrabajo">
+        <xs:sequence>
+            <xs:element name="detalleOrdenTrabajo" minOccurs="0" maxOccurs="unbounded" type="ae:detalleOrdenTrabajoDTO">
+                <xs:annotation>
+                    <xs:documentation>Lista de Detalles de Orden Trabajo</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="ordenTrabajoEstadoDTO">
+       <xs:annotation>
+           <xs:documentation>Representación del Estado de una Orden Trabajo</xs:documentation>
+       </xs:annotation>
+        <xs:all>
+            <xs:element name="id"  			type="xs:int"  		minOccurs="1" maxOccurs="1" />
+            <xs:element name="nombre"       type="xs:string"    minOccurs="1" maxOccurs="1" />
+			<xs:element name="descripcion"  type="xs:string"    minOccurs="0" maxOccurs="1" />
+        </xs:all>
+    </xs:complexType>
+
+
+    <xs:complexType name="imagenDTO">
+        <xs:annotation>
+            <xs:documentation>Representación de una Imagen</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="idImagen"         type="xs:int"/>
+            <xs:element name="descripcion"      type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="nombreArchivo"    type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="url"              type="xs:string" minOccurs="1" maxOccurs="1" />
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="parametroDTO">
+       <xs:annotation>
+           <xs:documentation>Representación de un Parámetro</xs:documentation>
+       </xs:annotation>
+        <xs:all>
+            <xs:element name="idParametro"  type="xs:int" />
+            <xs:element name="clave"        type="xs:string"    minOccurs="1" maxOccurs="1" />
+            <xs:element name="valor"        type="xs:string"    minOccurs="0" maxOccurs="1" />
+            <xs:element name="descripcion"  type="xs:string"    minOccurs="0" maxOccurs="1" />
+        </xs:all>
+    </xs:complexType>
+    
+	<xs:complexType name="usuarioDTO">
+	   <xs:annotation>
+	       <xs:documentation>Representación del Usuario</xs:documentation>
+	   </xs:annotation>
+		<xs:all>
+			<xs:element name="idUsuario" 			type="xs:int" 	 minOccurs="1" maxOccurs="1" />
+			<xs:element name="nombre" 				type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="apellido"             type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="nombreCompleto"       type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="login"             	type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="password"             type="xs:string" />
+			<xs:element name="confirmarPassword"    type="xs:string" />
+			<xs:element name="email"          		type="xs:string" />
+			<xs:element name="changePassword"       type="xs:boolean" />
+			<xs:element name="tiempoLogin"       	type="xs:int" />
+            <xs:element name="roles"                type="ae:roles" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>Roles a los que está asociado el usuario</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="permisos"             type="ae:permisos" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>Permisos unificados que tienen todos los roles asociados al usuario</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+		</xs:all>
+	</xs:complexType>
+	
+	<xs:complexType name="usuarios">
+		<xs:sequence>
+			<xs:element name="usuario" minOccurs="0" maxOccurs="unbounded" type="ae:usuarioDTO">
+				<xs:annotation>
+					<xs:documentation>Lista de Usuarios</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="rolDTO">
+	   <xs:annotation>
+	       <xs:documentation>Representación del Rol</xs:documentation>
+	   </xs:annotation>
+		<xs:all>
+			<xs:element name="idRol" 			type="xs:int" minOccurs="1" maxOccurs="1" />
+			<xs:element name="nombre" 			type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+                    <xs:appinfo><equals:ignored/><hashCode:ignored/></xs:appinfo>
+                </xs:annotation>
+            </xs:element> 
+			<xs:element name="descripcion" 		type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+                    <xs:appinfo><equals:ignored/><hashCode:ignored/></xs:appinfo>
+                </xs:annotation>
+			</xs:element>
+            <xs:element name="permisos"         type="ae:permisos" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                	<xs:appinfo><equals:ignored/><hashCode:ignored/></xs:appinfo>
+                    <xs:documentation>Permisos a los que está asociado el rol</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+		</xs:all>
+	</xs:complexType>
+	
+	<xs:complexType name="roles">
+        <xs:sequence>
+            <xs:element name="rol" minOccurs="0" maxOccurs="unbounded" type="ae:rolDTO">
+                <xs:annotation>
+                    <xs:documentation>Lista de Roles</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="permisoDTO">
+       <xs:annotation>
+           <xs:documentation>Representación del Permiso</xs:documentation>
+       </xs:annotation>
+       <xs:all>
+       	<xs:element name="idPermiso" type="xs:int" minOccurs="1" maxOccurs="1" />
+       	<xs:element name="nombre" type="xs:string" minOccurs="1" maxOccurs="1">
+       		<xs:annotation>
+            	<xs:appinfo><equals:ignored/><hashCode:ignored/></xs:appinfo>
+            </xs:annotation>
+       	</xs:element>
+       	<xs:element name="descripcion" type="xs:string" minOccurs="1" maxOccurs="1">
+       		<xs:annotation>
+            	<xs:appinfo><equals:ignored/><hashCode:ignored/></xs:appinfo>
+            </xs:annotation>
+       	</xs:element>
+       </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="permisos">
+        <xs:sequence>
+            <xs:element name="permiso" minOccurs="0" maxOccurs="unbounded" type="ae:permisoDTO">
+                <xs:annotation>
+                    <xs:documentation>Lista de Permisos</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>   
+
+	<xs:complexType name="medioDePagoDTO">
+		<xs:sequence>
+			<xs:element name="id"                    type="xs:int"      			   minOccurs="1" maxOccurs="1" />
+			<xs:element name="tipoMedioDePago"       type="ae:tipoMedioDePagoDTO"      minOccurs="1" maxOccurs="1" />
+			<xs:element name="planDePago"            type="ae:planDePagoDTO"   		   minOccurs="0" maxOccurs="1" />
+			<xs:element name="informacionAdicional"  type="xs:string"  				   minOccurs="0" maxOccurs="1" />
+			<xs:element name="habilitado" 		 	 type="xs:boolean" 				   maxOccurs="1" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="tipoMedioDePagoDTO">
+		<xs:sequence>
+			<xs:element name="id"                  type="xs:int"      minOccurs="1" maxOccurs="1" />
+			<xs:element name="descripcion"         type="xs:string"   minOccurs="1" maxOccurs="1" />
+			<xs:element name="abreviatura"         type="xs:string"   minOccurs="1" maxOccurs="1" />
+			<xs:element name="codigo"              type="xs:string"   minOccurs="1" maxOccurs="1" />
+			<xs:element name="tieneId"             type="xs:boolean"  minOccurs="1" maxOccurs="1" />
+			<xs:element name="tieneVencimiento"    type="xs:boolean"  minOccurs="1" maxOccurs="1" />
+			<xs:element name="habilitado"          type="xs:boolean"  minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="tiposMedioDePago">
+		<xs:sequence>
+			<xs:element name="tipoMedioDePago" minOccurs="0" maxOccurs="unbounded" type="ae:tipoMedioDePagoDTO">
+				<xs:annotation>
+					<xs:documentation>Lista de los Tipos de Medio de Pago</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="tarjetaDTO">
+		<xs:sequence>
+			<xs:element name="id"                  type="xs:int"        minOccurs="1" maxOccurs="1" />
+			<xs:element name="nombre"         	   type="xs:string"     minOccurs="1" maxOccurs="1" />
+			<xs:element name="habilitada"          type="xs:boolean"    minOccurs="1" maxOccurs="1" />
+			<xs:element name="abreviatura"         type="xs:string"     minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="tarjetas">
+		<xs:sequence>
+			<xs:element name="tarjeta" minOccurs="0" maxOccurs="unbounded" type="ae:tarjetaDTO">
+				<xs:annotation>
+					<xs:documentation>Lista de las Tarjetas de Credito/Debito</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+		
+	<xs:complexType name="planDePagoDTO">
+		<xs:sequence>
+			<xs:element name="id"                    type="xs:int"      minOccurs="1" maxOccurs="1" />
+			<xs:element name="idTarjetaDeCredito"    type="xs:int"      minOccurs="1" maxOccurs="1" />
+			<xs:element name="descripcion"           type="xs:string"   minOccurs="1" maxOccurs="1" />
+			<xs:element name="recargo"               type="xs:decimal"  minOccurs="1" maxOccurs="1" />
+			<xs:element name="cantidadCuotas" 		 type="xs:int" 	maxOccurs="1" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="planesDePago">
+		<xs:sequence>
+			<xs:element name="planDePago" minOccurs="0" maxOccurs="unbounded" type="ae:planDePagoDTO">
+				<xs:annotation>
+					<xs:documentation>Lista de planes de pago</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>	
+</xs:schema>

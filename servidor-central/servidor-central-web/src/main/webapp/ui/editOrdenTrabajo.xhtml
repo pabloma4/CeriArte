@@ -1,0 +1,224 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../templates/ui.xhtml">
+        
+        <f:metadata>
+            <f:viewParam name="ordenTrabajoId" value="#{ordenTrabajoController.ordenTrabajoId}" />
+    	    <f:viewParam name="detallePedidoId" value="#{ordenTrabajoController.detallePedidoId}" />
+    	    <f:viewAction action="#{ordenTrabajoController.init}"/>
+		</f:metadata>
+    <ui:define name="content">
+   	
+        <h:form id="form">  
+            <p:growl id="messages" showDetail="true" life="2500" />
+
+            <p:outputPanel style="padding-top: 18px; padding-bottom: 8px;">
+                <h:outputText value="#{msg['ordenTrabajo.titulo']}" styleClass="title"/>
+            </p:outputPanel>
+          
+			<p:outputPanel id="outputPanelEdit" style="text-align:center;">
+            
+	            <p:panelGrid columns="9">	      
+					<p:outputLabel for="fechaCreacion" value="#{msg['ordenTrabajo.fechaCreacion']}:" />  
+	                <p:calendar id="fechaCreacion" value="#{ordenTrabajoController.editableFechaCreacion}" effect="fold" 
+	                			locale="es" pattern="dd-MMM-yyyy" disabled="true"/>
+					<p:message for="fechaCreacion" />
+	                
+					<p:outputLabel for="fechaEstimadaFin" value="#{msg['ordenTrabajo.fechaEstimadaFin']}:" />  
+	                <p:calendar id="fechaEstimadaFin" value="#{ordenTrabajoController.editableFechaEstimadaFin}" effect="fold" 
+	                			locale="es" pattern="dd-MMM-yyyy"
+	                			disabled="#{ordenTrabajoController.editable.ordenTrabajoEstado.id == ordenTrabajoController.ordenTrabajoEstadoEnumFinalizada or 
+  	                                        ordenTrabajoController.editable.ordenTrabajoEstado.id == ordenTrabajoController.ordenTrabajoEstadoEnumCancelada}"/>
+					<p:message for="fechaEstimadaFin" />
+	               	
+	               	<p:outputLabel for="estado" value="#{msg['ordenTrabajo.estado']}:" />  
+	                <p:outputLabel id="estado" value="#{ordenTrabajoController.editable.ordenTrabajoEstado.nombre}"/>
+					<p:message for="estado" />
+	               	
+	                <p:outputLabel for="ordenTrabajoCliente" value="#{msg['ordenTrabajo.cliente']}:" />  
+	                <p:outputLabel id="ordenTrabajoCliente" value="#{ordenTrabajoController.editable.detallePedido.pedido.cliente.nombreCompleto}"/>
+	               	<p:message for="ordenTrabajoCliente" /> 			    
+	               	
+	               	<p:outputLabel for="creadaPor" value="#{msg['ordenTrabajo.creadaPor']}:" />  
+	                <p:outputLabel id="creadaPor" value="#{ordenTrabajoController.editable.creadaPor.nombreCompleto}"/>
+					<p:message for="creadaPor" />
+					
+					<p:outputLabel for="asignadaA" value="#{msg['ordenTrabajo.asignadaA']}:" />
+			        <p:selectOneMenu id="asignadaA" value="#{ordenTrabajoController.editable.asignadaA}" 
+			        			     disabled="#{ordenTrabajoController.editable.ordenTrabajoEstado.id == ordenTrabajoController.ordenTrabajoEstadoEnumFinalizada or 
+  	                                             ordenTrabajoController.editable.ordenTrabajoEstado.id == ordenTrabajoController.ordenTrabajoEstadoEnumCancelada}"
+			                         converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains">
+			            <f:selectItem itemLabel="" />
+			            <f:selectItems value="#{ordenTrabajoController.usuarios}" var="usuario" itemLabel="#{usuario.nombreCompleto}" itemValue="#{usuario}" />
+			        </p:selectOneMenu>
+                    <p:message for="asignadaA" />
+                    
+                    <p:outputLabel for="ordenTrabajoPedido" value="#{msg['ordenTrabajo.pedido']}:" />
+	                <p:outputLabel id="ordenTrabajoPedido" value="#{ordenTrabajoController.editable.detallePedido != null and ordenTrabajoController.editable.detallePedido.pedido != null ? ordenTrabajoController.editable.detallePedido.pedido.id:'---'}"/>	
+	               	<p:message for="ordenTrabajoPedido" />
+	            </p:panelGrid>
+	            
+	            <p:spacer height="5"/>                   
+	            
+	            <p:fieldset legend="#{msg['ordenTrabajo.producto']}" styleClass="fieldSetLeft">
+			        <h:panelGrid columns="3">
+		               	<p:outputLabel for="ordenTrabajoProductoNombre" value="#{msg['ordenTrabajo.productoNombre']}:" />  
+		                <p:outputLabel id="ordenTrabajoProductoNombre" value="#{ordenTrabajoController.editable.detallePedido.nombre}"/>
+						<p:message for="ordenTrabajoProductoNombre" />
+					
+		               	<p:outputLabel for="ordenTrabajoProductoDescripcion" value="#{msg['ordenTrabajo.productoDescripcion']}:" />  
+		               	<h:outputText id="ordenTrabajoProductoDescripcion" value="#{ordenTrabajoController.editable.detallePedido.descripcion}"></h:outputText>
+		                <p:message for="ordenTrabajoProductoDescripcion" />
+						
+						<p:outputLabel for="ordenTrabajoProductoMedida" value="#{msg['ordenTrabajo.productoMedida']}:" />
+		               	<h:panelGrid columns="2">  
+		                	<p:outputLabel id="ordenTrabajoProductoMedida" value="#{ordenTrabajoController.editable.detallePedido.medida}"/>
+		                	<h:outputLabel value=" (#{ordenTrabajoController.editable.detallePedido.producto.unidadMedida.simbolo})" />
+						</h:panelGrid>
+						<p:message for="ordenTrabajoProductoMedida" />
+						
+		               	<p:outputLabel for="ordenTrabajoProductoCantidad" value="#{msg['ordenTrabajo.productoCantidad']}:" />
+		                <p:outputLabel id="ordenTrabajoProductoCantidad" value="#{ordenTrabajoController.editable.detallePedido.cantidad}"/>
+		               	<p:message for="ordenTrabajoProductoCantidad" />
+			        </h:panelGrid>
+			    </p:fieldset>                                      
+           	</p:outputPanel>
+           	
+           	<p:outputPanel style="padding-top: 25px; padding-bottom: 25px;">
+                <p:commandButton id="new" value="#{msg['boton.agregar.insumo']}" icon="ui-icon-plusthick" style="float:right"
+                                 actionListener="#{ordenTrabajoController.prepareNewDetalle}" process="@this" immediate="true" update=":form:panelEdit"
+                                 oncomplete="PF('dialogEdit').show()" 
+                                 rendered="#{ordenTrabajoController.editable.ordenTrabajoEstado.id == ordenTrabajoController.ordenTrabajoEstadoEnumNueva or 
+  	                                         ordenTrabajoController.editable.ordenTrabajoEstado.id == ordenTrabajoController.ordenTrabajoEstadoEnumEnConstruccion}"/>
+            </p:outputPanel>
+            
+           	<p:dataTable id="detalles" var="detalle" value="#{ordenTrabajoController.editable.detalles.detalleOrdenTrabajo}" editable="true" style="margin-bottom:20px"
+           				 sortBy="#{detalle.producto.id}" reflow="true">
+		       <f:facet name="header">
+		           <h:outputText value="#{msg['ordenTrabajo.detalle.titulo']}" />  
+		       </f:facet>
+		 
+		       <p:ajax event="rowEdit" listener="#{ordenTrabajoController.onRowEdit}" update=":form:messages" execute="@this"/>
+		       <p:ajax event="rowEditCancel" listener="#{ordenTrabajoController.onRowCancel}" update=":form:messages" />
+		       
+		       <p:column headerText="#{msg['ordenTrabajo.detalle.codigoProducto']}" style="text-align:center;">
+		          	<h:outputText value="#{detalle.producto.id}" />
+		       </p:column>
+		       
+		       <p:column headerText="#{msg['ordenTrabajo.detalle.nombreProducto']}">
+		           <h:outputText value="#{detalle.producto.nombre}" />
+		       </p:column>
+		       
+		       <p:column headerText="#{msg['ordenTrabajo.detalle.descripcionProducto']}">
+					<h:outputText value="#{detalle.producto.descripcion}" />
+		       </p:column>
+		       
+		 		<p:column headerText="#{msg['ordenTrabajo.detalle.cantidad']}" style="text-align:center;">
+		           <p:cellEditor>
+		               <f:facet name="output"><h:outputText value="#{detalle.cantidad}" /><h:outputLabel value=" (#{detalle.producto.unidadMedida.simbolo})" /></f:facet>
+		               <f:facet name="input"><h:inputText value="#{detalle.cantidad}" size="10"/></f:facet>
+		           </p:cellEditor>
+		       </p:column>
+		 
+		       <p:column id="editColumn" style="width:4%;" rendered="#{ordenTrabajoController.editable.ordenTrabajoEstado.id == ordenTrabajoController.ordenTrabajoEstadoEnumNueva or 
+  	                     ordenTrabajoController.editable.ordenTrabajoEstado.id == ordenTrabajoController.ordenTrabajoEstadoEnumEnConstruccion}">
+		            <p:rowEditor />
+		       </p:column>
+		       
+		       <p:column id="deleteColumn" style="width:4%;" rendered="#{ordenTrabajoController.editable.ordenTrabajoEstado.id == ordenTrabajoController.ordenTrabajoEstadoEnumNueva or 
+  	                     ordenTrabajoController.editable.ordenTrabajoEstado.id == ordenTrabajoController.ordenTrabajoEstadoEnumEnConstruccion}">
+		       		<p:commandButton id="deleteDetalle" action="#{ordenTrabajoController.deleteDetalle}" icon="ui-icon-trash" immediate="true" update=":form:messages">
+			       		 <f:setPropertyActionListener value="#{detalle}" target="#{ordenTrabajoController.detalleEditable}" />  			
+			       		 <p:confirm header="#{msg['eliminar.confirmDialog.header']}" message="#{msg['eliminar.confirmDialog.message']}" icon="ui-icon-alert" />
+			        </p:commandButton>
+		       </p:column>
+		       
+		   </p:dataTable>
+		   
+		   <p:spacer height="10"/>
+		   
+		   <p:panelGrid columns="8" styleClass="panelGridCenter">
+	             <p:commandButton id="save" value="#{msg['boton.guardar']}" icon="ui-icon-pencil"
+	                              action="#{ordenTrabajoController.save}" update=":form" 
+	                              rendered="#{ordenTrabajoController.editable.ordenTrabajoEstado.id == ordenTrabajoController.ordenTrabajoEstadoEnumNueva or 
+  	                                          ordenTrabajoController.editable.ordenTrabajoEstado.id == ordenTrabajoController.ordenTrabajoEstadoEnumEnConstruccion}"/>
+  	             <p:commandButton id="print" value="#{msg['boton.imprimir']}" icon="ui-icon-print" 
+                    			  action="#{ordenTrabajoController.saveAndExportToPDF}" ajax="false"
+                    			  onclick="form.target='_blank'"
+                    			  rendered="#{ordenTrabajoController.editable.ordenTrabajoEstado.id != ordenTrabajoController.ordenTrabajoEstadoEnumNueva}"/>                             
+				 <p:commandButton id="start" value="#{msg['boton.comenzar']}" icon="ui-icon-play"
+	                              action="#{ordenTrabajoController.start}" update=":form"
+								  rendered="#{ordenTrabajoController.editable.ordenTrabajoEstado.id == ordenTrabajoController.ordenTrabajoEstadoEnumNueva}">
+								  <p:confirm header="#{msg['ordenTrabajo.start.confirmDialog.header']}" message="#{msg['ordenTrabajo.start.confirmDialog.message']}" icon="ui-icon-alert" />
+				 </p:commandButton>
+				 <p:commandButton id="continue" value="#{msg['boton.continuar']}" icon="ui-icon-seek-next"
+	                              action="#{ordenTrabajoController.start}" update=":form"
+								  rendered="#{ordenTrabajoController.editable.ordenTrabajoEstado.id == ordenTrabajoController.ordenTrabajoEstadoEnumSuspendida}">
+				 				  <p:confirm header="#{msg['ordenTrabajo.continue.confirmDialog.header']}" message="#{msg['ordenTrabajo.continue.confirmDialog.message']}" icon="ui-icon-alert" />
+				 </p:commandButton>				  
+				 <p:commandButton id="finalize" value="#{msg['boton.finalizar']}" icon="ui-icon-check"
+	                              action="#{ordenTrabajoController.complete}" update=":form"
+	                              rendered="#{ordenTrabajoController.editable.ordenTrabajoEstado.id == ordenTrabajoController.ordenTrabajoEstadoEnumNueva or
+	                                          ordenTrabajoController.editable.ordenTrabajoEstado.id == ordenTrabajoController.ordenTrabajoEstadoEnumEnConstruccion}">
+	             				  <p:confirm header="#{msg['ordenTrabajo.finalize.confirmDialog.header']}" message="#{msg['ordenTrabajo.finalize.confirmDialog.message']}" icon="ui-icon-alert" />
+	             </p:commandButton>                                              
+	             <p:commandButton id="suspend" value="#{msg['boton.suspender']}" icon="ui-icon-pause"
+	                              action="#{ordenTrabajoController.suspend}" update=":form"
+								  rendered="#{ordenTrabajoController.editable.ordenTrabajoEstado.id == ordenTrabajoController.ordenTrabajoEstadoEnumNueva or
+	                              		      ordenTrabajoController.editable.ordenTrabajoEstado.id == ordenTrabajoController.ordenTrabajoEstadoEnumEnConstruccion}">
+	             		          <p:confirm header="#{msg['ordenTrabajo.suspend.confirmDialog.header']}" message="#{msg['ordenTrabajo.suspend.confirmDialog.message']}" icon="ui-icon-alert" />
+	             </p:commandButton>                 		      
+				 <p:commandButton id="cancel" value="#{msg['boton.cancelar']}" icon="ui-icon-close"
+	                              action="#{ordenTrabajoController.cancel}" update=":form"
+							      rendered="#{ordenTrabajoController.editable.ordenTrabajoEstado.id == ordenTrabajoController.ordenTrabajoEstadoEnumNueva or
+	                                          ordenTrabajoController.editable.ordenTrabajoEstado.id == ordenTrabajoController.ordenTrabajoEstadoEnumEnConstruccion}">
+	             		          <p:confirm header="#{msg['ordenTrabajo.cancel.confirmDialog.header']}" message="#{msg['ordenTrabajo.cancel.confirmDialog.message']}" icon="ui-icon-alert" />
+	             </p:commandButton>                                                               
+	             <p:commandButton id="exit" value="#{msg['boton.volver']}" icon="ui-icon-arrowreturnthick-1-w" 
+                    			  immediate="true" style="float:right" action="#{ordenTrabajoController.exit}"/>
+           </p:panelGrid>
+		   
+		   <p:dialog id="dialogEdit" widgetVar="dialogEdit" header="#{msg['ordenTrabajo.detalle.dialog.header']}"
+                     showEffect="explode" hideEffect="explode" resizable="false">  
+
+                <p:outputPanel id="panelEdit" style="text-align:center;">
+            
+                    <p:panelGrid id="gridEdit" columns="3" rendered="#{ordenTrabajoController.detalleEditable != null}">
+              
+                        <p:outputLabel for="productoNombre" value="#{msg['ordenTrabajo.detalle.nombreProducto']}:" />
+                        <p:autoComplete id="productoNombre" forceSelection="true" dropdown="true"
+	                				var="detalleOrdenTrabajoProducto"  
+	                				value="#{ordenTrabajoController.detalleEditable.producto}"
+	                				itemLabel="#{detalleOrdenTrabajoProducto.nombre}"
+	                				itemValue="#{detalleOrdenTrabajoProducto}"
+	                				converter="productoConverter"
+	               	 			    completeMethod="#{ordenTrabajoController.completarProducto}" 
+	               	 			    required="true">
+	               	 	</p:autoComplete>		    
+                        <p:message for="productoNombre" />
+
+                        <p:outputLabel for="cantidad" value="#{msg['ordenTrabajo.detalle.cantidad']}:" />
+                        <p:inputText id="cantidad" value="#{ordenTrabajoController.detalleEditable.cantidad}"/>
+                        <p:message for="cantidad" />
+                    </p:panelGrid>
+                </p:outputPanel>
+
+                <p:outputPanel style="padding-top: 5px;">
+                    <p:commandButton id="add" value="#{msg['boton.agregar']}" icon="ui-icon-disk"
+                                     actionListener="#{ordenTrabajoController.addDetalle}" 
+                                     update=":form:panelEdit" />
+                    <p:commandButton id="cancelAdd" value="#{msg['boton.cancelar']}" icon="ui-icon-close" 
+                                     onclick="PF('dialogEdit').hide()" immediate="true" style="float:right" />
+                </p:outputPanel>
+            
+            </p:dialog>
+		   
+
+        </h:form>  
+        
+    </ui:define>
+     
+</ui:composition>

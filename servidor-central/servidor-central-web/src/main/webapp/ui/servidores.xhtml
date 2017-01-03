@@ -1,0 +1,148 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+				xmlns:o="http://omnifaces.org/ui"
+				xmlns:of="http://omnifaces.org/functions"
+                template="../templates/ui.xhtml">
+    
+    <ui:define name="content">
+    
+        <h:form id="form">  
+            <p:growl id="messages" showDetail="true" life="2500" />
+
+	        <p:outputPanel style="padding-top: 18px; padding-bottom: 8px;">
+	            <h:outputText value="#{msg['servidores.titulo']}" style="font-size: 20; font-weight:normal; color:#DF013A"/>
+	            <p:commandButton id="new" value="#{msg['boton.nuevo']}" icon="ui-icon-plusthick" style="float:right"
+	                       		 actionListener="#{servidores.newSVT}" process="@this" immediate="true" update=":form:panelEdit"
+	                             oncomplete="PF('dialogEdit').show()" />
+		    </p:outputPanel>
+		  
+		    <p:dataTable id="svtTable" var="svt" value="#{servidores.lazyModel}" lazy="true"
+		                 paginator="true" rows="10"  
+		                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"  
+		                 rowsPerPageTemplate="10,15,20,25,50" 
+		                 selectionMode="single" selection="#{servidores.svtSeleccionado}" rowKey="#{svt.idServidor}"
+		                 sortBy="#{svt.nombre}" >  
+
+		  		<p:ajax event="rowSelect" listener="#{servidores.onRowSelect}" update=":form:panelView" oncomplete="PF('dialogView').show()"/>
+		        <p:column headerText="#{msg['servidor.nombre']}" sortBy="#{svt.nombre}" filterBy="#{svt.nombre}" width="15%">  
+		            <h:outputText value="#{svt.nombre}" />  
+		        </p:column>  
+		  
+		        <p:column headerText="#{msg['servidor.url']}" sortBy="#{svt.url}" filterBy="#{svt.url}" width="20%">  
+		            <h:outputText value="#{svt.url}" />  
+		        </p:column>  
+		  
+                <p:column headerText="#{msg['servidor.sucursal']}" sortBy="#{svt.sucursal.nombre}" filterBy="#{svt.sucursal.nombre}" width="15%">  
+                    <h:outputText value="#{svt.sucursal.nombre}" />  
+                </p:column>  
+
+		        <p:column headerText="#{msg['servidor.idClienteMqtt']}" sortBy="#{svt.idClienteMqtt}" filterBy="#{svt.idClienteMqtt}" width="15%">  
+		            <h:outputText value="#{svt.idClienteMqtt}" />  
+		        </p:column>  
+		  
+		        <p:column headerText="#{msg['servidor.uriWsdl']}" sortBy="#{svt.uriWsdl}" filterBy="#{svt.uriWsdl}" width="35%">  
+		            <h:outputText value="#{svt.uriWsdl}" />  
+		        </p:column>
+		    </p:dataTable>  
+						
+			<p:dialog id="dialogView" widgetVar="dialogView" header="#{msg['servidor.dialog.header']}" 
+		              showEffect="explode" hideEffect="explode" resizable="false" >  
+		  
+                <p:outputPanel id="panelView" style="text-align:center;">
+            
+	                <p:panelGrid columns="2" rendered="#{not empty servidores.svtSeleccionado}" columnClasses="label,value">
+			  
+			            <h:outputText value="#{msg['servidor.nombre']}:" />  
+			            <h:outputText value="#{servidores.svtSeleccionado.nombre}" style="font-weight:bold"/>
+
+			            <h:outputText value="#{msg['servidor.url']}:" />  
+			            <h:outputText value="#{servidores.svtSeleccionado.url}" style="font-weight:bold"/>  
+			  
+	                    <h:outputText value="#{msg['servidor.sucursal']}:" />  
+	                    <h:outputText value="#{servidores.svtSeleccionado.sucursal.nombre}" style="font-weight:bold"/>  
+	
+			            <h:outputText value="#{msg['servidor.idClienteMqtt']}:" />  
+			            <h:outputText value="#{servidores.svtSeleccionado.idClienteMqtt}" style="font-weight:bold"/>  
+			  
+			            <h:outputText value="#{msg['servidor.uriWsdl']}:" />  
+			            <h:outputText value="#{servidores.svtSeleccionado.uriWsdl}" style="font-weight:bold"/>  
+
+			        </p:panelGrid>
+                    	                                 
+                </p:outputPanel>
+
+                <p:outputPanel style="padding-top: 5px;">
+                    <p:commandButton id="edit" value="#{msg['boton.modificar']}" icon="ui-icon-pencil" ajax="true"
+                                     actionListener="#{servidores.editSVT}" process="@this" immediate="true" update=":form:panelEdit"
+                                     oncomplete="PF('dialogEdit').show(); PF('dialogView').hide()" />                                   
+                    <p:commandButton id="delete" value="#{msg['boton.eliminar']}" icon="ui-icon-trash" actionListener="#{servidores.delete}" immediate="true" update="messages"> 
+                        <p:confirm header="#{msg['eliminar.confirmDialog.header']}" message="#{msg['eliminar.confirmDialog.message']}" icon="ui-icon-alert" />
+                    </p:commandButton>
+                    <p:commandButton id="licences" value="#{msg['boton.licencias']}" icon="ui-icon-key" ajax="true"
+                                     actionListener="#{licenciasSVT.prepareView}" process="@this" immediate="true" update=":formLicenciasSVT:dialogViewLicenciaSVT"
+                                     oncomplete="PF('dialogViewLicenciaSVT').show(); PF('dialogView').hide()">
+                    	<f:attribute name="servidorSeleccionado" value="#{servidores.svtSeleccionado}" />
+                    </p:commandButton>
+                    <p:commandButton id="close" value="#{msg['boton.cerrar']}" icon="ui-icon-close" onclick="PF('dialogView').hide()" immediate="true" style="float:right" />
+                </p:outputPanel>
+
+		   </p:dialog>
+
+		   <p:dialog id="dialogEdit" widgetVar="dialogEdit" header="#{msg['servidor.dialog.header']}"
+                     showEffect="explode" hideEffect="explode" resizable="false">  
+
+                <p:outputPanel id="panelEdit" style="text-align:center;">
+            
+                    <p:panelGrid id="gridEdit" columns="3" rendered="#{servidores.svtEditable != null}">
+              
+				        <p:outputLabel for="svtNombre" value="#{msg['servidor.nombre']}:" />
+				        <p:inputText id="svtNombre" value="#{servidores.svtEditable.nombre}" required="true" />
+				        <p:message for="svtNombre" />
+				        
+				        <p:outputLabel for="svtUrl" value="#{msg['servidor.url']}:" />
+				        <p:inputText id="svtUrl" value="#{servidores.svtEditable.url}" required="true" size="70" />
+				        <p:message for="svtUrl" />
+              
+                        <p:outputLabel for="svtSucursal" value="#{msg['servidor.sucursal']}:" />
+				        <p:selectOneMenu id="svtSucursal" value="#{servidores.svtEditable.sucursal}" var="suc" 
+				                         converter="omnifaces.SelectItemsConverter" required="true" >
+				            <f:selectItem itemLabel="" itemValue="" />
+				            <f:selectItems value="#{servidores.sucursales}" var="sucursal" itemLabel="#{sucursal.nombre}" itemValue="#{sucursal}" />
+				            <p:column>
+				                <h:outputText value="#{suc.provincia.nombre}" />
+				            </p:column>
+				            <p:column>
+				                <h:outputText value="#{suc.nombre}" />
+				            </p:column>
+				        </p:selectOneMenu>
+                        <p:message for="svtSucursal" />
+
+                        <p:outputLabel for="svtIdClienteMqtt" value="#{msg['servidor.idClienteMqtt']}:" />
+                        <p:inputText id="svtIdClienteMqtt" value="#{servidores.svtEditable.idClienteMqtt}" required="true">
+                            <f:validateLength minimum="1" maximum="23" />
+                        </p:inputText>             
+                        <p:message for="svtIdClienteMqtt" />
+              
+                        <p:outputLabel for="svtUriWsdl" value="#{msg['servidor.uriWsdl']}:" />
+                        <p:inputText id="svtUriWsdl" value="#{servidores.svtEditable.uriWsdl}" size="70"/>
+                        <p:message for="svtUriWsdl" />
+
+                    </p:panelGrid>
+                </p:outputPanel>
+
+                <p:outputPanel style="padding-top: 5px;">
+					<p:commandButton id="save" value="#{msg['boton.guardar']}" icon="ui-icon-disk"
+                                     actionListener="#{servidores.save}" 
+                                     update=":form:panelEdit" />
+                    <p:commandButton id="cancel" value="#{msg['boton.cancelar']}" icon="ui-icon-close" 
+                                     onclick="PF('dialogEdit').hide()" immediate="true" style="float:right" />
+                </p:outputPanel>
+            
+            </p:dialog>
+        </h:form> 
+    	<ui:include src="/ui/licenciasSVT.xhtml"></ui:include>
+    </ui:define>
+</ui:composition>

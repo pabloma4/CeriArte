@@ -1,0 +1,135 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../templates/ui.xhtml">
+    
+    <ui:define name="content">
+    
+        <h:form id="form">  
+            <p:growl id="messages" showDetail="true" life="2500" />
+                        
+            <p:outputPanel>
+                <h:outputText value="#{msg['clientes.titulo']}" styleClass="title"/>
+            </p:outputPanel>
+            
+            <p:outputPanel style="padding-bottom: 25px;">
+                <p:commandButton id="new" value="#{msg['boton.nuevo']}" icon="ui-icon-plusthick" style="float:right"
+                                 actionListener="#{clientesController.prepareNew}" process="@this" immediate="true" update=":form:panelEdit"
+                                 oncomplete="PF('dialogEdit').show()" rendered="#{facesContext.externalContext.isUserInRole('ROLE_NEW_CLIENTE')}"/>
+            </p:outputPanel>
+          
+            <p:dataTable id="clientesTable" var="cliente" value="#{clientesController.lazyModel}" lazy="true"
+                         paginator="true" rows="25"  
+                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"  
+                         rowsPerPageTemplate="10,15,20,25,50" 
+                         selectionMode="single" selection="#{clientesController.seleccionado}" rowKey="#{cliente.id}"
+                         sortBy="#{cliente.apellido}">  
+
+                <p:ajax event="rowSelect" listener="#{clientesController.prepareEdit}" update=":form:panelEdit" oncomplete="PF('dialogEdit').show()"/>
+                
+                <p:column headerText="#{msg['cliente.nombre']}" sortBy="#{cliente.nombre}" filterBy="#{cliente.nombre}" width="10%" priority="1">  
+                    <h:outputText value="#{cliente.nombre}" />  
+                </p:column>  
+          
+                <p:column headerText="#{msg['cliente.apellido']}" sortBy="#{cliente.apellido}" filterBy="#{cliente.apellido}" width="10%" priority="1">  
+                    <h:outputText value="#{cliente.apellido}" />  
+                </p:column>  
+                
+                <p:column headerText="#{msg['cliente.email']}" sortBy="#{cliente.email}" filterBy="#{cliente.email}" width="15%" priority="2">  
+                    <h:outputText value="#{cliente.email}" />  
+                </p:column>  
+          
+                <p:column headerText="#{msg['cliente.telefono']}" sortBy="#{cliente.telefono}" filterBy="#{cliente.telefono}" width="15%" priority="1">  
+                    <h:outputText value="#{cliente.telefono}" />  
+                </p:column>  
+                
+				<p:column headerText="#{msg['cliente.localidad']}" sortBy="#{cliente.localidad.nombre}" filterBy="#{cliente.localidad.nombre}" width="15%" priority="2">  
+                    <h:outputText value="#{cliente.localidad.nombre}" />  
+                </p:column>  
+                
+				<p:column headerText="#{msg['cliente.domicilio']}" sortBy="#{cliente.domicilio}" filterBy="#{cliente.domicilio}" width="15%" priority="1">  
+                    <h:outputText value="#{cliente.domicilio}" />  
+                </p:column>  
+                
+                <p:column headerText="#{msg['cliente.cuit']}" sortBy="#{cliente.cuit}" filterBy="#{cliente.cuit}" width="10%" priority="2">  
+                    <h:outputText value="#{cliente.cuit}" />  
+                </p:column>  
+                
+                <p:column headerText="#{msg['cliente.responsabilidadIVA']}" sortBy="#{cliente.responsabilidadIVA.descripcion}" filterBy="#{cliente.responsabilidadIVA.descripcion}" 
+                		  width="10%" priority="2">  
+                    <h:outputText value="#{cliente.responsabilidadIVA.descripcion}" />  
+                </p:column>  
+          
+            </p:dataTable>  
+                        
+           <p:dialog id="dialogEdit" widgetVar="dialogEdit" header="#{msg['cliente.dialog.header']}"
+                     showEffect="explode" hideEffect="explode" resizable="false">  
+
+                <p:outputPanel id="panelEdit" style="text-align:center;">
+            
+                    <p:panelGrid id="gridEdit" columns="3" rendered="#{clientesController.editable != null}">
+              
+                        <p:outputLabel for="clienteNombre" value="#{msg['cliente.nombre']}:" />
+                        <p:inputText id="clienteNombre" value="#{clientesController.editable.nombre}" required="true" />
+                        <p:message for="clienteNombre" />
+                        
+                        <p:outputLabel for="clienteApellido" value="#{msg['cliente.apellido']}:" />
+                        <p:inputText id="clienteApellido" value="#{clientesController.editable.apellido}" required="true" />
+                        <p:message for="clienteApellido" />
+
+                        <p:outputLabel for="clienteEmail" value="#{msg['cliente.email']}:" />
+                        <p:inputText id="clienteEmail" value="#{clientesController.editable.email}" />
+                        <p:message for="clienteEmail" />
+                        
+                        <p:outputLabel for="clienteTelefono" value="#{msg['cliente.telefono']}:" />
+                        <p:inputText id="clienteTelefono" value="#{clientesController.editable.telefono}" size="12" />
+                        <p:message for="clienteTelefono" />
+
+                        <p:outputLabel for="clienteLocalidad" value="#{msg['cliente.localidad']}:" />
+				        <p:selectOneMenu id="clienteLocalidad" value="#{clientesController.editable.localidad}" 
+				                         converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains">
+				            <f:selectItem itemLabel="" />
+				            <f:selectItems value="#{clientesController.localidades}" var="localidad" itemLabel="#{localidad.nombre}" itemValue="#{localidad}" />
+				        </p:selectOneMenu>
+                        <p:message for="clienteLocalidad" />
+                                                
+                        <p:outputLabel for="clienteDomicilio" value="#{msg['cliente.domicilio']}:" />
+                        <p:inputText id="clienteDomicilio" value="#{clientesController.editable.domicilio}" size="60" />
+                        <p:message for="clienteDomicilio" />
+                        
+                        <p:outputLabel for="clienteCUIT" value="#{msg['cliente.cuit']}:" />
+                        <p:inputText id="clienteCUIT" value="#{clientesController.editable.cuit}" size="13" maxlength="13"/>
+                        <p:message for="clienteCUIT" />
+                        
+                        <p:outputLabel for="clienteIVA" value="#{msg['cliente.responsabilidadIVA']}:" />
+				        <p:selectOneMenu id="clienteIVA" value="#{clientesController.editable.responsabilidadIVA}" 
+				                         converter="omnifaces.SelectItemsConverter">
+				            <f:selectItem itemLabel="" />
+				            <f:selectItems value="#{clientesController.responsabilidadIVAList}" var="responsabilidadIVA" itemLabel="#{responsabilidadIVA.descripcion}" itemValue="#{responsabilidadIVA}" />
+				        </p:selectOneMenu>
+                        <p:message for="clienteIVA" />
+              
+                    </p:panelGrid>
+                </p:outputPanel>
+
+                <p:outputPanel style="padding-top: 5px;">
+                    <p:commandButton id="save" value="#{msg['boton.guardar']}" icon="ui-icon-disk"
+                                     actionListener="#{clientesController.save}" 
+                                     update=":form:panelEdit" />
+                    <p:commandButton id="delete" value="#{msg['boton.eliminar']}" icon="ui-icon-trash" actionListener="#{clientesController.delete}" immediate="true" update="messages"
+                    				 rendered="#{facesContext.externalContext.isUserInRole('ROLE_DELETE_CLIENTE')}"> 
+                        <p:confirm header="#{msg['eliminar.confirmDialog.header']}" message="#{msg['eliminar.confirmDialog.message']}" icon="ui-icon-alert" />
+                    </p:commandButton>                 
+                    <p:commandButton id="cancel" value="#{msg['boton.cancelar']}" icon="ui-icon-close" 
+                                     onclick="PF('dialogEdit').hide()" immediate="true" style="float:right" />
+                </p:outputPanel>
+            
+            </p:dialog>
+            
+        </h:form>  
+
+    </ui:define>
+     
+</ui:composition>

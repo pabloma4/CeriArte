@@ -1,0 +1,113 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../templates/ui.xhtml">
+    
+    <ui:define name="content">
+        
+        <h:form id="form">  
+            <p:growl id="messages" showDetail="true" life="2500" />
+
+			<p:outputPanel>
+            	<h:outputText value="#{msg['usuarios.titulo']}" styleClass="title"/>
+            </p:outputPanel>
+            
+            <p:outputPanel style="padding-bottom: 25px;">
+                <p:commandButton id="new" value="#{msg['boton.nuevo']}" icon="ui-icon-plusthick" style="float:right"
+                                 actionListener="#{usuariosController.prepareNew}" process="@this" immediate="true" update=":form:panelEdit"
+                                 oncomplete="PF('dialogEdit').show()" rendered="#{facesContext.externalContext.isUserInRole('ROLE_NEW_USUARIO')}"/>
+            </p:outputPanel>
+           
+            <p:dataTable id="usuariosTable" var="usuario" value="#{usuariosController.lazyModel}" lazy="true"
+                         paginator="true" rows="30"  
+                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"  
+                         rowsPerPageTemplate="10,15,20,25,50" 
+                         selectionMode="single" selection="#{usuariosController.seleccionado}" rowKey="#{usuario.idUsuario}"
+                         sortBy="#{usuario.nombre}">  
+
+                <p:ajax event="rowSelect" listener="#{usuariosController.prepareEdit}" update=":form:panelEdit" oncomplete="PF('dialogEdit').show()"/>
+				
+                <p:column headerText="#{msg['usuario.login']}" sortBy="#{usuario.login}" filterBy="#{usuario.login}" width="20%">  
+                    <h:outputText value="#{usuario.login}" />  
+                </p:column>
+                
+                <p:column headerText="#{msg['usuario.nombre']}" sortBy="#{usuario.nombre}" filterBy="#{usuario.nombre}" width="20%">  
+                    <h:outputText value="#{usuario.nombre}" />  
+                </p:column>  
+
+                <p:column headerText="#{msg['usuario.apellido']}" sortBy="#{usuario.apellido}" filterBy="#{usuario.apellido}" width="20%">  
+                    <h:outputText value="#{usuario.apellido}" />  
+                </p:column>
+                <p:column headerText="#{msg['usuario.email']}" sortBy="#{usuario.email}" filterBy="#{usuario.email}" width="40%">  
+                    <h:outputText value="#{usuario.email}" />  
+                </p:column>
+
+
+			</p:dataTable>  
+
+
+           <p:dialog id="dialogEdit" widgetVar="dialogEdit" header="#{msg['usuario.dialog.header']}"
+                     showEffect="explode" hideEffect="explode" resizable="false">  
+
+                <p:outputPanel id="panelEdit" style="text-align:center;">
+            
+                    <p:panelGrid id="gridEdit" columns="3" rendered="#{usuariosController.editable != null}">
+
+						<p:outputLabel for="usuarioLogin" value="#{msg['usuario.login']}:" />
+                        <p:inputText id="usuarioLogin" value="#{usuariosController.editable.login}" required="true" label="#{msg['usuario.login']}"/>
+                        <p:message for="usuarioLogin" />              
+                       
+                        <p:outputLabel for="usuarioNombre" value="#{msg['usuario.nombre']}:" />
+                        <p:inputText id="usuarioNombre" value="#{usuariosController.editable.nombre}" size="20" label="#{msg['usuario.nombre']}"/>
+                        <p:message for="usuarioNombre" />
+                       
+                        <p:outputLabel for="usuarioApellido" value="#{msg['usuario.apellido']}:" />
+                        <p:inputText id="usuarioApellido" value="#{usuariosController.editable.apellido}" size="20" label="#{msg['usuario.apellido']}"/>
+                        <p:message for="usuarioApellido" />
+                       
+                        <p:outputLabel for="usuarioEmail" value="#{msg['usuario.email']}:" />
+                        <p:inputText id="usuarioEmail" value="#{usuariosController.editable.email}" size="20" required="true" label="#{msg['usuario.email']}">
+                        	<f:validateRegex  pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						</p:inputText>
+                        <p:message for="usuarioEmail" />                                                
+                       
+                        <h:outputLabel rendered="#{usuariosController.editable.idUsuario == 0}" for="usuarioPassword" value="#{msg['usuario.password']}:" />
+        				<p:password rendered="#{usuariosController.editable.idUsuario == 0}" id="usuarioPassword" value="#{usuariosController.editable.password}" match="usuarioConfirmaPassword" 
+        				required="true" validatorMessage="#{msg['usuario.password.different']}:" label="#{msg['usuario.password']}"/>
+				        <p:message for="usuarioPassword" rendered="#{usuariosController.editable.idUsuario == 0}"/>
+				       
+				        <h:outputLabel rendered="#{usuariosController.editable.idUsuario == 0}" for="usuarioConfirmaPassword" value="#{msg['usuario.repassword']}:" />
+        				<p:password rendered="#{usuariosController.editable.idUsuario == 0}" id="usuarioConfirmaPassword" value="#{usuariosController.editable.confirmarPassword}" 
+        				required="true" label="#{msg['usuario.repassword']}"/>
+        				<p:message rendered="#{usuariosController.editable.idUsuario == 0}" for="usuarioConfirmaPassword" />
+				       
+						<h:outputLabel for="roles" value="#{msg['usuario.roles']}:" />
+				        <p:selectCheckboxMenu id="roles" value="#{usuariosController.selectedRoles}" label="#{msg['usuario.seleccione']}" 
+				        				      filter="false" required="true">
+				            <f:selectItems value="#{usuariosController.roles}" var="rol" itemLabel="#{rol.nombre}" itemValue="#{rol.idRol}"/>
+				        </p:selectCheckboxMenu>
+						<p:message for="roles" />
+                    </p:panelGrid>
+                </p:outputPanel>
+
+                <p:outputPanel style="padding-top: 5px;">
+                    <p:commandButton id="save" value="#{msg['boton.guardar']}" icon="ui-icon-disk"
+                                     actionListener="#{usuariosController.save}" 
+                                     update=":form:panelEdit" />
+                    <p:commandButton id="delete" value="#{msg['boton.eliminar']}" icon="ui-icon-trash" actionListener="#{usuariosController.delete}" immediate="true" update="messages"
+                    				 rendered="#{facesContext.externalContext.isUserInRole('ROLE_DELETE_USUARIO')}"> 
+                        <p:confirm header="#{msg['eliminar.confirmDialog.header']}" message="#{msg['eliminar.confirmDialog.message']}" icon="ui-icon-alert" />
+                    </p:commandButton>                 
+                    <p:commandButton id="cancel" value="#{msg['boton.cancelar']}" icon="ui-icon-close" 
+                                     onclick="PF('dialogEdit').hide()" immediate="true" style="float:right" />
+                </p:outputPanel>
+            
+            </p:dialog>
+            
+        </h:form>  
+
+    </ui:define>
+     
+</ui:composition>

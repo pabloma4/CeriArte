@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        template="../../templates/ui.xhtml">
+
+    <ui:define name="content">
+        
+        <p:outputPanel style="padding-top: 18px; padding-bottom: 8px;">
+            <h:outputText value="#{msg['error.titulo']}" style="font-size: 20; font-weight:bold; color:#DF013A"/><br/><br/>
+            <p:accordionPanel multiple="true">
+                <p:tab title="#{msg['error.error']}" >
+                    <h:outputText value="#{pfExceptionHandler.message}"/>
+                </p:tab>
+                <p:tab title="#{msg['error.tipo']}" >
+                    <h:outputText value="#{pfExceptionHandler.type}"/>
+                </p:tab>
+                <p:tab title="#{msg['error.detalles']}" >
+                    <h:outputText value="#{pfExceptionHandler.formattedStackTrace}" escape="false" />
+                </p:tab>
+            </p:accordionPanel>
+        </p:outputPanel>
+        
+    </ui:define>
+     
+</ui:composition>

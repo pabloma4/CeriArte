@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14249106031280" configfile="/servidor-central-web/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="122" y="178" id="pf14262099222440" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" outlinks="pf14262099222442 pf142621336134545" inlinks="pf14262099222442" path="/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="home.xhtml" x="338" y="178" id="pf142621336134547" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf142621336134545" path="/home.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="562" id="pf14288877080013" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" path="/ui/presupuestos.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="ui/editPresupuesto.xhtml" x="122" y="946" id="pf14288877080015" referenceLink="//@navigationRule.2/@fromViewId|" path="/ui/editPresupuesto.xhtml"/>
+  <links id="pf142621336134545" target="pf142621336134547" source="pf14262099222440" outcome="success" fromaction="#{loginBean.login}"/>
+  <links id="pf14262099222442" target="pf14262099222440" source="pf14262099222440" outcome="failure" fromaction="#{loginBean.login}">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
+</pageflow:Pageflow>

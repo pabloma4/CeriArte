@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pm="http://primefaces.org/mobile">
+<h:head>
+	<link rel="stylesheet"
+	href="${request.contextPath}/css/login.css"
+	type="text/css" />
+</h:head>
+
+<h:body>
+    <div id="contenido">
+        <div id="loginBody">
+
+            <div id="loginTitulo" align="center" />
+        
+            <div id="loginData">
+                <h:form  id="loginFormId" prependId="false" >
+
+                    <!-- h:messages globalOnly="true"/ -->
+
+                    <table class="loginInput" align="center">
+                        <tbody>
+                            <tr>
+                                <td colspan="2"></td>
+                            </tr>
+                            <tr>
+                                <td class="tdLabel">
+                                    <h:outputText id="outTxtUserNameId" value="Usuario: " 
+                                                  name="outTxtUserNameNm" />
+                                </td>
+                                <td class="tdField" nowrap="nowrap">
+                                    <h:inputText id="userName" required="true" value="#{loginBean.username}" 
+                                        requiredMessage="Por favor Ingrese Usuario" />
+                                    <h:outputLabel id="outLblUserNameId" for="userName" 
+                                        name="outLblUserNameNm" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdLabel">
+                                    <h:outputText id="outTxtPasswordId" value="Contraseña: " name="outTxtPasswordNm" />
+                                </td>
+                                <td class="tdField">
+                                    <h:inputSecret id="password" required="true" value="#{loginBean.password}" 
+                                        requiredMessage="Por favor Ingrese Password" name="inTxtPasswordNm" />
+                                    <h:outputLabel id="outLblPasswordId" for="password" name="outLblPasswordNm" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="center">
+                                    <h:commandButton type="submit" id="login" action="#{loginBean.login}" 
+                                        value="Ingresar" class="boton" />
+                                    <input name="reset" type="reset" value="Cancelar" class="boton" onclick="cancelar_login();" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>                
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </h:form>
+            </div>
+
+             <div id="loginNotificacion" align="center">
+                <h:form id="notificaciones">
+                    <p:messages id="messages" showDetail="false" autoUpdate="true" closable="false" />
+                </h:form>
+            </div>
+
+        </div>
+
+    </div>
+</h:body>
+</html>

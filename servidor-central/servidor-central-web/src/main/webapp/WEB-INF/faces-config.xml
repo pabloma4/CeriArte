@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+    http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+    version="2.0">
+
+    <application>
+    	<!-- Spring -->
+    	<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+ 
+        <!-- Exception Handler -->
+        <el-resolver>org.primefaces.application.exceptionhandler.PrimeExceptionHandlerELResolver</el-resolver>
+
+        <locale-config>
+            <default-locale>es</default-locale>
+        </locale-config>
+
+        <resource-bundle>
+            <base-name>com.ceriarte.central.web.messages</base-name>
+            <var>msg</var>
+        </resource-bundle>
+        
+        <navigation-handler>
+        	org.primefaces.mobile.application.MobileNavigationHandler
+    	</navigation-handler>
+    </application>
+    
+	<factory>
+		<exception-handler-factory>
+    		org.primefaces.application.exceptionhandler.PrimeExceptionHandlerFactory
+		</exception-handler-factory>
+	</factory>
+	
+    <navigation-rule>
+        <from-view-id>/login.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{loginBean.login}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/home.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{loginBean.login}</from-action>
+            <from-outcome>failure</from-outcome>
+            <to-view-id>/login.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule> 
+</faces-config>

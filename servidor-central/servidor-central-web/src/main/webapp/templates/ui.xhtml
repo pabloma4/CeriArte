@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html 
+     xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:sec="http://www.springframework.org/security/tags"
+     xmlns:pm="http://primefaces.org/mobile">
+
+<!-- <f:view renderKitId="PRIMEFACES_MOBILE"/> -->
+<f:view encoding="UTF-8" contentType="text/html">
+
+	<h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+            <meta http-equiv="Content-Type" content="text/xhtml; charset=UTF-8" />
+            <meta http-equiv="Cache-Control" content="no-cache" />
+            <meta http-equiv="Pragma" content="no-cache" />        
+            <meta http-equiv="expires" content="0"/>      
+            <title>Ceriarte - Servidor Central</title>
+			<link rel="shortcut icon" type="image/jpg" href="#{request.contextPath}/images/logo.jpg" /> 
+        </f:facet>
+        
+        <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/ceriarte.css" />
+        <script type="text/javascript" src="#{request.contextPath}/js/locales.js"/>
+
+		<ui:insert name="head"></ui:insert>
+        
+	</h:head>
+
+	<h:body>
+	    <p:layout fullPage="true">
+
+			<p:layoutUnit position="north" gutter="1" collapsible="true" collapsed="false" size="120" style="border:0; margin:0; padding:0;">
+
+                <h:form>
+		            <p:confirmDialog global="true" showEffect="explode" hideEffect="explode">
+		                <p:commandButton value="#{msg['boton.si']}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+		                <p:commandButton value="#{msg['boton.no']}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+		            </p:confirmDialog>
+                </h:form>
+                        
+		        <ui:insert name="status">
+		            <p:ajaxStatus style="width:64px;height:64px;position:fixed;right:5px;top:5px">
+		                <f:facet name="start">
+		                    <p:graphicImage value="/images/loading.gif" />
+		                </f:facet>
+		
+		                <f:facet name="complete">
+		                    <h:outputText value="" />
+		                </f:facet>
+		            </p:ajaxStatus>
+		            <div id="header">
+						<p:panelGrid columns="1" styleClass="welcome">
+			            	<p:panelGrid>
+				            	<p:outputLabel value="#{msg['label.welcome']} "/> 
+				            	<p:outputLabel value="#{request.userPrincipal.name}!!!"/>
+			            	</p:panelGrid>
+			            	<p:clock pattern="EEEE d MMMM yyyy | HH:mm" mode="server"/>
+		            	</p:panelGrid>
+		        	</div>
+		        </ui:insert>
+	        </p:layoutUnit>
+	        
+	        <p:layoutUnit position="center">
+            	<ui:include src="menu-bar.xhtml" />
+		    	<ui:include src="menu-bar-short.xhtml" />
+	       		<div id="page" class="ui-widget">
+
+		            <div id="content">
+		                <div class="post">
+		                    <ui:insert name="content">...</ui:insert>
+		                </div>
+		            </div>
+		
+		            <div style="clear: both;"></div>
+		        </div>
+			</p:layoutUnit>        
+	        
+	        <p:layoutUnit position="south" size="30" resizable="false" closable="false" collapsible="false" id="footer">
+		        <div id="footer" class="ui-widget ui-widget-header">
+		            <p class="version">Versión 1.1.2</p>
+		            <p class="copyright">© 2015 SierraSoft</p>
+		        </div>
+	        </p:layoutUnit>
+
+        </p:layout>
+	</h:body>
+	
+</f:view>
+</html>

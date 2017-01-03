@@ -1,0 +1,84 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../templates/ui.xhtml">
+    
+    <ui:define name="content">
+    
+        <h:form id="form">  
+            <p:growl id="messages" showDetail="true" life="2500" />
+
+            <p:outputPanel style="padding-top: 18px; padding-bottom: 8px;">
+                <h:outputText value="#{msg['pedidos.titulo']}" styleClass="title"/>
+            </p:outputPanel>
+              
+			<p:panel>
+		        <h:panelGrid columns="4" cellpadding="10" id="filterGrid">        
+			        <p:outputLabel value="#{msg['pedido.filtro.fechaCreacionDesde']}:" />
+			  		<p:calendar id="filtroFechaDesde" value="#{pedidosController.filtroFechaCreacionDesde}" 
+                                locale="es" pattern="dd-MMM-yyyy" effect="explode" />
+			        
+			        <p:outputLabel value="#{msg['pedido.filtro.fechaCreacionHasta']}:" />
+			  		<p:calendar id="filtroFechaHasta" value="#{pedidosController.filtroFechaCreacionHasta}" 
+                                locale="es" pattern="dd-MMM-yyyy" effect="explode" />
+                    
+                    <p:outputLabel value="#{msg['pedido.filtro.estado']}:" />
+			 		<p:selectCheckboxMenu id="menu" value="#{pedidosController.filtroPedidoEstados}" label="#{msg['pedido.filtro.seleccionarEstados']}">
+			            <f:selectItems value="#{pedidosController.pedidoEstados}" var="estado" itemLabel="#{estado.nombre}" itemValue="#{estado.id}"/>
+			        </p:selectCheckboxMenu>
+			         
+                    <p:outputLabel value="" />            		 			
+	 				<p:commandButton id="search" value="#{msg['boton.buscar']}" icon="ui-icon-search" style="float:right;"
+		                             actionListener="#{pedidosController.search}"
+		                             update=":form:pedidosTable"/>           
+		        </h:panelGrid>
+		    </p:panel>
+            
+			<p:outputPanel style="padding-top: 18px; padding-bottom: 8px; text-align:right;">
+                <p:button id="new"  outcome="editPedido"  ajax="false" value="#{msg['boton.nuevo']}" icon="ui-icon-plusthick"
+                		  rendered="#{facesContext.externalContext.isUserInRole('ROLE_NEW_PEDIDO')}"/>
+            </p:outputPanel>
+          
+            <p:dataTable id="pedidosTable" var="pedido" value="#{pedidosController.lazyModel}" lazy="true"
+                         paginator="true" rows="25" 
+                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"  
+                         rowsPerPageTemplate="10,15,20,25,50"  rowKey="#{pedido.id}" sortBy="#{pedido.id}" 
+                         selectionMode="single" sortOrder="descending">  
+                         
+				<p:ajax event="rowSelect" listener="#{pedidosController.onRowSelect}"
+				        rendered="#{facesContext.externalContext.isUserInRole('ROLE_EDIT_PEDIDO')}">
+				</p:ajax>        
+                
+                <p:column headerText="#{msg['pedido.numero']}" sortBy="#{pedido.id}" filterBy="#{pedido.id}" width="15%" priority="1">  
+                    <h:outputText value="#{pedido.id}" />  
+                </p:column>  
+                
+                <p:column headerText="#{msg['pedido.cliente']}" sortBy="#{pedido.cliente.apellido}" filterBy="#{pedido.cliente.apellido}" width="20%" priority="1">  
+                    <h:outputText value="#{pedido.cliente.apellido} #{pedido.cliente.nombre}" />  
+                </p:column>  
+          
+                <p:column headerText="#{msg['pedido.estado']}" sortBy="#{pedido.pedidoEstado.nombre}" filterBy="#{pedido.pedidoEstado.nombre}" width="30%" 
+                		  style="text-align:center;" priority="1">  
+                    <h:outputText value="#{pedido.pedidoEstado.nombre}" />  
+                </p:column>  
+                
+                <p:column headerText="#{msg['pedido.fechaCreacion']}" sortBy="#{pedido.fechaCreacion}" filterBy="#{pedido.fechaCreacion}" width="20%" 
+                		  style="text-align:center;" priority="2">  
+                    <h:outputText value="#{pedido.fechaCreacion.toGregorianCalendar().time}">
+                    	 <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>  
+                </p:column>  
+
+                <p:column headerText="#{msg['pedido.presupuesto']}" sortBy="#{pedido.presupuesto.id}" filterBy="#{pedido.presupuesto.id}" width="15%" 
+                		  style="text-align:center;" priority="2">  
+                    <h:outputText value="#{pedido.presupuesto.id}" rendered="#{pedido.presupuesto != null}"/>  
+                </p:column>  
+                                
+            </p:dataTable>  
+        </h:form>  
+        
+    </ui:define>
+     
+</ui:composition>
