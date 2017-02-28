@@ -110,8 +110,8 @@ public class PedidoController extends AbstractController implements Serializable
     	
         FacesContext.getCurrentInstance().addMessage(null, fMsg);
         RequestContext.getCurrentInstance().update("form:messages");
-        RequestContext.getCurrentInstance().update("form:detalles");
-        RequestContext.getCurrentInstance().update("form:estado");
+        RequestContext.getCurrentInstance().update("form:tabs:detalles");
+        RequestContext.getCurrentInstance().update("form:tabs:estado");
 
         logger.debug("Fin save()");
     }
@@ -203,8 +203,8 @@ public class PedidoController extends AbstractController implements Serializable
     	
         FacesContext.getCurrentInstance().addMessage(null, fMsg);
         RequestContext.getCurrentInstance().update("form:messages");
-        RequestContext.getCurrentInstance().update("form:detalles");
-        RequestContext.getCurrentInstance().update("form:montoTotal");
+        RequestContext.getCurrentInstance().update("form:tabs:detalles");
+        RequestContext.getCurrentInstance().update("form:tabs:montoTotal");
 		logger.info("Detalle de Pedido agregado exitosamente");
         logger.debug("Fin save()");
     }
@@ -217,8 +217,8 @@ public class PedidoController extends AbstractController implements Serializable
     	try{
     		fMsg = new FacesMessage(msg.getString("pedido.detalle.deleted"));
     		editable.getDetalles().getDetallePedido().remove(detalleEditable);
-            RequestContext.getCurrentInstance().update("form:detalles");
-            RequestContext.getCurrentInstance().update("form:montoTotal");
+            RequestContext.getCurrentInstance().update("form:tabs:detalles");
+            RequestContext.getCurrentInstance().update("form:tabs:montoTotal");
     	}catch(Exception e){
     		logger.error("No se pudo eliminar el detalle para el producto:  {}", detalleEditable.getProducto().getNombre());
         	fMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("pedido.detalle.deleted.error"), detalleEditable.getProducto().getNombre());
