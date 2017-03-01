@@ -20,7 +20,7 @@
             </p:outputPanel>
           
 			<p:tabView id="tabs">
-				<p:tab title="Datos del Pedido">
+				<p:tab title="#{msg['pedido.tab.informacion.titulo']}">
 					<p:outputPanel id="outputPanelEdit" style="text-align:center;">
 					
 						<p:panelGrid columns="6">	      
@@ -259,7 +259,8 @@
 					
 					</p:dialog>
 				</p:tab>
-				<p:tab title="Pagos">
+				<p:tab title="#{msg['pedido.tab.pagos.titulo']}">
+					<ui:include src="pedidoPagos.xhtml"/>
 				</p:tab>
 			</p:tabView>
 

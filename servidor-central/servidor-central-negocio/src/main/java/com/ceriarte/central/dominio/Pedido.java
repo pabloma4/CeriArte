@@ -37,6 +37,7 @@ public class Pedido implements java.io.Serializable {
 	private boolean borrado;
 	private PedidoEstado pedidoEstado;
 	private Presupuesto presupuesto;
+	private Set<MovimientoCaja> pagos;
 
 	public Pedido() {
 	}
@@ -128,6 +129,15 @@ public class Pedido implements java.io.Serializable {
 
 	public void setPresupuesto(Presupuesto presupuesto) {
 		this.presupuesto = presupuesto;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pedido", cascade = {CascadeType.ALL})
+	public Set<MovimientoCaja> getPagos() {
+		return pagos;
+	}
+
+	public void setPagos(Set<MovimientoCaja> pagos) {
+		this.pagos = pagos;
 	}
 	
 }
