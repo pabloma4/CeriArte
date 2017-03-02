@@ -513,71 +513,9 @@
 	<xs:complexType name="medioDePagoDTO">
 		<xs:sequence>
 			<xs:element name="id"                    type="xs:int"      			   minOccurs="1" maxOccurs="1" />
-			<xs:element name="tipoMedioDePago"       type="ae:tipoMedioDePagoDTO"      minOccurs="1" maxOccurs="1" />
-			<xs:element name="planDePago"            type="ae:planDePagoDTO"   		   minOccurs="0" maxOccurs="1" />
-			<xs:element name="informacionAdicional"  type="xs:string"  				   minOccurs="0" maxOccurs="1" />
+			<xs:element name="descripcion"       	 type="xs:string"     		 	   minOccurs="1" maxOccurs="1" />
+			<xs:element name="abreviatura"           type="xs:string"   		       minOccurs="0" maxOccurs="1" />
 			<xs:element name="habilitado" 		 	 type="xs:boolean" 				   maxOccurs="1" minOccurs="1" />
 		</xs:sequence>
 	</xs:complexType>
-	
-	<xs:complexType name="tipoMedioDePagoDTO">
-		<xs:sequence>
-			<xs:element name="id"                  type="xs:int"      minOccurs="1" maxOccurs="1" />
-			<xs:element name="descripcion"         type="xs:string"   minOccurs="1" maxOccurs="1" />
-			<xs:element name="abreviatura"         type="xs:string"   minOccurs="1" maxOccurs="1" />
-			<xs:element name="codigo"              type="xs:string"   minOccurs="1" maxOccurs="1" />
-			<xs:element name="tieneId"             type="xs:boolean"  minOccurs="1" maxOccurs="1" />
-			<xs:element name="tieneVencimiento"    type="xs:boolean"  minOccurs="1" maxOccurs="1" />
-			<xs:element name="habilitado"          type="xs:boolean"  minOccurs="1" maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
-
-	<xs:complexType name="tiposMedioDePago">
-		<xs:sequence>
-			<xs:element name="tipoMedioDePago" minOccurs="0" maxOccurs="unbounded" type="ae:tipoMedioDePagoDTO">
-				<xs:annotation>
-					<xs:documentation>Lista de los Tipos de Medio de Pago</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	
-	<xs:complexType name="tarjetaDTO">
-		<xs:sequence>
-			<xs:element name="id"                  type="xs:int"        minOccurs="1" maxOccurs="1" />
-			<xs:element name="nombre"         	   type="xs:string"     minOccurs="1" maxOccurs="1" />
-			<xs:element name="habilitada"          type="xs:boolean"    minOccurs="1" maxOccurs="1" />
-			<xs:element name="abreviatura"         type="xs:string"     minOccurs="1" maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
-
-	<xs:complexType name="tarjetas">
-		<xs:sequence>
-			<xs:element name="tarjeta" minOccurs="0" maxOccurs="unbounded" type="ae:tarjetaDTO">
-				<xs:annotation>
-					<xs:documentation>Lista de las Tarjetas de Credito/Debito</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-		
-	<xs:complexType name="planDePagoDTO">
-		<xs:sequence>
-			<xs:element name="id"                    type="xs:int"      minOccurs="1" maxOccurs="1" />
-			<xs:element name="idTarjetaDeCredito"    type="xs:int"      minOccurs="1" maxOccurs="1" />
-			<xs:element name="descripcion"           type="xs:string"   minOccurs="1" maxOccurs="1" />
-			<xs:element name="recargo"               type="xs:decimal"  minOccurs="1" maxOccurs="1" />
-			<xs:element name="cantidadCuotas" 		 type="xs:int" 	maxOccurs="1" minOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
-
-	<xs:complexType name="planesDePago">
-		<xs:sequence>
-			<xs:element name="planDePago" minOccurs="0" maxOccurs="unbounded" type="ae:planDePagoDTO">
-				<xs:annotation>
-					<xs:documentation>Lista de planes de pago</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>	
 </xs:schema>
