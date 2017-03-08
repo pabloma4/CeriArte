@@ -34,7 +34,7 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
  *       &lt;all&gt;
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="fechaCreacion" type="{http://www.w3.org/2001/XMLSchema}date"/&gt;
- *         &lt;element name="medioDePago" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="medioDePago" type="{http://www.autoentrada.com/ws/schemas/sc/ae/1_0}medioDePagoDTO"/&gt;
  *         &lt;element name="monto" type="{http://www.w3.org/2001/XMLSchema}double"/&gt;
  *         &lt;element name="pedido" type="{http://www.autoentrada.com/ws/schemas/sc/ae/1_0}pedidoDTO"/&gt;
  *       &lt;/all&gt;
@@ -58,7 +58,7 @@ public class PagoPedidoDTO
     @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar fechaCreacion;
     @XmlElement(required = true)
-    protected String medioDePago;
+    protected MedioDePagoDTO medioDePago;
     protected double monto;
     @XmlElement(required = true)
     protected PedidoDTO pedido;
@@ -108,10 +108,10 @@ public class PagoPedidoDTO
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link MedioDePagoDTO }
      *     
      */
-    public String getMedioDePago() {
+    public MedioDePagoDTO getMedioDePago() {
         return medioDePago;
     }
 
@@ -120,10 +120,10 @@ public class PagoPedidoDTO
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link MedioDePagoDTO }
      *     
      */
-    public void setMedioDePago(String value) {
+    public void setMedioDePago(MedioDePagoDTO value) {
         this.medioDePago = value;
     }
 
@@ -185,9 +185,9 @@ public class PagoPedidoDTO
             }
         }
         {
-            String lhsMedioDePago;
+            MedioDePagoDTO lhsMedioDePago;
             lhsMedioDePago = this.getMedioDePago();
-            String rhsMedioDePago;
+            MedioDePagoDTO rhsMedioDePago;
             rhsMedioDePago = that.getMedioDePago();
             if (!strategy.equals(LocatorUtils.property(thisLocator, "medioDePago", lhsMedioDePago), LocatorUtils.property(thatLocator, "medioDePago", rhsMedioDePago), lhsMedioDePago, rhsMedioDePago)) {
                 return false;
@@ -209,7 +209,7 @@ public class PagoPedidoDTO
             currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "fechaCreacion", theFechaCreacion), currentHashCode, theFechaCreacion);
         }
         {
-            String theMedioDePago;
+            MedioDePagoDTO theMedioDePago;
             theMedioDePago = this.getMedioDePago();
             currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "medioDePago", theMedioDePago), currentHashCode, theMedioDePago);
         }
@@ -247,7 +247,7 @@ public class PagoPedidoDTO
             strategy.appendField(locator, this, "fechaCreacion", buffer, theFechaCreacion);
         }
         {
-            String theMedioDePago;
+            MedioDePagoDTO theMedioDePago;
             theMedioDePago = this.getMedioDePago();
             strategy.appendField(locator, this, "medioDePago", buffer, theMedioDePago);
         }

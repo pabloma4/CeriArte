@@ -23,6 +23,8 @@ import com.ceriarte.central.dominio.dto.ClienteDTO;
 import com.ceriarte.central.dominio.dto.DetallePedidoDTO;
 import com.ceriarte.central.dominio.dto.DetallePedidoEstadoDTO;
 import com.ceriarte.central.dominio.dto.DetallesPedido;
+import com.ceriarte.central.dominio.dto.MedioDePagoDTO;
+import com.ceriarte.central.dominio.dto.PagoPedidoDTO;
 import com.ceriarte.central.dominio.dto.PedidoDTO;
 import com.ceriarte.central.dominio.dto.PedidoEstadoDTO;
 import com.ceriarte.central.dominio.dto.PresupuestoDTO;
@@ -59,12 +61,20 @@ public class PedidoController extends AbstractController implements Serializable
 	@ManagedProperty(value ="#{servicioPedidoEstado}")
 	private ServicioGeneric<PedidoEstadoDTO> servicioPedidoEstado;
 	
+	@ManagedProperty(value ="#{servicioMediosDePago}")
+	private ServicioGeneric<MedioDePagoDTO> servicioMediosDePago;
+	
+	@ManagedProperty(value ="#{servicioPagosPedido}")
+	private ServicioGeneric<PagoPedidoDTO> servicioPagosPedido;
+	
 	private PedidoDTO editable;
 	private DetallePedidoDTO detalleEditable;
+	private PagoPedidoDTO pagoEditable;
 	private Integer detallePedidoEstadoId;
 	private List<ClienteDTO> clientes;
 	private List<PresupuestoDTO> presupuestos;
 	private List<ProductoDTO> productos;
+	private List<MedioDePagoDTO> mediosDePago;
     private Integer pedidoId;
     private double montoTotal;
 
@@ -173,6 +183,14 @@ public class PedidoController extends AbstractController implements Serializable
 		logger.debug("Se inicia el método prepareNewDetalle()");
     }
     
+    @PreAuthorize("hasAnyRole('ROLE_NEW_PEDIDO','ROLE_EDIT_PEDIDO')")
+    public void prepareNewPago() {
+    	this.pagoEditable = new PagoPedidoDTO();
+    	this.pagoEditable.setMonto(0.0);
+    	
+		logger.debug("Se inicia el método prepareNewPago()");
+    }
+    
     /**
      * Agregar un nuevo DetallePedidoDTO a la lista de detalles del pedido que se está editando/agregando
      */
@@ -224,10 +242,52 @@ public class PedidoController extends AbstractController implements Serializable
         	fMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("pedido.detalle.deleted.error"), detalleEditable.getProducto().getNombre());
     	}
         FacesContext.getCurrentInstance().addMessage(null, fMsg);
-		logger.debug("Fin delete()");
+		logger.debug("Fin deleteDetalle()");
+    }
+    
+    /**
+     * Guarda un nuevo Pago
+     */
+    @PreAuthorize("hasAnyRole('ROLE_NEW_PEDIDO','ROLE_EDIT_PEDIDO')")
+    public void savePago() {
+		logger.debug("Inicio savePago()");
+    	FacesMessage fMsg;
+    	
+    	try {
+    		pagoEditable = this.servicioPagosPedido.doSaveOrUpdate(pagoEditable);
+        	
+    		logger.info("Pago del Pedido {} guardado exitosamente");
+    		fMsg = new FacesMessage(msg.getString("pedido.pago.saved"));        	
+    	} catch(Exception e){
+    		logger.error("No se pudo guadar el Pago del Pedido {}");
+    		fMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("pedido.pago.save.error"), String.valueOf(pagoEditable.getId()));
+    	}
+    	
+        FacesContext.getCurrentInstance().addMessage(null, fMsg);
+        RequestContext.getCurrentInstance().update("formPagos:pagos");
+        RequestContext.getCurrentInstance().update("formPagos:montoTotal");
+
+        logger.debug("Fin savePago()");
+    }
+    
+    @PreAuthorize("hasAnyRole('ROLE_NEW_PEDIDO','ROLE_EDIT_PEDIDO')")
+    public void deletePago() {
+		logger.debug("Inicio deletePago()");
+    	FacesMessage fMsg;
+
+    	try{
+    		fMsg = new FacesMessage(msg.getString("pedido.pago.deleted"));
+    		servicioPagosPedido.doDelete(pagoEditable.getId());
+            RequestContext.getCurrentInstance().update("formPagos:pagos");
+            RequestContext.getCurrentInstance().update("formPagos:montoTotal");
+    	}catch(Exception e){
+    		logger.error("No se pudo eliminar el pago seleccionado");
+        	fMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("pedido.pago.deleted.error"), detalleEditable.getProducto().getNombre());
+    	}
+        FacesContext.getCurrentInstance().addMessage(null, fMsg);
+		logger.debug("Fin deletePago()");
     }
 
-    
     public void onRowEdit(RowEditEvent event) {
         DetallePedidoDTO currentDetallePedidoDTO = (DetallePedidoDTO) event.getObject();
 		ProductoDTO producto = currentDetallePedidoDTO.getProducto();
@@ -299,6 +359,14 @@ public class PedidoController extends AbstractController implements Serializable
 		}
 		return productos;
 	}
+	
+	public List<MedioDePagoDTO> getMediosDePago() {
+		if(mediosDePago == null){
+			mediosDePago = this.servicioMediosDePago.doFindAll();
+		}
+		return mediosDePago;
+	}
+
 
 	public PedidoDTO getEditable() {
 		return editable;
@@ -308,6 +376,14 @@ public class PedidoController extends AbstractController implements Serializable
 		this.editable = editable;
 	}
 	
+	public PagoPedidoDTO getPagoEditable() {
+		return pagoEditable;
+	}
+
+	public void setPagoEditable(PagoPedidoDTO pagoEditable) {
+		this.pagoEditable = pagoEditable;
+	}
+
 	public DetallePedidoDTO getDetalleEditable() {
 		return detalleEditable;
 	}
@@ -337,6 +413,14 @@ public class PedidoController extends AbstractController implements Serializable
 		for (DetallePedidoDTO detallePedidoDTO : editable.getDetalles().getDetallePedido()) {
 			montoTotal += detallePedidoDTO.getDetallePedidoEstado().getId() != DetallePedidoEstadoEnum.CANCELADO.getValue() ? 
 						  detallePedidoDTO.getPrecioUnitario() * detallePedidoDTO.getCantidad() * detallePedidoDTO.getMedida(): 0.0;
+		}
+		return montoTotal;
+	}
+	
+	public double getMontoTotalPagos() {
+		montoTotal = 0.0;
+		for (PagoPedidoDTO pagoPedidoDTO : editable.getPagos().getPagoPedido()) {
+			montoTotal += pagoPedidoDTO.getMonto();
 		}
 		return montoTotal;
 	}
@@ -398,5 +482,13 @@ public class PedidoController extends AbstractController implements Serializable
 	public void setServicioPedidoEstado(
 			ServicioGeneric<PedidoEstadoDTO> servicioPedidoEstado) {
 		this.servicioPedidoEstado = servicioPedidoEstado;
+	}
+	
+	public void setServicioMediosDePago(ServicioGeneric<MedioDePagoDTO> servicioMediosDePago) {
+		this.servicioMediosDePago = servicioMediosDePago;
+	}
+	
+	public void setServicioPagosPedido(ServicioGeneric<PagoPedidoDTO> servicioPagosPedido) {
+		this.servicioPagosPedido = servicioPagosPedido;
 	}
 }

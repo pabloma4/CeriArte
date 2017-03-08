@@ -23,9 +23,9 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 /**
  * Representación de un Producto Manufacturado o no
  * 
- * <p>Clase Java para productoDTO complex type.
+ * <p>Java class for productoDTO complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="productoDTO"&gt;
@@ -79,7 +79,7 @@ public class ProductoDTO
     protected XMLGregorianCalendar fechaModificacion;
 
     /**
-     * Obtiene el valor de la propiedad id.
+     * Gets the value of the id property.
      * 
      */
     public int getId() {
@@ -87,7 +87,7 @@ public class ProductoDTO
     }
 
     /**
-     * Define el valor de la propiedad id.
+     * Sets the value of the id property.
      * 
      */
     public void setId(int value) {
@@ -95,7 +95,7 @@ public class ProductoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad nombre.
+     * Gets the value of the nombre property.
      * 
      * @return
      *     possible object is
@@ -107,7 +107,7 @@ public class ProductoDTO
     }
 
     /**
-     * Define el valor de la propiedad nombre.
+     * Sets the value of the nombre property.
      * 
      * @param value
      *     allowed object is
@@ -119,7 +119,7 @@ public class ProductoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad descripcion.
+     * Gets the value of the descripcion property.
      * 
      * @return
      *     possible object is
@@ -131,7 +131,7 @@ public class ProductoDTO
     }
 
     /**
-     * Define el valor de la propiedad descripcion.
+     * Sets the value of the descripcion property.
      * 
      * @param value
      *     allowed object is
@@ -143,7 +143,7 @@ public class ProductoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad unidadMedida.
+     * Gets the value of the unidadMedida property.
      * 
      * @return
      *     possible object is
@@ -155,7 +155,7 @@ public class ProductoDTO
     }
 
     /**
-     * Define el valor de la propiedad unidadMedida.
+     * Sets the value of the unidadMedida property.
      * 
      * @param value
      *     allowed object is
@@ -167,7 +167,7 @@ public class ProductoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad stock.
+     * Gets the value of the stock property.
      * 
      * @return
      *     possible object is
@@ -179,7 +179,7 @@ public class ProductoDTO
     }
 
     /**
-     * Define el valor de la propiedad stock.
+     * Sets the value of the stock property.
      * 
      * @param value
      *     allowed object is
@@ -191,7 +191,7 @@ public class ProductoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad stockMinimo.
+     * Gets the value of the stockMinimo property.
      * 
      * @return
      *     possible object is
@@ -203,7 +203,7 @@ public class ProductoDTO
     }
 
     /**
-     * Define el valor de la propiedad stockMinimo.
+     * Sets the value of the stockMinimo property.
      * 
      * @param value
      *     allowed object is
@@ -215,7 +215,7 @@ public class ProductoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad medida.
+     * Gets the value of the medida property.
      * 
      * @return
      *     possible object is
@@ -227,7 +227,7 @@ public class ProductoDTO
     }
 
     /**
-     * Define el valor de la propiedad medida.
+     * Sets the value of the medida property.
      * 
      * @param value
      *     allowed object is
@@ -239,7 +239,7 @@ public class ProductoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad precio.
+     * Gets the value of the precio property.
      * 
      */
     public double getPrecio() {
@@ -247,7 +247,7 @@ public class ProductoDTO
     }
 
     /**
-     * Define el valor de la propiedad precio.
+     * Sets the value of the precio property.
      * 
      */
     public void setPrecio(double value) {
@@ -255,7 +255,7 @@ public class ProductoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad precioUnitario.
+     * Gets the value of the precioUnitario property.
      * 
      */
     public double getPrecioUnitario() {
@@ -263,7 +263,7 @@ public class ProductoDTO
     }
 
     /**
-     * Define el valor de la propiedad precioUnitario.
+     * Sets the value of the precioUnitario property.
      * 
      */
     public void setPrecioUnitario(double value) {
@@ -271,7 +271,7 @@ public class ProductoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad elaborado.
+     * Gets the value of the elaborado property.
      * 
      */
     public boolean isElaborado() {
@@ -279,7 +279,7 @@ public class ProductoDTO
     }
 
     /**
-     * Define el valor de la propiedad elaborado.
+     * Sets the value of the elaborado property.
      * 
      */
     public void setElaborado(boolean value) {
@@ -287,7 +287,7 @@ public class ProductoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad fechaCreacion.
+     * Gets the value of the fechaCreacion property.
      * 
      * @return
      *     possible object is
@@ -299,7 +299,7 @@ public class ProductoDTO
     }
 
     /**
-     * Define el valor de la propiedad fechaCreacion.
+     * Sets the value of the fechaCreacion property.
      * 
      * @param value
      *     allowed object is
@@ -311,7 +311,7 @@ public class ProductoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad fechaModificacion.
+     * Gets the value of the fechaModificacion property.
      * 
      * @return
      *     possible object is
@@ -323,7 +323,7 @@ public class ProductoDTO
     }
 
     /**
-     * Define el valor de la propiedad fechaModificacion.
+     * Sets the value of the fechaModificacion property.
      * 
      * @param value
      *     allowed object is

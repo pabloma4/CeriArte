@@ -21,9 +21,9 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 /**
  * Representación de la Responsabilidad frente al IVA
  * 
- * <p>Clase Java para responsabilidadIVADTO complex type.
+ * <p>Java class for responsabilidadIVADTO complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="responsabilidadIVADTO"&gt;
@@ -53,7 +53,7 @@ public class ResponsabilidadIVADTO
     protected String descripcion;
 
     /**
-     * Obtiene el valor de la propiedad idResponsabilidadIVA.
+     * Gets the value of the idResponsabilidadIVA property.
      * 
      */
     public int getIdResponsabilidadIVA() {
@@ -61,7 +61,7 @@ public class ResponsabilidadIVADTO
     }
 
     /**
-     * Define el valor de la propiedad idResponsabilidadIVA.
+     * Sets the value of the idResponsabilidadIVA property.
      * 
      */
     public void setIdResponsabilidadIVA(int value) {
@@ -69,7 +69,7 @@ public class ResponsabilidadIVADTO
     }
 
     /**
-     * Obtiene el valor de la propiedad descripcion.
+     * Gets the value of the descripcion property.
      * 
      * @return
      *     possible object is
@@ -81,7 +81,7 @@ public class ResponsabilidadIVADTO
     }
 
     /**
-     * Define el valor de la propiedad descripcion.
+     * Sets the value of the descripcion property.
      * 
      * @param value
      *     allowed object is

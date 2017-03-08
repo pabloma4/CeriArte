@@ -19,9 +19,9 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 
 
 /**
- * <p>Clase Java para medioDePagoDTO complex type.
+ * <p>Java class for medioDePagoDTO complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="medioDePagoDTO"&gt;
@@ -29,9 +29,8 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
- *         &lt;element name="tipoMedioDePago" type="{http://www.autoentrada.com/ws/schemas/sc/ae/1_0}tipoMedioDePagoDTO"/&gt;
- *         &lt;element name="planDePago" type="{http://www.autoentrada.com/ws/schemas/sc/ae/1_0}planDePagoDTO" minOccurs="0"/&gt;
- *         &lt;element name="informacionAdicional" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="descripcion" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="abreviatura" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="habilitado" type="{http://www.w3.org/2001/XMLSchema}boolean"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -44,9 +43,8 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "medioDePagoDTO", propOrder = {
     "id",
-    "tipoMedioDePago",
-    "planDePago",
-    "informacionAdicional",
+    "descripcion",
+    "abreviatura",
     "habilitado"
 })
 public class MedioDePagoDTO
@@ -55,13 +53,12 @@ public class MedioDePagoDTO
 
     protected int id;
     @XmlElement(required = true)
-    protected TipoMedioDePagoDTO tipoMedioDePago;
-    protected PlanDePagoDTO planDePago;
-    protected String informacionAdicional;
+    protected String descripcion;
+    protected String abreviatura;
     protected boolean habilitado;
 
     /**
-     * Obtiene el valor de la propiedad id.
+     * Gets the value of the id property.
      * 
      */
     public int getId() {
@@ -69,7 +66,7 @@ public class MedioDePagoDTO
     }
 
     /**
-     * Define el valor de la propiedad id.
+     * Sets the value of the id property.
      * 
      */
     public void setId(int value) {
@@ -77,79 +74,55 @@ public class MedioDePagoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad tipoMedioDePago.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TipoMedioDePagoDTO }
-     *     
-     */
-    public TipoMedioDePagoDTO getTipoMedioDePago() {
-        return tipoMedioDePago;
-    }
-
-    /**
-     * Define el valor de la propiedad tipoMedioDePago.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TipoMedioDePagoDTO }
-     *     
-     */
-    public void setTipoMedioDePago(TipoMedioDePagoDTO value) {
-        this.tipoMedioDePago = value;
-    }
-
-    /**
-     * Obtiene el valor de la propiedad planDePago.
-     * 
-     * @return
-     *     possible object is
-     *     {@link PlanDePagoDTO }
-     *     
-     */
-    public PlanDePagoDTO getPlanDePago() {
-        return planDePago;
-    }
-
-    /**
-     * Define el valor de la propiedad planDePago.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link PlanDePagoDTO }
-     *     
-     */
-    public void setPlanDePago(PlanDePagoDTO value) {
-        this.planDePago = value;
-    }
-
-    /**
-     * Obtiene el valor de la propiedad informacionAdicional.
+     * Gets the value of the descripcion property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getInformacionAdicional() {
-        return informacionAdicional;
+    public String getDescripcion() {
+        return descripcion;
     }
 
     /**
-     * Define el valor de la propiedad informacionAdicional.
+     * Sets the value of the descripcion property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setInformacionAdicional(String value) {
-        this.informacionAdicional = value;
+    public void setDescripcion(String value) {
+        this.descripcion = value;
     }
 
     /**
-     * Obtiene el valor de la propiedad habilitado.
+     * Gets the value of the abreviatura property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getAbreviatura() {
+        return abreviatura;
+    }
+
+    /**
+     * Sets the value of the abreviatura property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setAbreviatura(String value) {
+        this.abreviatura = value;
+    }
+
+    /**
+     * Gets the value of the habilitado property.
      * 
      */
     public boolean isHabilitado() {
@@ -157,7 +130,7 @@ public class MedioDePagoDTO
     }
 
     /**
-     * Define el valor de la propiedad habilitado.
+     * Sets the value of the habilitado property.
      * 
      */
     public void setHabilitado(boolean value) {
@@ -182,29 +155,20 @@ public class MedioDePagoDTO
             }
         }
         {
-            TipoMedioDePagoDTO lhsTipoMedioDePago;
-            lhsTipoMedioDePago = this.getTipoMedioDePago();
-            TipoMedioDePagoDTO rhsTipoMedioDePago;
-            rhsTipoMedioDePago = that.getTipoMedioDePago();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "tipoMedioDePago", lhsTipoMedioDePago), LocatorUtils.property(thatLocator, "tipoMedioDePago", rhsTipoMedioDePago), lhsTipoMedioDePago, rhsTipoMedioDePago)) {
+            String lhsDescripcion;
+            lhsDescripcion = this.getDescripcion();
+            String rhsDescripcion;
+            rhsDescripcion = that.getDescripcion();
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "descripcion", lhsDescripcion), LocatorUtils.property(thatLocator, "descripcion", rhsDescripcion), lhsDescripcion, rhsDescripcion)) {
                 return false;
             }
         }
         {
-            PlanDePagoDTO lhsPlanDePago;
-            lhsPlanDePago = this.getPlanDePago();
-            PlanDePagoDTO rhsPlanDePago;
-            rhsPlanDePago = that.getPlanDePago();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "planDePago", lhsPlanDePago), LocatorUtils.property(thatLocator, "planDePago", rhsPlanDePago), lhsPlanDePago, rhsPlanDePago)) {
-                return false;
-            }
-        }
-        {
-            String lhsInformacionAdicional;
-            lhsInformacionAdicional = this.getInformacionAdicional();
-            String rhsInformacionAdicional;
-            rhsInformacionAdicional = that.getInformacionAdicional();
-            if (!strategy.equals(LocatorUtils.property(thisLocator, "informacionAdicional", lhsInformacionAdicional), LocatorUtils.property(thatLocator, "informacionAdicional", rhsInformacionAdicional), lhsInformacionAdicional, rhsInformacionAdicional)) {
+            String lhsAbreviatura;
+            lhsAbreviatura = this.getAbreviatura();
+            String rhsAbreviatura;
+            rhsAbreviatura = that.getAbreviatura();
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "abreviatura", lhsAbreviatura), LocatorUtils.property(thatLocator, "abreviatura", rhsAbreviatura), lhsAbreviatura, rhsAbreviatura)) {
                 return false;
             }
         }
@@ -233,19 +197,14 @@ public class MedioDePagoDTO
             currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "id", theId), currentHashCode, theId);
         }
         {
-            TipoMedioDePagoDTO theTipoMedioDePago;
-            theTipoMedioDePago = this.getTipoMedioDePago();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "tipoMedioDePago", theTipoMedioDePago), currentHashCode, theTipoMedioDePago);
+            String theDescripcion;
+            theDescripcion = this.getDescripcion();
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "descripcion", theDescripcion), currentHashCode, theDescripcion);
         }
         {
-            PlanDePagoDTO thePlanDePago;
-            thePlanDePago = this.getPlanDePago();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "planDePago", thePlanDePago), currentHashCode, thePlanDePago);
-        }
-        {
-            String theInformacionAdicional;
-            theInformacionAdicional = this.getInformacionAdicional();
-            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "informacionAdicional", theInformacionAdicional), currentHashCode, theInformacionAdicional);
+            String theAbreviatura;
+            theAbreviatura = this.getAbreviatura();
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "abreviatura", theAbreviatura), currentHashCode, theAbreviatura);
         }
         {
             boolean theHabilitado;
@@ -281,19 +240,14 @@ public class MedioDePagoDTO
             strategy.appendField(locator, this, "id", buffer, theId);
         }
         {
-            TipoMedioDePagoDTO theTipoMedioDePago;
-            theTipoMedioDePago = this.getTipoMedioDePago();
-            strategy.appendField(locator, this, "tipoMedioDePago", buffer, theTipoMedioDePago);
+            String theDescripcion;
+            theDescripcion = this.getDescripcion();
+            strategy.appendField(locator, this, "descripcion", buffer, theDescripcion);
         }
         {
-            PlanDePagoDTO thePlanDePago;
-            thePlanDePago = this.getPlanDePago();
-            strategy.appendField(locator, this, "planDePago", buffer, thePlanDePago);
-        }
-        {
-            String theInformacionAdicional;
-            theInformacionAdicional = this.getInformacionAdicional();
-            strategy.appendField(locator, this, "informacionAdicional", buffer, theInformacionAdicional);
+            String theAbreviatura;
+            theAbreviatura = this.getAbreviatura();
+            strategy.appendField(locator, this, "abreviatura", buffer, theAbreviatura);
         }
         {
             boolean theHabilitado;

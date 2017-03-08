@@ -23,9 +23,9 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 /**
  * Representación de una Orden de Trabajo
  * 
- * <p>Clase Java para ordenTrabajoDTO complex type.
+ * <p>Java class for ordenTrabajoDTO complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="ordenTrabajoDTO"&gt;
@@ -73,7 +73,7 @@ public class OrdenTrabajoDTO
     protected DetallePedidoDTO detallePedido;
 
     /**
-     * Obtiene el valor de la propiedad id.
+     * Gets the value of the id property.
      * 
      */
     public int getId() {
@@ -81,7 +81,7 @@ public class OrdenTrabajoDTO
     }
 
     /**
-     * Define el valor de la propiedad id.
+     * Sets the value of the id property.
      * 
      */
     public void setId(int value) {
@@ -89,7 +89,7 @@ public class OrdenTrabajoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad creadaPor.
+     * Gets the value of the creadaPor property.
      * 
      * @return
      *     possible object is
@@ -101,7 +101,7 @@ public class OrdenTrabajoDTO
     }
 
     /**
-     * Define el valor de la propiedad creadaPor.
+     * Sets the value of the creadaPor property.
      * 
      * @param value
      *     allowed object is
@@ -113,7 +113,7 @@ public class OrdenTrabajoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad asignadaA.
+     * Gets the value of the asignadaA property.
      * 
      * @return
      *     possible object is
@@ -125,7 +125,7 @@ public class OrdenTrabajoDTO
     }
 
     /**
-     * Define el valor de la propiedad asignadaA.
+     * Sets the value of the asignadaA property.
      * 
      * @param value
      *     allowed object is
@@ -137,7 +137,7 @@ public class OrdenTrabajoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad ordenTrabajoEstado.
+     * Gets the value of the ordenTrabajoEstado property.
      * 
      * @return
      *     possible object is
@@ -149,7 +149,7 @@ public class OrdenTrabajoDTO
     }
 
     /**
-     * Define el valor de la propiedad ordenTrabajoEstado.
+     * Sets the value of the ordenTrabajoEstado property.
      * 
      * @param value
      *     allowed object is
@@ -161,7 +161,7 @@ public class OrdenTrabajoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad fechaCreacion.
+     * Gets the value of the fechaCreacion property.
      * 
      * @return
      *     possible object is
@@ -173,7 +173,7 @@ public class OrdenTrabajoDTO
     }
 
     /**
-     * Define el valor de la propiedad fechaCreacion.
+     * Sets the value of the fechaCreacion property.
      * 
      * @param value
      *     allowed object is
@@ -185,7 +185,7 @@ public class OrdenTrabajoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad fechaEstimadaFin.
+     * Gets the value of the fechaEstimadaFin property.
      * 
      * @return
      *     possible object is
@@ -197,7 +197,7 @@ public class OrdenTrabajoDTO
     }
 
     /**
-     * Define el valor de la propiedad fechaEstimadaFin.
+     * Sets the value of the fechaEstimadaFin property.
      * 
      * @param value
      *     allowed object is
@@ -209,7 +209,7 @@ public class OrdenTrabajoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad detalles.
+     * Gets the value of the detalles property.
      * 
      * @return
      *     possible object is
@@ -221,7 +221,7 @@ public class OrdenTrabajoDTO
     }
 
     /**
-     * Define el valor de la propiedad detalles.
+     * Sets the value of the detalles property.
      * 
      * @param value
      *     allowed object is
@@ -233,7 +233,7 @@ public class OrdenTrabajoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad detallePedido.
+     * Gets the value of the detallePedido property.
      * 
      * @return
      *     possible object is
@@ -245,7 +245,7 @@ public class OrdenTrabajoDTO
     }
 
     /**
-     * Define el valor de la propiedad detallePedido.
+     * Sets the value of the detallePedido property.
      * 
      * @param value
      *     allowed object is

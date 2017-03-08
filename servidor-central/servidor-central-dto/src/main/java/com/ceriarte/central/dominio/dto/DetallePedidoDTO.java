@@ -21,9 +21,9 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 /**
  * Representación de un Detalle de Pedido
  * 
- * <p>Clase Java para detallePedidoDTO complex type.
+ * <p>Java class for detallePedidoDTO complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="detallePedidoDTO"&gt;
@@ -74,7 +74,7 @@ public class DetallePedidoDTO
     protected OrdenTrabajoDTO ordenTrabajo;
 
     /**
-     * Obtiene el valor de la propiedad id.
+     * Gets the value of the id property.
      * 
      */
     public int getId() {
@@ -82,7 +82,7 @@ public class DetallePedidoDTO
     }
 
     /**
-     * Define el valor de la propiedad id.
+     * Sets the value of the id property.
      * 
      */
     public void setId(int value) {
@@ -90,7 +90,7 @@ public class DetallePedidoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad producto.
+     * Gets the value of the producto property.
      * 
      * @return
      *     possible object is
@@ -102,7 +102,7 @@ public class DetallePedidoDTO
     }
 
     /**
-     * Define el valor de la propiedad producto.
+     * Sets the value of the producto property.
      * 
      * @param value
      *     allowed object is
@@ -114,7 +114,7 @@ public class DetallePedidoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad nombre.
+     * Gets the value of the nombre property.
      * 
      * @return
      *     possible object is
@@ -126,7 +126,7 @@ public class DetallePedidoDTO
     }
 
     /**
-     * Define el valor de la propiedad nombre.
+     * Sets the value of the nombre property.
      * 
      * @param value
      *     allowed object is
@@ -138,7 +138,7 @@ public class DetallePedidoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad descripcion.
+     * Gets the value of the descripcion property.
      * 
      * @return
      *     possible object is
@@ -150,7 +150,7 @@ public class DetallePedidoDTO
     }
 
     /**
-     * Define el valor de la propiedad descripcion.
+     * Sets the value of the descripcion property.
      * 
      * @param value
      *     allowed object is
@@ -162,7 +162,7 @@ public class DetallePedidoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad cantidad.
+     * Gets the value of the cantidad property.
      * 
      */
     public double getCantidad() {
@@ -170,7 +170,7 @@ public class DetallePedidoDTO
     }
 
     /**
-     * Define el valor de la propiedad cantidad.
+     * Sets the value of the cantidad property.
      * 
      */
     public void setCantidad(double value) {
@@ -178,7 +178,7 @@ public class DetallePedidoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad medida.
+     * Gets the value of the medida property.
      * 
      */
     public double getMedida() {
@@ -186,7 +186,7 @@ public class DetallePedidoDTO
     }
 
     /**
-     * Define el valor de la propiedad medida.
+     * Sets the value of the medida property.
      * 
      */
     public void setMedida(double value) {
@@ -194,7 +194,7 @@ public class DetallePedidoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad precioUnitario.
+     * Gets the value of the precioUnitario property.
      * 
      */
     public double getPrecioUnitario() {
@@ -202,7 +202,7 @@ public class DetallePedidoDTO
     }
 
     /**
-     * Define el valor de la propiedad precioUnitario.
+     * Sets the value of the precioUnitario property.
      * 
      */
     public void setPrecioUnitario(double value) {
@@ -210,7 +210,7 @@ public class DetallePedidoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad monto.
+     * Gets the value of the monto property.
      * 
      */
     public double getMonto() {
@@ -218,7 +218,7 @@ public class DetallePedidoDTO
     }
 
     /**
-     * Define el valor de la propiedad monto.
+     * Sets the value of the monto property.
      * 
      */
     public void setMonto(double value) {
@@ -226,7 +226,7 @@ public class DetallePedidoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad detallePedidoEstado.
+     * Gets the value of the detallePedidoEstado property.
      * 
      * @return
      *     possible object is
@@ -238,7 +238,7 @@ public class DetallePedidoDTO
     }
 
     /**
-     * Define el valor de la propiedad detallePedidoEstado.
+     * Sets the value of the detallePedidoEstado property.
      * 
      * @param value
      *     allowed object is
@@ -250,7 +250,7 @@ public class DetallePedidoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad pedido.
+     * Gets the value of the pedido property.
      * 
      * @return
      *     possible object is
@@ -262,7 +262,7 @@ public class DetallePedidoDTO
     }
 
     /**
-     * Define el valor de la propiedad pedido.
+     * Sets the value of the pedido property.
      * 
      * @param value
      *     allowed object is
@@ -274,7 +274,7 @@ public class DetallePedidoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad ordenTrabajo.
+     * Gets the value of the ordenTrabajo property.
      * 
      * @return
      *     possible object is
@@ -286,7 +286,7 @@ public class DetallePedidoDTO
     }
 
     /**
-     * Define el valor de la propiedad ordenTrabajo.
+     * Sets the value of the ordenTrabajo property.
      * 
      * @param value
      *     allowed object is

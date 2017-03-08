@@ -1,101 +1,87 @@
-<ui:composition xmlns="http://www.wo/1999/xhtml"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:p="http://primefaces.org/ui"
-                template="../templates/ui.xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+      <h:form id="formPagos">  
+		<p:outputPanel style="padding-top: 25px; padding-bottom: 25px;">
+			<p:commandButton id="new" value="#{msg['boton.agregar.pago']}" icon="ui-icon-plusthick" style="float:right"
+							 actionListener="#{pedidoController.prepareNewPago}" process="@this" immediate="true" update=":form:tabs:formPagos:panelEdit"
+							 oncomplete="PF('dialogEdit').show()" />
+		</p:outputPanel>
+		
+		<p:dataTable id="pagos" var="pago" value="#{pedidoController.editable.pagos.pagoPedido}" editable="false" style="margin-bottom:20px"
+					 sortBy="#{pago.fechaCreacion}">
+		   <f:facet name="header">
+			   <h:outputText value="#{msg['pedido.pagos.titulo']}" />  
+		   </f:facet>
+		   
+		   <p:column headerText="#{msg['pedido.pagos.fechaCreacion']}" style="text-align:center;" width="5%">
+                   <h:outputText value="#{pago.fechaCreacion.toGregorianCalendar().time}">
+                   	 <f:convertDateTime pattern="dd/MM/yyyy" />
+                   </h:outputText>  
+		   </p:column>
+		   
+		   <p:column headerText="#{msg['pedido.pagos.medioDePago']}" width="10%">
+				<h:outputText value="#{pago.medioDePago}"/>
+		   </p:column>
+		   
+		   <p:column headerText="#{msg['pedido.pagos.monto']}" width="10%">
+				<h:outputText value="#{pago.monto}"/>
+		   </p:column>
+					   
+		   <p:column id="deletePagoColumn" style="width:4%;">
+				<p:commandButton id="deletePago" action="#{pedidoController.deletePago}" icon="ui-icon-trash" immediate="true" update=":form:messages" 
+				                 title="#{msg['boton.quitar']}">
+					 <f:setPropertyActionListener value="#{pago}" target="#{pedidoController.pagoEditable}" />  			
+					 <p:confirm header="#{msg['eliminar.confirmDialog.header']}" message="#{msg['eliminar.confirmDialog.message']}" icon="ui-icon-alert" />
+				</p:commandButton>
+		   </p:column>
 
-    <ui:define name="content">   	
-        <h:form id="formPagos">  
-				<p:outputPanel style="padding-top: 25px; padding-bottom: 25px;">
-					<p:commandButton id="new" value="#{msg['boton.agregar.detalle']}" icon="ui-icon-plusthick" style="float:right"
-									 actionListener="#{pedidoController.prepareNewPago}" process="@this" immediate="true" update=":formPagos:panelEdit"
-									 oncomplete="PF('dialogEdit').show()" />
-				</p:outputPanel>
+	   </p:dataTable>
+	   
+	   <p:outputPanel style="float:right;padding-right: 180px;" styleClass="ui-montoTotal">
+			<p:outputLabel for="montoTotal" value="#{msg['columna.total']}: " /> 
+			<p:outputLabel id="montoTotal" value="#{pedidoController.montoTotalPagos}">
+				<f:convertNumber type="currency" currencySymbol="$" />
+			</p:outputLabel>
+	   </p:outputPanel>
+	   
+	   <p:spacer height="20"/>
+	   
+	   <p:panelGrid columns="1" styleClass="panelGridCenter">
+			 <p:commandButton id="cancel" value="#{msg['boton.volver']}" icon="ui-icon-arrowreturnthick-1-w" 
+							  immediate="true" action="#{pedidoController.cancel}"/>
+	   </p:panelGrid>
+	   
+	   <p:dialog id="dialogEdit" widgetVar="dialogEdit" header="#{msg['pedido.pago.dialog.header']}"
+				 showEffect="explode" hideEffect="explode" resizable="false">  
+
+			<p:outputPanel id="panelEdit" style="text-align:center;">
+				<p:panelGrid id="gridEdit" columns="3" rendered="#{pedidoController.pagoEditable != null}">
 				
-				<p:dataTable id="pagos" var="pago" value="#{pedidoController.editable.pagosPedido.pagoPedido}" editable="false" style="margin-bottom:20px"
-							 sortBy="#{pago.fechaCreacion}">
-				   <f:facet name="header">
-					   <h:outputText value="#{msg['pedido.pagos.titulo']}" />  
-				   </f:facet>
-				   
-				   <p:column headerText="#{msg['pedido.pagos.fechaCreacion']}" style="text-align:center;" width="5%">
-	                    <h:outputText value="#{pago.fechaCreacion.toGregorianCalendar().time}">
-	                    	 <f:convertDateTime pattern="dd/MM/yyyy" />
-	                    </h:outputText>  
-				   </p:column>
-				   
-				   <p:column headerText="#{msg['pedido.pagos.medioDePago']}" width="10%">
-						<h:outputText value="#{pago.medioDePago}"/>
-				   </p:column>
-				   
-				   <p:column headerText="#{msg['pedido.pagos.monto']}" width="10%">
-						<h:outputText value="#{pago.monto}"/>
-				   </p:column>
-							   
-				   <p:column id="deletePagoColumn" style="width:4%;">
-						<p:commandButton id="deletePago" action="#{pedidoController.deletePago}" icon="ui-icon-trash" immediate="true" update=":form:messages" 
-						                 title="#{msg['boton.quitar']}">
-							 <f:setPropertyActionListener value="#{pago}" target="#{pedidoController.pagoSeleccionado}" />  			
-							 <p:confirm header="#{msg['eliminar.confirmDialog.header']}" message="#{msg['eliminar.confirmDialog.message']}" icon="ui-icon-alert" />
-						</p:commandButton>
-				   </p:column>
+					<p:outputLabel for="pagoMedioDePago" value="#{msg['pedido.pagos.medioDePago']}:" />
+                   	<p:selectOneMenu id="pagoMedioDePago" value="#{pedidoController.pagoEditable.medioDePago}" 
+		        			     converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains">
+		            	<f:selectItems value="#{pedidoController.mediosDePago}" var="medioDePago" itemLabel="#{medioDePago.descripcion}" itemValue="#{medioDePago}" />
+		        	</p:selectOneMenu>
+		        	<p:message for="pagoMedioDePago" />
+		        
+					<p:outputLabel for="pagoMonto" value="#{msg['pedido.pagos.monto']}:" />
+					<p:inputText id="pagoMonto" value="#{pedidoController.pagoEditable.monto}"/>
+					<p:message for="pagoMonto" />
+				</p:panelGrid>
+			</p:outputPanel>
 
-			   </p:dataTable>
-			   
-			   <p:outputPanel style="float:right;padding-right: 180px;" styleClass="ui-montoTotal">
-					<p:outputLabel for="montoTotal" value="#{msg['columna.total']}: " /> 
-					<p:outputLabel id="montoTotal" value="#{pedidoController.montoTotalPagos}">
-						<f:convertNumber type="currency" currencySymbol="$" />
-					</p:outputLabel>
-			   </p:outputPanel>
-			   
-			   <p:spacer height="20"/>
-			   
-			   <p:panelGrid columns="3" styleClass="panelGridCenter">
-					 <p:commandButton id="save" value="#{msg['boton.guardar']}" icon="ui-icon-pencil"
-									  action="#{pedidoController.savePagos}"/>        
-					 <p:commandButton id="cancel" value="#{msg['boton.volver']}" icon="ui-icon-arrowreturnthick-1-w" 
-									  immediate="true" action="#{pedidoController.cancel}"/>
-			   </p:panelGrid>
-			   
-			   <p:dialog id="dialogEdit" widgetVar="dialogEdit" header="#{msg['pedido.detalle.dialog.header']}"
-						 showEffect="explode" hideEffect="explode" resizable="false">  
-
-					<p:outputPanel id="panelEdit" style="text-align:center;">
-				
-						<p:panelGrid id="gridEdit" columns="3" rendered="#{pedidoController.pagoEditable != null}">
-							
-							<p:outputLabel for="pagoFechaCreacion" value="#{msg['pedido.pagos.fechaCreacion']}:" />
-							<p:calendar id="pagoFechaCreacion" value="#{pedidoController.pagoEditable.pagoFechaCreacion}" effect="fold" 
-										locale="es" pattern="dd-MMM-yyyy" disabled="true"/>
-							<p:message for="pagoFechaCreacion" />
-							
-							<p:outputLabel for="pagoMedioDePago" value="#{msg['pedido.pagos.medioDePago']}:" />
-							<p:selectOneMenu id="pagoMedioDePago" value="#{ordenesTrabajoController.filtroAsignadaA}" 
-			        			     converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains">
-					            <f:selectItem itemLabel="" />
-					            <f:selectItems value="#{pedidoController.mediosDePago}" var="medioDePago" itemLabel="#{medioDePago.nombreCompleto}" itemValue="#{usuario}" />
-					        </p:selectOneMenu>
-							<p:message for="pagoMedioDePago" />
-							
-							<p:outputLabel for="pagoMonto" value="#{msg['pedido.pagos.monto']}:" />
-							<p:inputText id="pagoMonto" value="#{pedidoController.pagoEditable.monto}"/>
-							<p:message for="pagoMonto" />
-
-						</p:panelGrid>
-					</p:outputPanel>
-
-					<p:outputPanel style="padding-top: 5px;">
-						<p:commandButton id="add" value="#{msg['boton.agregar']}" icon="ui-icon-disk"
-										 actionListener="#{pedidoController.addDetalle}" 
-										 update="form:tabs:panelEdit" />
-						<p:commandButton id="cancelAdd" value="#{msg['boton.cancelar']}" icon="ui-icon-close" 
-										 onclick="PF('dialogEdit').hide()" immediate="true" style="float:right" />
-					</p:outputPanel>
-				
-				</p:dialog>
-			</h:form>  
-    </ui:define>
-     
-</ui:composition>
+			<p:outputPanel style="padding-top: 5px;">
+				<p:commandButton id="add" value="#{msg['boton.guardar']}" icon="ui-icon-disk"
+								 actionListener="#{pedidoController.savePago}" 
+								 update="form:tabs:panelEdit" />
+				<p:commandButton id="cancelAdd" value="#{msg['boton.cancelar']}" icon="ui-icon-close" 
+								 onclick="PF('dialogEdit').hide()" immediate="true" style="float:right" />
+			</p:outputPanel>
+		
+		</p:dialog>
+	</h:form>  
+</html>

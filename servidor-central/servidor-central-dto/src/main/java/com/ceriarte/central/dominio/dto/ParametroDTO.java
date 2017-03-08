@@ -21,9 +21,9 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 /**
  * Representación de un Parámetro
  * 
- * <p>Clase Java para parametroDTO complex type.
+ * <p>Java class for parametroDTO complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="parametroDTO"&gt;
@@ -57,7 +57,7 @@ public class ParametroDTO
     protected String descripcion;
 
     /**
-     * Obtiene el valor de la propiedad idParametro.
+     * Gets the value of the idParametro property.
      * 
      */
     public int getIdParametro() {
@@ -65,7 +65,7 @@ public class ParametroDTO
     }
 
     /**
-     * Define el valor de la propiedad idParametro.
+     * Sets the value of the idParametro property.
      * 
      */
     public void setIdParametro(int value) {
@@ -73,7 +73,7 @@ public class ParametroDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad clave.
+     * Gets the value of the clave property.
      * 
      * @return
      *     possible object is
@@ -85,7 +85,7 @@ public class ParametroDTO
     }
 
     /**
-     * Define el valor de la propiedad clave.
+     * Sets the value of the clave property.
      * 
      * @param value
      *     allowed object is
@@ -97,7 +97,7 @@ public class ParametroDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad valor.
+     * Gets the value of the valor property.
      * 
      * @return
      *     possible object is
@@ -109,7 +109,7 @@ public class ParametroDTO
     }
 
     /**
-     * Define el valor de la propiedad valor.
+     * Sets the value of the valor property.
      * 
      * @param value
      *     allowed object is
@@ -121,7 +121,7 @@ public class ParametroDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad descripcion.
+     * Gets the value of the descripcion property.
      * 
      * @return
      *     possible object is
@@ -133,7 +133,7 @@ public class ParametroDTO
     }
 
     /**
-     * Define el valor de la propiedad descripcion.
+     * Sets the value of the descripcion property.
      * 
      * @param value
      *     allowed object is

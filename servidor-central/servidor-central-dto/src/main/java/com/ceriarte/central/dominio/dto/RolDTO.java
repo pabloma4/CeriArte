@@ -21,9 +21,9 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 /**
  * Representación del Rol
  * 
- * <p>Clase Java para rolDTO complex type.
+ * <p>Java class for rolDTO complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="rolDTO"&gt;
@@ -58,7 +58,7 @@ public class RolDTO
     protected Permisos permisos;
 
     /**
-     * Obtiene el valor de la propiedad idRol.
+     * Gets the value of the idRol property.
      * 
      */
     public int getIdRol() {
@@ -66,7 +66,7 @@ public class RolDTO
     }
 
     /**
-     * Define el valor de la propiedad idRol.
+     * Sets the value of the idRol property.
      * 
      */
     public void setIdRol(int value) {
@@ -74,7 +74,7 @@ public class RolDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad nombre.
+     * Gets the value of the nombre property.
      * 
      * @return
      *     possible object is
@@ -86,7 +86,7 @@ public class RolDTO
     }
 
     /**
-     * Define el valor de la propiedad nombre.
+     * Sets the value of the nombre property.
      * 
      * @param value
      *     allowed object is
@@ -98,7 +98,7 @@ public class RolDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad descripcion.
+     * Gets the value of the descripcion property.
      * 
      * @return
      *     possible object is
@@ -110,7 +110,7 @@ public class RolDTO
     }
 
     /**
-     * Define el valor de la propiedad descripcion.
+     * Sets the value of the descripcion property.
      * 
      * @param value
      *     allowed object is
@@ -122,7 +122,7 @@ public class RolDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad permisos.
+     * Gets the value of the permisos property.
      * 
      * @return
      *     possible object is
@@ -134,7 +134,7 @@ public class RolDTO
     }
 
     /**
-     * Define el valor de la propiedad permisos.
+     * Sets the value of the permisos property.
      * 
      * @param value
      *     allowed object is

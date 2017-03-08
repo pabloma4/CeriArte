@@ -21,9 +21,9 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 /**
  * Representación de la Provincia
  * 
- * <p>Clase Java para provinciaDTO complex type.
+ * <p>Java class for provinciaDTO complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="provinciaDTO"&gt;
@@ -57,7 +57,7 @@ public class ProvinciaDTO
     protected PaisDTO pais;
 
     /**
-     * Obtiene el valor de la propiedad idProvincia.
+     * Gets the value of the idProvincia property.
      * 
      * @return
      *     possible object is
@@ -69,7 +69,7 @@ public class ProvinciaDTO
     }
 
     /**
-     * Define el valor de la propiedad idProvincia.
+     * Sets the value of the idProvincia property.
      * 
      * @param value
      *     allowed object is
@@ -81,7 +81,7 @@ public class ProvinciaDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad nombre.
+     * Gets the value of the nombre property.
      * 
      * @return
      *     possible object is
@@ -93,7 +93,7 @@ public class ProvinciaDTO
     }
 
     /**
-     * Define el valor de la propiedad nombre.
+     * Sets the value of the nombre property.
      * 
      * @param value
      *     allowed object is
@@ -105,7 +105,7 @@ public class ProvinciaDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad pais.
+     * Gets the value of the pais property.
      * 
      * @return
      *     possible object is
@@ -117,7 +117,7 @@ public class ProvinciaDTO
     }
 
     /**
-     * Define el valor de la propiedad pais.
+     * Sets the value of the pais property.
      * 
      * @param value
      *     allowed object is

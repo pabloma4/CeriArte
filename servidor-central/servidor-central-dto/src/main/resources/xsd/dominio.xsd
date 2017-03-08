@@ -203,6 +203,7 @@
 			<xs:element name="pedidoEstado"    		type="ae:pedidoEstadoDTO"  		minOccurs="1" maxOccurs="1" />
 			<xs:element name="fechaCreacion" 		type="xs:date" 			  		minOccurs="1" maxOccurs="1" />
 			<xs:element name="detalles"  			type="ae:detallesPedido" 		minOccurs="0" maxOccurs="1" />
+			<xs:element name="pagos"  			    type="ae:pagosPedido" 			minOccurs="0" maxOccurs="1" />
 			<xs:element name="presupuesto"      	type="ae:presupuestoDTO" 	  	minOccurs="0" maxOccurs="1" />
 	   </xs:all>
 	</xs:complexType>
@@ -360,7 +361,7 @@
                 </xs:annotation>
 			</xs:element>
 			<xs:element name="fechaCreacion" 		type="xs:date" 			        minOccurs="1" maxOccurs="1" />
-			<xs:element name="medioDePago"          type="xs:string" 	  			minOccurs="1" maxOccurs="1" />
+			<xs:element name="medioDePago"          type="ae:medioDePagoDTO" 	  	minOccurs="1" maxOccurs="1" />
 			<xs:element name="monto"    			type="xs:double"  				minOccurs="1" maxOccurs="1" >
 				<xs:annotation>
                     <xs:appinfo><equals:ignored/><hashCode:ignored/></xs:appinfo>
