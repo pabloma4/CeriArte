@@ -20,9 +20,9 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 
 
 /**
- * <p>Clase Java para detallesOrdenTrabajo complex type.
+ * <p>Java class for detallesOrdenTrabajo complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="detallesOrdenTrabajo"&gt;

@@ -19,9 +19,9 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 
 
 /**
- * <p>Clase Java para clienteDTO complex type.
+ * <p>Java class for clienteDTO complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="clienteDTO"&gt;
@@ -78,7 +78,7 @@ public class ClienteDTO
     protected String nombreCompleto;
 
     /**
-     * Obtiene el valor de la propiedad id.
+     * Gets the value of the id property.
      * 
      */
     public int getId() {
@@ -86,7 +86,7 @@ public class ClienteDTO
     }
 
     /**
-     * Define el valor de la propiedad id.
+     * Sets the value of the id property.
      * 
      */
     public void setId(int value) {
@@ -94,7 +94,7 @@ public class ClienteDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad nombre.
+     * Gets the value of the nombre property.
      * 
      * @return
      *     possible object is
@@ -106,7 +106,7 @@ public class ClienteDTO
     }
 
     /**
-     * Define el valor de la propiedad nombre.
+     * Sets the value of the nombre property.
      * 
      * @param value
      *     allowed object is
@@ -118,7 +118,7 @@ public class ClienteDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad apellido.
+     * Gets the value of the apellido property.
      * 
      * @return
      *     possible object is
@@ -130,7 +130,7 @@ public class ClienteDTO
     }
 
     /**
-     * Define el valor de la propiedad apellido.
+     * Sets the value of the apellido property.
      * 
      * @param value
      *     allowed object is
@@ -142,7 +142,7 @@ public class ClienteDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad email.
+     * Gets the value of the email property.
      * 
      * @return
      *     possible object is
@@ -154,7 +154,7 @@ public class ClienteDTO
     }
 
     /**
-     * Define el valor de la propiedad email.
+     * Sets the value of the email property.
      * 
      * @param value
      *     allowed object is
@@ -166,7 +166,7 @@ public class ClienteDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad telefono.
+     * Gets the value of the telefono property.
      * 
      * @return
      *     possible object is
@@ -178,7 +178,7 @@ public class ClienteDTO
     }
 
     /**
-     * Define el valor de la propiedad telefono.
+     * Sets the value of the telefono property.
      * 
      * @param value
      *     allowed object is
@@ -190,7 +190,7 @@ public class ClienteDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad domicilio.
+     * Gets the value of the domicilio property.
      * 
      * @return
      *     possible object is
@@ -202,7 +202,7 @@ public class ClienteDTO
     }
 
     /**
-     * Define el valor de la propiedad domicilio.
+     * Sets the value of the domicilio property.
      * 
      * @param value
      *     allowed object is
@@ -214,7 +214,7 @@ public class ClienteDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad localidad.
+     * Gets the value of the localidad property.
      * 
      * @return
      *     possible object is
@@ -226,7 +226,7 @@ public class ClienteDTO
     }
 
     /**
-     * Define el valor de la propiedad localidad.
+     * Sets the value of the localidad property.
      * 
      * @param value
      *     allowed object is
@@ -238,7 +238,7 @@ public class ClienteDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad cuit.
+     * Gets the value of the cuit property.
      * 
      * @return
      *     possible object is
@@ -250,7 +250,7 @@ public class ClienteDTO
     }
 
     /**
-     * Define el valor de la propiedad cuit.
+     * Sets the value of the cuit property.
      * 
      * @param value
      *     allowed object is
@@ -262,7 +262,7 @@ public class ClienteDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad responsabilidadIVA.
+     * Gets the value of the responsabilidadIVA property.
      * 
      * @return
      *     possible object is
@@ -274,7 +274,7 @@ public class ClienteDTO
     }
 
     /**
-     * Define el valor de la propiedad responsabilidadIVA.
+     * Sets the value of the responsabilidadIVA property.
      * 
      * @param value
      *     allowed object is
@@ -286,7 +286,7 @@ public class ClienteDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad nombreCompleto.
+     * Gets the value of the nombreCompleto property.
      * 
      * @return
      *     possible object is
@@ -298,7 +298,7 @@ public class ClienteDTO
     }
 
     /**
-     * Define el valor de la propiedad nombreCompleto.
+     * Sets the value of the nombreCompleto property.
      * 
      * @param value
      *     allowed object is

@@ -21,9 +21,9 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 /**
  * Representación de la Localidad
  * 
- * <p>Clase Java para localidadDTO complex type.
+ * <p>Java class for localidadDTO complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="localidadDTO"&gt;
@@ -54,7 +54,7 @@ public class LocalidadDTO
     protected String nombre;
 
     /**
-     * Obtiene el valor de la propiedad idLocalidad.
+     * Gets the value of the idLocalidad property.
      * 
      * @return
      *     possible object is
@@ -66,7 +66,7 @@ public class LocalidadDTO
     }
 
     /**
-     * Define el valor de la propiedad idLocalidad.
+     * Sets the value of the idLocalidad property.
      * 
      * @param value
      *     allowed object is
@@ -78,7 +78,7 @@ public class LocalidadDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad nombre.
+     * Gets the value of the nombre property.
      * 
      * @return
      *     possible object is
@@ -90,7 +90,7 @@ public class LocalidadDTO
     }
 
     /**
-     * Define el valor de la propiedad nombre.
+     * Sets the value of the nombre property.
      * 
      * @param value
      *     allowed object is

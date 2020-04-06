@@ -4,9 +4,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.ceriarte.central.dominio.DetallePedido;
+import com.ceriarte.central.dominio.MovimientoCaja;
 import com.ceriarte.central.dominio.Pedido;
 import com.ceriarte.central.dominio.dto.DetallePedidoDTO;
 import com.ceriarte.central.dominio.dto.DetallesPedido;
+import com.ceriarte.central.dominio.dto.PagoPedidoDTO;
+import com.ceriarte.central.dominio.dto.PagosPedido;
 import com.ceriarte.central.dominio.dto.PedidoDTO;
 import com.ceriarte.central.utilidades.XMLGregorianCalendarConverter;
 
@@ -37,6 +40,12 @@ public class PedidoConverter {
 				detallesPedido.getDetallePedido().add(DetallePedidoConverter.toDetallePedidoDTO(detallePedido));
 			}
 			dto.setDetalles(detallesPedido);
+			
+			PagosPedido pagosPedido = new PagosPedido();
+			for (MovimientoCaja pagoPedido : pedido.getPagos()) {
+				pagosPedido.getPagoPedido().add(PagoPedidoConverter.toPagoPedidoDTO(pagoPedido));
+			}
+			dto.setPagos(pagosPedido);
 			
 			return dto;
 		}
@@ -81,6 +90,12 @@ public class PedidoConverter {
 			}
 			pedido.setDetalles(detalles);
 			
+			Set<MovimientoCaja> pagos = new HashSet<MovimientoCaja>();
+			for (PagoPedidoDTO pagoPedidoDTO : dto.getPagos().getPagoPedido()) {
+				pagos.add(PagoPedidoConverter.toMovimientoCaja(pagoPedidoDTO));
+			}
+			pedido.setPagos(pagos);
+			
 			return pedido;		
 		}
 	}
@@ -123,6 +138,7 @@ public class PedidoConverter {
         	targetDTO.setPresupuesto(sourceDTO.getPresupuesto());
         	targetDTO.setPedidoEstado(sourceDTO.getPedidoEstado());
         	targetDTO.setDetalles(sourceDTO.getDetalles());
+        	targetDTO.setPagos(sourceDTO.getPagos());
     	}
     	return targetDTO;
 	}

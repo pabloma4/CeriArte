@@ -23,9 +23,9 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 /**
  * Representación de un Pedido
  * 
- * <p>Clase Java para pedidoDTO complex type.
+ * <p>Java class for pedidoDTO complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="pedidoDTO"&gt;
@@ -37,6 +37,7 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
  *         &lt;element name="pedidoEstado" type="{http://www.autoentrada.com/ws/schemas/sc/ae/1_0}pedidoEstadoDTO"/&gt;
  *         &lt;element name="fechaCreacion" type="{http://www.w3.org/2001/XMLSchema}date"/&gt;
  *         &lt;element name="detalles" type="{http://www.autoentrada.com/ws/schemas/sc/ae/1_0}detallesPedido" minOccurs="0"/&gt;
+ *         &lt;element name="pagos" type="{http://www.autoentrada.com/ws/schemas/sc/ae/1_0}pagosPedido" minOccurs="0"/&gt;
  *         &lt;element name="presupuesto" type="{http://www.autoentrada.com/ws/schemas/sc/ae/1_0}presupuestoDTO" minOccurs="0"/&gt;
  *       &lt;/all&gt;
  *     &lt;/restriction&gt;
@@ -63,10 +64,11 @@ public class PedidoDTO
     @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar fechaCreacion;
     protected DetallesPedido detalles;
+    protected PagosPedido pagos;
     protected PresupuestoDTO presupuesto;
 
     /**
-     * Obtiene el valor de la propiedad id.
+     * Gets the value of the id property.
      * 
      */
     public int getId() {
@@ -74,7 +76,7 @@ public class PedidoDTO
     }
 
     /**
-     * Define el valor de la propiedad id.
+     * Sets the value of the id property.
      * 
      */
     public void setId(int value) {
@@ -82,7 +84,7 @@ public class PedidoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad cliente.
+     * Gets the value of the cliente property.
      * 
      * @return
      *     possible object is
@@ -94,7 +96,7 @@ public class PedidoDTO
     }
 
     /**
-     * Define el valor de la propiedad cliente.
+     * Sets the value of the cliente property.
      * 
      * @param value
      *     allowed object is
@@ -106,7 +108,7 @@ public class PedidoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad pedidoEstado.
+     * Gets the value of the pedidoEstado property.
      * 
      * @return
      *     possible object is
@@ -118,7 +120,7 @@ public class PedidoDTO
     }
 
     /**
-     * Define el valor de la propiedad pedidoEstado.
+     * Sets the value of the pedidoEstado property.
      * 
      * @param value
      *     allowed object is
@@ -130,7 +132,7 @@ public class PedidoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad fechaCreacion.
+     * Gets the value of the fechaCreacion property.
      * 
      * @return
      *     possible object is
@@ -142,7 +144,7 @@ public class PedidoDTO
     }
 
     /**
-     * Define el valor de la propiedad fechaCreacion.
+     * Sets the value of the fechaCreacion property.
      * 
      * @param value
      *     allowed object is
@@ -154,7 +156,7 @@ public class PedidoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad detalles.
+     * Gets the value of the detalles property.
      * 
      * @return
      *     possible object is
@@ -166,7 +168,7 @@ public class PedidoDTO
     }
 
     /**
-     * Define el valor de la propiedad detalles.
+     * Sets the value of the detalles property.
      * 
      * @param value
      *     allowed object is
@@ -178,7 +180,31 @@ public class PedidoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad presupuesto.
+     * Gets the value of the pagos property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link PagosPedido }
+     *     
+     */
+    public PagosPedido getPagos() {
+        return pagos;
+    }
+
+    /**
+     * Sets the value of the pagos property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link PagosPedido }
+     *     
+     */
+    public void setPagos(PagosPedido value) {
+        this.pagos = value;
+    }
+
+    /**
+     * Gets the value of the presupuesto property.
      * 
      * @return
      *     possible object is
@@ -190,7 +216,7 @@ public class PedidoDTO
     }
 
     /**
-     * Define el valor de la propiedad presupuesto.
+     * Sets the value of the presupuesto property.
      * 
      * @param value
      *     allowed object is
@@ -255,6 +281,15 @@ public class PedidoDTO
             }
         }
         {
+            PagosPedido lhsPagos;
+            lhsPagos = this.getPagos();
+            PagosPedido rhsPagos;
+            rhsPagos = that.getPagos();
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "pagos", lhsPagos), LocatorUtils.property(thatLocator, "pagos", rhsPagos), lhsPagos, rhsPagos)) {
+                return false;
+            }
+        }
+        {
             PresupuestoDTO lhsPresupuesto;
             lhsPresupuesto = this.getPresupuesto();
             PresupuestoDTO rhsPresupuesto;
@@ -297,6 +332,11 @@ public class PedidoDTO
             DetallesPedido theDetalles;
             theDetalles = this.getDetalles();
             currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "detalles", theDetalles), currentHashCode, theDetalles);
+        }
+        {
+            PagosPedido thePagos;
+            thePagos = this.getPagos();
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "pagos", thePagos), currentHashCode, thePagos);
         }
         {
             PresupuestoDTO thePresupuesto;
@@ -350,6 +390,11 @@ public class PedidoDTO
             DetallesPedido theDetalles;
             theDetalles = this.getDetalles();
             strategy.appendField(locator, this, "detalles", buffer, theDetalles);
+        }
+        {
+            PagosPedido thePagos;
+            thePagos = this.getPagos();
+            strategy.appendField(locator, this, "pagos", buffer, thePagos);
         }
         {
             PresupuestoDTO thePresupuesto;

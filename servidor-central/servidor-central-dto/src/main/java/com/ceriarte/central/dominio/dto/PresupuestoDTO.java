@@ -23,9 +23,9 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 /**
  * Representación de un Presupuesto
  * 
- * <p>Clase Java para presupuestoDTO complex type.
+ * <p>Java class for presupuestoDTO complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="presupuestoDTO"&gt;
@@ -69,7 +69,7 @@ public class PresupuestoDTO
     protected DetallesPresupuesto detalles;
 
     /**
-     * Obtiene el valor de la propiedad id.
+     * Gets the value of the id property.
      * 
      */
     public int getId() {
@@ -77,7 +77,7 @@ public class PresupuestoDTO
     }
 
     /**
-     * Define el valor de la propiedad id.
+     * Sets the value of the id property.
      * 
      */
     public void setId(int value) {
@@ -85,7 +85,7 @@ public class PresupuestoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad cliente.
+     * Gets the value of the cliente property.
      * 
      * @return
      *     possible object is
@@ -97,7 +97,7 @@ public class PresupuestoDTO
     }
 
     /**
-     * Define el valor de la propiedad cliente.
+     * Sets the value of the cliente property.
      * 
      * @param value
      *     allowed object is
@@ -109,7 +109,7 @@ public class PresupuestoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad presupuestoEstado.
+     * Gets the value of the presupuestoEstado property.
      * 
      * @return
      *     possible object is
@@ -121,7 +121,7 @@ public class PresupuestoDTO
     }
 
     /**
-     * Define el valor de la propiedad presupuestoEstado.
+     * Sets the value of the presupuestoEstado property.
      * 
      * @param value
      *     allowed object is
@@ -133,7 +133,7 @@ public class PresupuestoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad fechaCreacion.
+     * Gets the value of the fechaCreacion property.
      * 
      * @return
      *     possible object is
@@ -145,7 +145,7 @@ public class PresupuestoDTO
     }
 
     /**
-     * Define el valor de la propiedad fechaCreacion.
+     * Sets the value of the fechaCreacion property.
      * 
      * @param value
      *     allowed object is
@@ -157,7 +157,7 @@ public class PresupuestoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad fechaValidoHasta.
+     * Gets the value of the fechaValidoHasta property.
      * 
      * @return
      *     possible object is
@@ -169,7 +169,7 @@ public class PresupuestoDTO
     }
 
     /**
-     * Define el valor de la propiedad fechaValidoHasta.
+     * Sets the value of the fechaValidoHasta property.
      * 
      * @param value
      *     allowed object is
@@ -181,7 +181,7 @@ public class PresupuestoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad detalles.
+     * Gets the value of the detalles property.
      * 
      * @return
      *     possible object is
@@ -193,7 +193,7 @@ public class PresupuestoDTO
     }
 
     /**
-     * Define el valor de la propiedad detalles.
+     * Sets the value of the detalles property.
      * 
      * @param value
      *     allowed object is

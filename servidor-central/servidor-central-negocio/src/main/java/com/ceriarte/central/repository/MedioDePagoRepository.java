@@ -12,4 +12,10 @@ import com.ceriarte.central.dominio.MedioDePago;
  */
 public interface MedioDePagoRepository extends CrudRepository<MedioDePago, Integer> {
 
+	/**
+	 * @return MedioDePago
+	 * 
+	 * Metodo que devuelve los mediosDePago habilitados
+	 */
+	public Iterable<MedioDePago> findByHabilitadoIsFalse();
 }

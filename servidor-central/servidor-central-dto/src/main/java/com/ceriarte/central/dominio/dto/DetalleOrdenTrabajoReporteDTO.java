@@ -21,9 +21,9 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 /**
  * Representación de un Detalle de Presupuesto para visualizar en un reporte
  * 
- * <p>Clase Java para detalleOrdenTrabajoReporteDTO complex type.
+ * <p>Java class for detalleOrdenTrabajoReporteDTO complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="detalleOrdenTrabajoReporteDTO"&gt;
@@ -61,7 +61,7 @@ public class DetalleOrdenTrabajoReporteDTO
     protected String cantidad;
 
     /**
-     * Obtiene el valor de la propiedad id.
+     * Gets the value of the id property.
      * 
      */
     public int getId() {
@@ -69,7 +69,7 @@ public class DetalleOrdenTrabajoReporteDTO
     }
 
     /**
-     * Define el valor de la propiedad id.
+     * Sets the value of the id property.
      * 
      */
     public void setId(int value) {
@@ -77,7 +77,7 @@ public class DetalleOrdenTrabajoReporteDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad idProducto.
+     * Gets the value of the idProducto property.
      * 
      */
     public int getIdProducto() {
@@ -85,7 +85,7 @@ public class DetalleOrdenTrabajoReporteDTO
     }
 
     /**
-     * Define el valor de la propiedad idProducto.
+     * Sets the value of the idProducto property.
      * 
      */
     public void setIdProducto(int value) {
@@ -93,7 +93,7 @@ public class DetalleOrdenTrabajoReporteDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad nombreProducto.
+     * Gets the value of the nombreProducto property.
      * 
      * @return
      *     possible object is
@@ -105,7 +105,7 @@ public class DetalleOrdenTrabajoReporteDTO
     }
 
     /**
-     * Define el valor de la propiedad nombreProducto.
+     * Sets the value of the nombreProducto property.
      * 
      * @param value
      *     allowed object is
@@ -117,7 +117,7 @@ public class DetalleOrdenTrabajoReporteDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad descripcionProducto.
+     * Gets the value of the descripcionProducto property.
      * 
      * @return
      *     possible object is
@@ -129,7 +129,7 @@ public class DetalleOrdenTrabajoReporteDTO
     }
 
     /**
-     * Define el valor de la propiedad descripcionProducto.
+     * Sets the value of the descripcionProducto property.
      * 
      * @param value
      *     allowed object is
@@ -141,7 +141,7 @@ public class DetalleOrdenTrabajoReporteDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad cantidad.
+     * Gets the value of the cantidad property.
      * 
      * @return
      *     possible object is
@@ -153,7 +153,7 @@ public class DetalleOrdenTrabajoReporteDTO
     }
 
     /**
-     * Define el valor de la propiedad cantidad.
+     * Sets the value of the cantidad property.
      * 
      * @param value
      *     allowed object is

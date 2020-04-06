@@ -206,6 +206,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link PagoPedidoDTO }
+     * 
+     */
+    public PagoPedidoDTO createPagoPedidoDTO() {
+        return new PagoPedidoDTO();
+    }
+
+    /**
+     * Create an instance of {@link PagosPedido }
+     * 
+     */
+    public PagosPedido createPagosPedido() {
+        return new PagosPedido();
+    }
+
+    /**
      * Create an instance of {@link ImagenDTO }
      * 
      */
@@ -275,54 +291,6 @@ public class ObjectFactory {
      */
     public MedioDePagoDTO createMedioDePagoDTO() {
         return new MedioDePagoDTO();
-    }
-
-    /**
-     * Create an instance of {@link TipoMedioDePagoDTO }
-     * 
-     */
-    public TipoMedioDePagoDTO createTipoMedioDePagoDTO() {
-        return new TipoMedioDePagoDTO();
-    }
-
-    /**
-     * Create an instance of {@link TiposMedioDePago }
-     * 
-     */
-    public TiposMedioDePago createTiposMedioDePago() {
-        return new TiposMedioDePago();
-    }
-
-    /**
-     * Create an instance of {@link TarjetaDTO }
-     * 
-     */
-    public TarjetaDTO createTarjetaDTO() {
-        return new TarjetaDTO();
-    }
-
-    /**
-     * Create an instance of {@link Tarjetas }
-     * 
-     */
-    public Tarjetas createTarjetas() {
-        return new Tarjetas();
-    }
-
-    /**
-     * Create an instance of {@link PlanDePagoDTO }
-     * 
-     */
-    public PlanDePagoDTO createPlanDePagoDTO() {
-        return new PlanDePagoDTO();
-    }
-
-    /**
-     * Create an instance of {@link PlanesDePago }
-     * 
-     */
-    public PlanesDePago createPlanesDePago() {
-        return new PlanesDePago();
     }
 
 }

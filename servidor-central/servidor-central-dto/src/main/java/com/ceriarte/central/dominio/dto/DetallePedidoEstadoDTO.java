@@ -21,9 +21,9 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 /**
  * Representación del Estado de un Detalle de Pedido
  * 
- * <p>Clase Java para detallePedidoEstadoDTO complex type.
+ * <p>Java class for detallePedidoEstadoDTO complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="detallePedidoEstadoDTO"&gt;
@@ -55,7 +55,7 @@ public class DetallePedidoEstadoDTO
     protected String descripcion;
 
     /**
-     * Obtiene el valor de la propiedad id.
+     * Gets the value of the id property.
      * 
      */
     public int getId() {
@@ -63,7 +63,7 @@ public class DetallePedidoEstadoDTO
     }
 
     /**
-     * Define el valor de la propiedad id.
+     * Sets the value of the id property.
      * 
      */
     public void setId(int value) {
@@ -71,7 +71,7 @@ public class DetallePedidoEstadoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad nombre.
+     * Gets the value of the nombre property.
      * 
      * @return
      *     possible object is
@@ -83,7 +83,7 @@ public class DetallePedidoEstadoDTO
     }
 
     /**
-     * Define el valor de la propiedad nombre.
+     * Sets the value of the nombre property.
      * 
      * @param value
      *     allowed object is
@@ -95,7 +95,7 @@ public class DetallePedidoEstadoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad descripcion.
+     * Gets the value of the descripcion property.
      * 
      * @return
      *     possible object is
@@ -107,7 +107,7 @@ public class DetallePedidoEstadoDTO
     }
 
     /**
-     * Define el valor de la propiedad descripcion.
+     * Sets the value of the descripcion property.
      * 
      * @param value
      *     allowed object is
