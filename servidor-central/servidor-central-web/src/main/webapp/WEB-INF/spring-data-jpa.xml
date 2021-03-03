@@ -15,38 +15,8 @@
 		http://www.springframework.org/schema/util 		http://www.springframework.org/schema/util/spring-util.xsd
 		http://www.springframework.org/schema/data/jpa	http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
 	    http://www.springframework.org/schema/tx 		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
-
-    <!--declaramos el archivo de propiedades para la configuracion del datasource-->
-	<!-- <context:property-placeholder  location="file:${CONFIG_HOME}/servidor-central-ceriarte/datos.properties" ignore-unresolvable="true"/> -->
-
-	<!--declaramos el datasource-->
-    <!-- <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean" p:jndiName="${db.dataSourceName}"/> -->
-
-	<!--declaramos el transaction manager-->
-    <!-- <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" p:entityManagerFactory-ref="emf"/> -->
-
-    <!-- <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" /> -->
-
-    <!-- <bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"> -->
-        <!-- <property name="dataSource" ref="dataSource" /> -->
-        <!-- <property name="jpaVendorAdapter"> -->
-            <!-- <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" /> -->
-        <!-- </property>         -->
-		<!--spring 3.1 elimina la obligacion de utilizar el archivo persistence.xml-->
-        <!-- <property name="packagesToScan" value="com.ceriarte.central.dominio"/> -->
-        <!-- <property name="jpaProperties"> -->
-            <!-- <props> -->
-                <!-- <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop> -->
-                <!-- <prop key="hibernate.max_fetch_depth">3</prop> -->
-                <!-- <prop key="hibernate.jdbc.fetch_size">50</prop> -->
-                <!-- <prop key="hibernate.jdbc.batch_size">10</prop> -->
-                <!-- <prop key="hibernate.show_sql">true</prop> -->
-            <!-- </props>         -->
-        <!-- </property> -->
-    <!-- </bean> -->
 	
     <context:annotation-config />
-	
 	
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
@@ -67,17 +37,35 @@
         </property>
     </bean>
 
-    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory" />
-    </bean>
 
-    <tx:annotation-driven transaction-manager="transactionManager" />
+    <!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
 	
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	<!--<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver" />
 		<property name="url" value="postgres://fjlhrkozycbqlz:5d4bf39952eb7cfa2d7f889b38a072ae6afdfdd644daeb08254639e7451e5e3b@ec2-174-129-199-54.compute-1.amazonaws.com:5432/d997q193j2fjap" />
 		<property name="username" value="postgres" />
 		<property name="password" value="postgres" />
+	</bean>-->
+	
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+	
+	<context:component-scan base-package="com.ceriarte.central.repository" />
+    <tx:annotation-driven transaction-manager="txManager"/>
+
+
+    <!-- a PlatformTransactionManager is still required -->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!-- (this dependency is defined somewhere else) -->
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+	
+	<bean id = "dataSource" class = "org.springframework.jdbc.datasource.DriverManagerDataSource">
+	   <property name = "driverClassName" value = "org.postgresql.Driver"/>
+	   <property name = "url" value = "jdbc:postgresql://ec2-174-129-199-54.compute-1.amazonaws.com:5432/d997q193j2fjap"/>
+	   <property name = "username" value = "fjlhrkozycbqlz"/>
+	   <property name = "password" value = "5d4bf39952eb7cfa2d7f889b38a072ae6afdfdd644daeb08254639e7451e5e3b"/>
 	</bean>
     
     <jpa:repositories base-package="com.ceriarte.central.repository"></jpa:repositories>
