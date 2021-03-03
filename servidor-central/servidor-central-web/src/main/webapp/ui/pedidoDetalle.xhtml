@@ -1,0 +1,242 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+       
+		<p:outputPanel id="outputPanelEdit" style="text-align:center;">
+	
+		<p:panelGrid columns="6">	      
+			<p:outputLabel for="fechaCreacion" value="#{msg['pedido.fecha']}:" />  
+			<p:calendar id="fechaCreacion" value="#{pedidoController.editableFechaCreacion}" effect="fold" 
+						locale="es" pattern="dd-MMM-yyyy" disabled="true"/>
+			<p:message for="fechaCreacion" />
+			
+			<p:outputLabel for="pedidoPresupuesto" value="#{msg['pedido.presupuesto']}:" />
+			<p:outputLabel id="pedidoPresupuesto" value="#{pedidoController.editable.presupuesto != null ? pedidoController.editable.presupuesto.id:'---'}"/>	
+			<p:message for="pedidoPresupuesto" />
+			
+			<p:outputLabel for="estado" value="#{msg['pedido.estado']}:" />  
+			<p:outputLabel id="estado" value="#{pedidoController.editable.pedidoEstado.nombre}"/>
+			<p:message for="estado" />
+			
+			<p:outputLabel for="pedidoCliente" value="#{msg['pedido.cliente']}:" />  
+			<p:autoComplete id="pedidoCliente" forceSelection="true" dropdown="true" 
+							var="pedidoCliente"  
+							value="#{pedidoController.editable.cliente}"
+							itemLabel="#{pedidoCliente.nombreCompleto}"
+							itemValue="#{pedidoCliente}"
+							converter="clienteConverter"
+							completeMethod="#{pedidoController.completarCliente}" 
+							required="true"
+							disabled="#{pedidoController.editable.presupuesto != null}"/>
+			<p:message for="pedidoCliente" /> 			    
+		</p:panelGrid>                                                       
+	</p:outputPanel>
+	
+	<p:outputPanel style="padding-top: 25px; padding-bottom: 25px;">
+		<p:commandButton id="new" value="#{msg['boton.agregar.detalle']}" icon="ui-icon-plusthick" style="float:right"
+						 actionListener="#{pedidoController.prepareNewDetalle}" update=":form:tabs:panelDetalleEdit"
+						 oncomplete="PF('dialogDetalleEdit').show()" />
+	</p:outputPanel>
+	
+	<p:dataTable id="detalles" var="detalle" value="#{pedidoController.editable.detalles.detallePedido}" editable="true" style="margin-bottom:20px"
+				 sortBy="#{detalle.producto.id}">
+	   <f:facet name="header">
+		   <h:outputText value="#{msg['pedido.detalle.titulo']}" />  
+	   </f:facet>
+ 
+	   <p:ajax event="rowEdit" listener="#{pedidoController.onRowEdit}" update=":form:messages,form:tabs:montoTotal"/>
+	   <p:ajax event="rowEditCancel" listener="#{pedidoController.onRowCancel}" update=":form:messages" />
+	   
+	   <p:column headerText="#{msg['pedido.detalle.codigoProducto']}" style="text-align:center;" width="5%">
+		   <p:cellEditor>
+			   <f:facet name="output">
+					<h:outputText value="#{detalle.producto.id}" rendered="#{detalle.detallePedidoEstado.id != pedidoController.detallePedidoEstadoEnumCancelado}"/>
+					<h:outputText value="#{detalle.producto.id}" rendered="#{detalle.detallePedidoEstado.id == pedidoController.detallePedidoEstadoEnumCancelado}" styleClass="tachado"/>
+			   </f:facet>
+			   <f:facet name="input"><h:outputText value="#{detalle.producto.id}"/></f:facet>
+		   </p:cellEditor>
+	   </p:column>
+	   
+	   <p:column headerText="#{msg['pedido.detalle.cantidad']}" style="text-align:center;" width="6%">
+		   <p:cellEditor>
+			   <f:facet name="output">
+					<h:outputText value="#{detalle.cantidad}" rendered="#{detalle.detallePedidoEstado.id != pedidoController.detallePedidoEstadoEnumCancelado}"/>
+					<h:outputText value="#{detalle.cantidad}" rendered="#{detalle.detallePedidoEstado.id == pedidoController.detallePedidoEstadoEnumCancelado}" styleClass="tachado"/>
+			   </f:facet>
+			   <f:facet name="input"><h:inputText value="#{detalle.cantidad}" size="10"/></f:facet>
+		   </p:cellEditor>
+	   </p:column>
+	   
+	   <p:column headerText="#{msg['pedido.detalle.nombreProducto']}" width="10%">
+		   <p:cellEditor>
+			   <f:facet name="output">
+					<h:outputText value="#{detalle.nombre}" rendered="#{detalle.detallePedidoEstado.id != pedidoController.detallePedidoEstadoEnumCancelado}"/>
+					<h:outputText value="#{detalle.nombre}" rendered="#{detalle.detallePedidoEstado.id == pedidoController.detallePedidoEstadoEnumCancelado}" styleClass="tachado"/>
+			   </f:facet>
+			   <f:facet name="input"><h:inputText value="#{detalle.nombre}" /></f:facet>
+		   </p:cellEditor>
+	   </p:column>
+	   
+	   <p:column headerText="#{msg['pedido.detalle.descripcionProducto']}" width="15%">
+		   <p:cellEditor>
+			   <f:facet name="output">
+					<h:outputText value="#{detalle.descripcion}" rendered="#{detalle.detallePedidoEstado.id != pedidoController.detallePedidoEstadoEnumCancelado}"/>
+					<h:outputText value="#{detalle.descripcion}" rendered="#{detalle.detallePedidoEstado.id == pedidoController.detallePedidoEstadoEnumCancelado}" styleClass="tachado"/>
+			   </f:facet>
+			   <f:facet name="input"><h:inputTextarea value="#{detalle.descripcion}" rows="3" cols="35" maxlength="1000"/></f:facet>
+		   </p:cellEditor>
+	   </p:column>
+	   
+	   <p:column headerText="#{msg['pedido.detalle.estado']}" width="10%" id="detallePedidoEstadoColumn">
+		   <p:cellEditor>
+			   <f:facet name="output">
+					<h:outputText value="#{detalle.detallePedidoEstado.nombre}" rendered="#{detalle.detallePedidoEstado.id != pedidoController.detallePedidoEstadoEnumCancelado}"/>
+					<h:outputText value="#{detalle.detallePedidoEstado.nombre}" rendered="#{detalle.detallePedidoEstado.id == pedidoController.detallePedidoEstadoEnumCancelado}" styleClass="tachado"/>
+			   </f:facet>
+			   <f:facet name="input">
+					<h:outputText value="#{detalle.detallePedidoEstado.nombre}" rendered="#{detalle.detallePedidoEstado.id != pedidoController.detallePedidoEstadoEnumPendienteEntrega}"/>
+					<p:selectOneButton value="#{pedidoController.detallePedidoEstadoId}"
+									   rendered="#{detalle.detallePedidoEstado.id == pedidoController.detallePedidoEstadoEnumPendienteEntrega}">
+						<f:selectItem itemLabel="#{msg['pedido.detalle.estadoEntregado']}" itemValue="#{pedidoController.detallePedidoEstadoEnumEntregado}" />
+						<f:selectItem itemLabel="#{msg['pedido.detalle.estadoCancelado']}" itemValue="#{pedidoController.detallePedidoEstadoEnumCancelado}" />
+					</p:selectOneButton>
+			   </f:facet>
+		   </p:cellEditor>
+	   </p:column>
+	   
+		<p:column headerText="#{msg['pedido.detalle.medida']}" style="text-align:center;" width="6%">
+		   <p:cellEditor>
+			   <f:facet name="output">
+					<h:outputText value="#{detalle.medida}" rendered="#{detalle.detallePedidoEstado.id != pedidoController.detallePedidoEstadoEnumCancelado}"/>
+					<h:outputText value="#{detalle.medida}" rendered="#{detalle.detallePedidoEstado.id == pedidoController.detallePedidoEstadoEnumCancelado}" styleClass="tachado"/>
+					<h:outputLabel value=" (#{detalle.producto.unidadMedida.simbolo})" />
+			   </f:facet>
+			   <f:facet name="input"><h:inputText value="#{detalle.medida}" size="10"/></f:facet>
+		   </p:cellEditor>
+	   </p:column>
+ 
+	   <p:column headerText="#{msg['pedido.detalle.precioUnitario']}" style="text-align:center;" width="6%">
+		   <p:cellEditor>
+			   <f:facet name="output">
+					<h:outputText value="#{detalle.precioUnitario}" rendered="#{detalle.detallePedidoEstado.id != pedidoController.detallePedidoEstadoEnumCancelado}">
+							<f:convertNumber type="currency" currencySymbol="$" />
+					</h:outputText>
+					<h:outputText value="#{detalle.precioUnitario}" rendered="#{detalle.detallePedidoEstado.id == pedidoController.detallePedidoEstadoEnumCancelado}" styleClass="tachado">
+							<f:convertNumber type="currency" currencySymbol="$" />
+					</h:outputText>
+			   </f:facet>
+			   <f:facet name="input"><h:inputText value="#{detalle.precioUnitario}" size="10"/></f:facet>
+		   </p:cellEditor>
+	   </p:column>
+	   
+	   <p:column headerText="#{msg['pedido.detalle.monto']}" style="text-align:center;" width="6%">
+		   <p:cellEditor>
+			   <f:facet name="output">
+					<h:outputText value="#{detalle.precioUnitario * detalle.cantidad * detalle.medida}" rendered="#{detalle.detallePedidoEstado.id != pedidoController.detallePedidoEstadoEnumCancelado}">
+						<f:convertNumber type="currency" currencySymbol="$" />
+					</h:outputText>
+					<h:outputText value="#{detalle.precioUnitario * detalle.cantidad * detalle.medida}" rendered="#{detalle.detallePedidoEstado.id == pedidoController.detallePedidoEstadoEnumCancelado}" styleClass="tachado">
+						<f:convertNumber type="currency" currencySymbol="$" />
+					</h:outputText>
+			   </f:facet>
+			   <f:facet name="input"><p:inputText value="#{detalle.precioUnitario * detalle.cantidad * detalle.medida}" size="10" disabled="true"/></f:facet>
+		   </p:cellEditor>
+	   </p:column>
+ 
+	   <p:column id="editColumn" style="width:4%;" rendered="#{pedidoController.editable.pedidoEstado.id != pedidoController.pedidoEstadoEnumEntregado}">
+			<p:rowEditor rendered="#{detalle.id > 0 and detalle.detallePedidoEstado.id != pedidoController.detallePedidoEstadoEnumEntregado and 
+									 detalle.detallePedidoEstado.id != pedidoController.detallePedidoEstadoEnumCancelado}"/>
+	   </p:column>
+				   
+	   <p:column id="deleteColumn" style="width:4%;" rendered="#{pedidoController.editable.pedidoEstado.id != pedidoController.pedidoEstadoEnumEntregado}">
+			<p:commandButton id="deleteDetalle" action="#{pedidoController.deleteDetalle}" icon="ui-icon-trash" immediate="true" 
+							 update=":form:messages" title="#{msg['boton.quitar']}"
+							 rendered="#{(detalle.producto.elaborado == false and detalle.detallePedidoEstado.id == pedidoController.detallePedidoEstadoEnumPendienteEntrega) or
+										 (detalle.producto.elaborado == true and detalle.detallePedidoEstado.id == pedidoController.detallePedidoEstadoEnumPendienteElaboracion)}">
+				 <f:setPropertyActionListener value="#{detalle}" target="#{pedidoController.detalleEditable}" />  			
+				 <p:confirm header="#{msg['eliminar.confirmDialog.header']}" message="#{msg['eliminar.confirmDialog.message']}" icon="ui-icon-alert" />
+			</p:commandButton>
+	   </p:column>
+
+	   <p:column id="ordenTrabajoColumn" style="width:4%;">
+			<p:button id="newOrdenTrabajo"  outcome="editOrdenTrabajo"  ajax="false" title="#{msg['boton.nueva.orden.trabajo']}" icon="ui-icon-wrench"
+					  rendered="#{facesContext.externalContext.isUserInRole('ROLE_NEW_ORDEN_TRABAJO') and detalle.id > 0 and detalle.ordenTrabajo == null and detalle.producto.elaborado == true}">
+					  <f:param value="#{detalle.id}" name="detallePedidoId"  />
+			</p:button>	  	  
+			
+			<p:button id="editOrdenTrabajo"  outcome="editOrdenTrabajo"  ajax="false" title="#{msg['boton.editar.orden.trabajo']}" icon="ui-icon-search"
+					  rendered="#{facesContext.externalContext.isUserInRole('ROLE_NEW_ORDEN_TRABAJO') and detalle.ordenTrabajo != null}">
+					  <f:param value="#{detalle.ordenTrabajo.id}" name="ordenTrabajoId"  />
+					  <f:param value="#{detalle.id}" name="detallePedidoId"  />
+			</p:button>	  	  
+	   </p:column>
+	   
+   </p:dataTable>
+   
+   <p:outputPanel style="float:right;padding-right: 180px;" styleClass="ui-montoTotal">
+		<p:outputLabel for="montoTotal" value="#{msg['columna.total']}: " /> 
+		<p:outputLabel id="montoTotal" value="#{pedidoController.montoTotal}">
+			<f:convertNumber type="currency" currencySymbol="$" />
+		</p:outputLabel>
+   </p:outputPanel>
+   
+   <p:spacer height="20"/>
+   
+   <p:panelGrid columns="3" styleClass="panelGridCenter">
+		 <p:commandButton id="save" value="#{msg['boton.guardar']}" icon="ui-icon-pencil"
+						  action="#{pedidoController.save}"/>
+		 <p:commandButton id="delete" action="#{pedidoController.delete}" icon="ui-icon-trash" value="#{msg['boton.eliminar']}" 
+						  update=":form:tabs" rendered="#{facesContext.externalContext.isUserInRole('ROLE_DELETE_PEDIDO') and pedidoController.editable.id > 0 and pedidoController.editable.pedidoEstado.id == pedidoController.pedidoEstadoEnumNuevo}">
+					<p:confirm header="#{msg['eliminar.confirmDialog.header']}" message="#{msg['eliminar.confirmDialog.message']}" icon="ui-icon-alert" />
+		 </p:commandButton>                  
+		 <p:commandButton id="cancel" value="#{msg['boton.volver']}" icon="ui-icon-arrowreturnthick-1-w" 
+						  immediate="true" action="#{pedidoController.cancel}"/>
+   </p:panelGrid> 
+   			<p:dialog id="dialogDetalleEdit" widgetVar="dialogDetalleEdit" header="#{msg['pedido.detalle.dialog.header']}"
+				 showEffect="explode" hideEffect="explode" resizable="false">  
+
+				<p:outputPanel id="panelDetalleEdit" style="text-align:center;">
+					<p:panelGrid id="gridDetalleEdit" columns="3" rendered="#{pedidoController.detalleEditable != null}">
+			  
+						<p:outputLabel for="productoNombre" value="#{msg['pedido.detalle.nombreProducto']}:" />
+						<p:autoComplete id="productoNombre" forceSelection="true" dropdown="true" immediate="true"
+									var="detallePedidoProducto"  
+									value="#{pedidoController.detalleEditable.producto}"
+									itemLabel="#{detallePedidoProducto.nombre}"
+									itemValue="#{detallePedidoProducto}"
+									converter="productoConverter"
+									completeMethod="#{pedidoController.completarProducto}" 
+									required="true">
+							<p:ajax event="itemSelect" update="form:tabs:precioUnitario, form:tabs:medida" render="precioUnitario, medida" listener="#{pedidoController.onProductoChange}"/>
+						</p:autoComplete>		    
+						<p:message for="productoNombre" />
+						
+						<p:outputLabel for="precioUnitario" value="#{msg['pedido.detalle.precioUnitario']}:" />
+						<p:inputText id="precioUnitario" value="#{pedidoController.detalleEditable.precioUnitario}"/>
+						<p:message for="precioUnitario" />
+	
+						<p:outputLabel for="medida" value="#{msg['pedido.detalle.medida']}:" />
+						<h:panelGroup id="medida"> 
+							<p:inputText value="#{pedidoController.detalleEditable.medida}" maxlength="5" size="5"/>
+							<h:outputLabel value=" (#{pedidoController.detalleEditable.producto.unidadMedida.simbolo})" rendered="#{pedidoController.detalleEditable.producto != null}"/>
+						</h:panelGroup>
+						<p:message for="medida" />
+						
+						<p:outputLabel for="cantidad" value="#{msg['pedido.detalle.cantidad']}:" />
+						<h:inputText id="cantidad" value="#{pedidoController.detalleEditable.cantidad}"/>
+						<p:message for="cantidad" />
+					</p:panelGrid>
+				</p:outputPanel>
+	
+				<p:outputPanel style="padding-top: 5px;">
+					<p:commandButton id="addDetalle" value="#{msg['boton.agregar']}" icon="ui-icon-disk"
+									 actionListener="#{pedidoController.addDetalle}"
+									 update=":form:tabs:panelDetalleEdit"/>
+
+					<p:commandButton id="cancelAddDetalle" value="#{msg['boton.cancelar']}" icon="ui-icon-close" 
+									 onclick="PF('dialogDetalleEdit').hide()" immediate="true" style="float:right" />
+				</p:outputPanel>
+		</p:dialog>
+</html>
