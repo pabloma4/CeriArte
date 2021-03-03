@@ -20,9 +20,9 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 
 
 /**
- * <p>Clase Java para planDePagoDTO complex type.
+ * <p>Java class for planDePagoDTO complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="planDePagoDTO"&gt;
@@ -63,7 +63,7 @@ public class PlanDePagoDTO
     protected int cantidadCuotas;
 
     /**
-     * Obtiene el valor de la propiedad id.
+     * Gets the value of the id property.
      * 
      */
     public int getId() {
@@ -71,7 +71,7 @@ public class PlanDePagoDTO
     }
 
     /**
-     * Define el valor de la propiedad id.
+     * Sets the value of the id property.
      * 
      */
     public void setId(int value) {
@@ -79,7 +79,7 @@ public class PlanDePagoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad idTarjetaDeCredito.
+     * Gets the value of the idTarjetaDeCredito property.
      * 
      */
     public int getIdTarjetaDeCredito() {
@@ -87,7 +87,7 @@ public class PlanDePagoDTO
     }
 
     /**
-     * Define el valor de la propiedad idTarjetaDeCredito.
+     * Sets the value of the idTarjetaDeCredito property.
      * 
      */
     public void setIdTarjetaDeCredito(int value) {
@@ -95,7 +95,7 @@ public class PlanDePagoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad descripcion.
+     * Gets the value of the descripcion property.
      * 
      * @return
      *     possible object is
@@ -107,7 +107,7 @@ public class PlanDePagoDTO
     }
 
     /**
-     * Define el valor de la propiedad descripcion.
+     * Sets the value of the descripcion property.
      * 
      * @param value
      *     allowed object is
@@ -119,7 +119,7 @@ public class PlanDePagoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad recargo.
+     * Gets the value of the recargo property.
      * 
      * @return
      *     possible object is
@@ -131,7 +131,7 @@ public class PlanDePagoDTO
     }
 
     /**
-     * Define el valor de la propiedad recargo.
+     * Sets the value of the recargo property.
      * 
      * @param value
      *     allowed object is
@@ -143,7 +143,7 @@ public class PlanDePagoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad cantidadCuotas.
+     * Gets the value of the cantidadCuotas property.
      * 
      */
     public int getCantidadCuotas() {
@@ -151,7 +151,7 @@ public class PlanDePagoDTO
     }
 
     /**
-     * Define el valor de la propiedad cantidadCuotas.
+     * Sets the value of the cantidadCuotas property.
      * 
      */
     public void setCantidadCuotas(int value) {

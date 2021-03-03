@@ -19,9 +19,9 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 
 
 /**
- * <p>Clase Java para tipoMedioDePagoDTO complex type.
+ * <p>Java class for tipoMedioDePagoDTO complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="tipoMedioDePagoDTO"&gt;
@@ -69,7 +69,7 @@ public class TipoMedioDePagoDTO
     protected boolean habilitado;
 
     /**
-     * Obtiene el valor de la propiedad id.
+     * Gets the value of the id property.
      * 
      */
     public int getId() {
@@ -77,7 +77,7 @@ public class TipoMedioDePagoDTO
     }
 
     /**
-     * Define el valor de la propiedad id.
+     * Sets the value of the id property.
      * 
      */
     public void setId(int value) {
@@ -85,7 +85,7 @@ public class TipoMedioDePagoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad descripcion.
+     * Gets the value of the descripcion property.
      * 
      * @return
      *     possible object is
@@ -97,7 +97,7 @@ public class TipoMedioDePagoDTO
     }
 
     /**
-     * Define el valor de la propiedad descripcion.
+     * Sets the value of the descripcion property.
      * 
      * @param value
      *     allowed object is
@@ -109,7 +109,7 @@ public class TipoMedioDePagoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad abreviatura.
+     * Gets the value of the abreviatura property.
      * 
      * @return
      *     possible object is
@@ -121,7 +121,7 @@ public class TipoMedioDePagoDTO
     }
 
     /**
-     * Define el valor de la propiedad abreviatura.
+     * Sets the value of the abreviatura property.
      * 
      * @param value
      *     allowed object is
@@ -133,7 +133,7 @@ public class TipoMedioDePagoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad codigo.
+     * Gets the value of the codigo property.
      * 
      * @return
      *     possible object is
@@ -145,7 +145,7 @@ public class TipoMedioDePagoDTO
     }
 
     /**
-     * Define el valor de la propiedad codigo.
+     * Sets the value of the codigo property.
      * 
      * @param value
      *     allowed object is
@@ -157,7 +157,7 @@ public class TipoMedioDePagoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad tieneId.
+     * Gets the value of the tieneId property.
      * 
      */
     public boolean isTieneId() {
@@ -165,7 +165,7 @@ public class TipoMedioDePagoDTO
     }
 
     /**
-     * Define el valor de la propiedad tieneId.
+     * Sets the value of the tieneId property.
      * 
      */
     public void setTieneId(boolean value) {
@@ -173,7 +173,7 @@ public class TipoMedioDePagoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad tieneVencimiento.
+     * Gets the value of the tieneVencimiento property.
      * 
      */
     public boolean isTieneVencimiento() {
@@ -181,7 +181,7 @@ public class TipoMedioDePagoDTO
     }
 
     /**
-     * Define el valor de la propiedad tieneVencimiento.
+     * Sets the value of the tieneVencimiento property.
      * 
      */
     public void setTieneVencimiento(boolean value) {
@@ -189,7 +189,7 @@ public class TipoMedioDePagoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad habilitado.
+     * Gets the value of the habilitado property.
      * 
      */
     public boolean isHabilitado() {
@@ -197,7 +197,7 @@ public class TipoMedioDePagoDTO
     }
 
     /**
-     * Define el valor de la propiedad habilitado.
+     * Sets the value of the habilitado property.
      * 
      */
     public void setHabilitado(boolean value) {

@@ -148,7 +148,7 @@
             <dependency>
                 <groupId>uk.org.simonsite</groupId>
                 <artifactId>log4j-rolling-appender</artifactId>
-                <version>20140925-0909</version>
+                <version>20150607-2059</version>
                 <scope>${deploy.scope}</scope>
             </dependency>
 
@@ -318,7 +318,7 @@
                 <groupId>postgresql</groupId>
                 <artifactId>postgresql</artifactId>
                 <version>${postgresql.version}</version>
-                <scope>provided</scope>
+                <scope>compile</scope>
             </dependency>
 
             <!-- PrimeFaces -->

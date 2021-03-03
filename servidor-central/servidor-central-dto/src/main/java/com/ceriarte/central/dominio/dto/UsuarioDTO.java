@@ -21,9 +21,9 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 /**
  * Representación del Usuario
  * 
- * <p>Clase Java para usuarioDTO complex type.
+ * <p>Java class for usuarioDTO complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="usuarioDTO"&gt;
@@ -79,7 +79,7 @@ public class UsuarioDTO
     protected Permisos permisos;
 
     /**
-     * Obtiene el valor de la propiedad idUsuario.
+     * Gets the value of the idUsuario property.
      * 
      */
     public int getIdUsuario() {
@@ -87,7 +87,7 @@ public class UsuarioDTO
     }
 
     /**
-     * Define el valor de la propiedad idUsuario.
+     * Sets the value of the idUsuario property.
      * 
      */
     public void setIdUsuario(int value) {
@@ -95,7 +95,7 @@ public class UsuarioDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad nombre.
+     * Gets the value of the nombre property.
      * 
      * @return
      *     possible object is
@@ -107,7 +107,7 @@ public class UsuarioDTO
     }
 
     /**
-     * Define el valor de la propiedad nombre.
+     * Sets the value of the nombre property.
      * 
      * @param value
      *     allowed object is
@@ -119,7 +119,7 @@ public class UsuarioDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad apellido.
+     * Gets the value of the apellido property.
      * 
      * @return
      *     possible object is
@@ -131,7 +131,7 @@ public class UsuarioDTO
     }
 
     /**
-     * Define el valor de la propiedad apellido.
+     * Sets the value of the apellido property.
      * 
      * @param value
      *     allowed object is
@@ -143,7 +143,7 @@ public class UsuarioDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad nombreCompleto.
+     * Gets the value of the nombreCompleto property.
      * 
      * @return
      *     possible object is
@@ -155,7 +155,7 @@ public class UsuarioDTO
     }
 
     /**
-     * Define el valor de la propiedad nombreCompleto.
+     * Sets the value of the nombreCompleto property.
      * 
      * @param value
      *     allowed object is
@@ -167,7 +167,7 @@ public class UsuarioDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad login.
+     * Gets the value of the login property.
      * 
      * @return
      *     possible object is
@@ -179,7 +179,7 @@ public class UsuarioDTO
     }
 
     /**
-     * Define el valor de la propiedad login.
+     * Sets the value of the login property.
      * 
      * @param value
      *     allowed object is
@@ -191,7 +191,7 @@ public class UsuarioDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad password.
+     * Gets the value of the password property.
      * 
      * @return
      *     possible object is
@@ -203,7 +203,7 @@ public class UsuarioDTO
     }
 
     /**
-     * Define el valor de la propiedad password.
+     * Sets the value of the password property.
      * 
      * @param value
      *     allowed object is
@@ -215,7 +215,7 @@ public class UsuarioDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad confirmarPassword.
+     * Gets the value of the confirmarPassword property.
      * 
      * @return
      *     possible object is
@@ -227,7 +227,7 @@ public class UsuarioDTO
     }
 
     /**
-     * Define el valor de la propiedad confirmarPassword.
+     * Sets the value of the confirmarPassword property.
      * 
      * @param value
      *     allowed object is
@@ -239,7 +239,7 @@ public class UsuarioDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad email.
+     * Gets the value of the email property.
      * 
      * @return
      *     possible object is
@@ -251,7 +251,7 @@ public class UsuarioDTO
     }
 
     /**
-     * Define el valor de la propiedad email.
+     * Sets the value of the email property.
      * 
      * @param value
      *     allowed object is
@@ -263,7 +263,7 @@ public class UsuarioDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad changePassword.
+     * Gets the value of the changePassword property.
      * 
      */
     public boolean isChangePassword() {
@@ -271,7 +271,7 @@ public class UsuarioDTO
     }
 
     /**
-     * Define el valor de la propiedad changePassword.
+     * Sets the value of the changePassword property.
      * 
      */
     public void setChangePassword(boolean value) {
@@ -279,7 +279,7 @@ public class UsuarioDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad tiempoLogin.
+     * Gets the value of the tiempoLogin property.
      * 
      */
     public int getTiempoLogin() {
@@ -287,7 +287,7 @@ public class UsuarioDTO
     }
 
     /**
-     * Define el valor de la propiedad tiempoLogin.
+     * Sets the value of the tiempoLogin property.
      * 
      */
     public void setTiempoLogin(int value) {
@@ -295,7 +295,7 @@ public class UsuarioDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad roles.
+     * Gets the value of the roles property.
      * 
      * @return
      *     possible object is
@@ -307,7 +307,7 @@ public class UsuarioDTO
     }
 
     /**
-     * Define el valor de la propiedad roles.
+     * Sets the value of the roles property.
      * 
      * @param value
      *     allowed object is
@@ -319,7 +319,7 @@ public class UsuarioDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad permisos.
+     * Gets the value of the permisos property.
      * 
      * @return
      *     possible object is
@@ -331,7 +331,7 @@ public class UsuarioDTO
     }
 
     /**
-     * Define el valor de la propiedad permisos.
+     * Sets the value of the permisos property.
      * 
      * @param value
      *     allowed object is

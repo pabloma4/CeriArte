@@ -19,9 +19,9 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 
 
 /**
- * <p>Clase Java para medioDePagoDTO complex type.
+ * <p>Java class for medioDePagoDTO complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="medioDePagoDTO"&gt;
@@ -61,7 +61,7 @@ public class MedioDePagoDTO
     protected boolean habilitado;
 
     /**
-     * Obtiene el valor de la propiedad id.
+     * Gets the value of the id property.
      * 
      */
     public int getId() {
@@ -69,7 +69,7 @@ public class MedioDePagoDTO
     }
 
     /**
-     * Define el valor de la propiedad id.
+     * Sets the value of the id property.
      * 
      */
     public void setId(int value) {
@@ -77,7 +77,7 @@ public class MedioDePagoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad tipoMedioDePago.
+     * Gets the value of the tipoMedioDePago property.
      * 
      * @return
      *     possible object is
@@ -89,7 +89,7 @@ public class MedioDePagoDTO
     }
 
     /**
-     * Define el valor de la propiedad tipoMedioDePago.
+     * Sets the value of the tipoMedioDePago property.
      * 
      * @param value
      *     allowed object is
@@ -101,7 +101,7 @@ public class MedioDePagoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad planDePago.
+     * Gets the value of the planDePago property.
      * 
      * @return
      *     possible object is
@@ -113,7 +113,7 @@ public class MedioDePagoDTO
     }
 
     /**
-     * Define el valor de la propiedad planDePago.
+     * Sets the value of the planDePago property.
      * 
      * @param value
      *     allowed object is
@@ -125,7 +125,7 @@ public class MedioDePagoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad informacionAdicional.
+     * Gets the value of the informacionAdicional property.
      * 
      * @return
      *     possible object is
@@ -137,7 +137,7 @@ public class MedioDePagoDTO
     }
 
     /**
-     * Define el valor de la propiedad informacionAdicional.
+     * Sets the value of the informacionAdicional property.
      * 
      * @param value
      *     allowed object is
@@ -149,7 +149,7 @@ public class MedioDePagoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad habilitado.
+     * Gets the value of the habilitado property.
      * 
      */
     public boolean isHabilitado() {
@@ -157,7 +157,7 @@ public class MedioDePagoDTO
     }
 
     /**
-     * Define el valor de la propiedad habilitado.
+     * Sets the value of the habilitado property.
      * 
      */
     public void setHabilitado(boolean value) {

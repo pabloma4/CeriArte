@@ -21,9 +21,9 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 /**
  * Representación de un Detalle de Orden Trabajo
  * 
- * <p>Clase Java para detalleOrdenTrabajoDTO complex type.
+ * <p>Java class for detalleOrdenTrabajoDTO complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="detalleOrdenTrabajoDTO"&gt;
@@ -55,7 +55,7 @@ public class DetalleOrdenTrabajoDTO
     protected double cantidad;
 
     /**
-     * Obtiene el valor de la propiedad id.
+     * Gets the value of the id property.
      * 
      */
     public int getId() {
@@ -63,7 +63,7 @@ public class DetalleOrdenTrabajoDTO
     }
 
     /**
-     * Define el valor de la propiedad id.
+     * Sets the value of the id property.
      * 
      */
     public void setId(int value) {
@@ -71,7 +71,7 @@ public class DetalleOrdenTrabajoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad producto.
+     * Gets the value of the producto property.
      * 
      * @return
      *     possible object is
@@ -83,7 +83,7 @@ public class DetalleOrdenTrabajoDTO
     }
 
     /**
-     * Define el valor de la propiedad producto.
+     * Sets the value of the producto property.
      * 
      * @param value
      *     allowed object is
@@ -95,7 +95,7 @@ public class DetalleOrdenTrabajoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad cantidad.
+     * Gets the value of the cantidad property.
      * 
      */
     public double getCantidad() {
@@ -103,7 +103,7 @@ public class DetalleOrdenTrabajoDTO
     }
 
     /**
-     * Define el valor de la propiedad cantidad.
+     * Sets the value of the cantidad property.
      * 
      */
     public void setCantidad(double value) {

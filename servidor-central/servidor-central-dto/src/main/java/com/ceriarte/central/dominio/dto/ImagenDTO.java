@@ -21,9 +21,9 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 /**
  * Representación de una Imagen
  * 
- * <p>Clase Java para imagenDTO complex type.
+ * <p>Java class for imagenDTO complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="imagenDTO"&gt;
@@ -59,7 +59,7 @@ public class ImagenDTO
     protected String url;
 
     /**
-     * Obtiene el valor de la propiedad idImagen.
+     * Gets the value of the idImagen property.
      * 
      */
     public int getIdImagen() {
@@ -67,7 +67,7 @@ public class ImagenDTO
     }
 
     /**
-     * Define el valor de la propiedad idImagen.
+     * Sets the value of the idImagen property.
      * 
      */
     public void setIdImagen(int value) {
@@ -75,7 +75,7 @@ public class ImagenDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad descripcion.
+     * Gets the value of the descripcion property.
      * 
      * @return
      *     possible object is
@@ -87,7 +87,7 @@ public class ImagenDTO
     }
 
     /**
-     * Define el valor de la propiedad descripcion.
+     * Sets the value of the descripcion property.
      * 
      * @param value
      *     allowed object is
@@ -99,7 +99,7 @@ public class ImagenDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad nombreArchivo.
+     * Gets the value of the nombreArchivo property.
      * 
      * @return
      *     possible object is
@@ -111,7 +111,7 @@ public class ImagenDTO
     }
 
     /**
-     * Define el valor de la propiedad nombreArchivo.
+     * Sets the value of the nombreArchivo property.
      * 
      * @param value
      *     allowed object is
@@ -123,7 +123,7 @@ public class ImagenDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad url.
+     * Gets the value of the url property.
      * 
      * @return
      *     possible object is
@@ -135,7 +135,7 @@ public class ImagenDTO
     }
 
     /**
-     * Define el valor de la propiedad url.
+     * Sets the value of the url property.
      * 
      * @param value
      *     allowed object is

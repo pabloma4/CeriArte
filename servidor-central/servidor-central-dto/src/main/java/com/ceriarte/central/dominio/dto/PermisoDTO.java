@@ -21,9 +21,9 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
 /**
  * Representación del Permiso
  * 
- * <p>Clase Java para permisoDTO complex type.
+ * <p>Java class for permisoDTO complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="permisoDTO"&gt;
@@ -56,7 +56,7 @@ public class PermisoDTO
     protected String descripcion;
 
     /**
-     * Obtiene el valor de la propiedad idPermiso.
+     * Gets the value of the idPermiso property.
      * 
      */
     public int getIdPermiso() {
@@ -64,7 +64,7 @@ public class PermisoDTO
     }
 
     /**
-     * Define el valor de la propiedad idPermiso.
+     * Sets the value of the idPermiso property.
      * 
      */
     public void setIdPermiso(int value) {
@@ -72,7 +72,7 @@ public class PermisoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad nombre.
+     * Gets the value of the nombre property.
      * 
      * @return
      *     possible object is
@@ -84,7 +84,7 @@ public class PermisoDTO
     }
 
     /**
-     * Define el valor de la propiedad nombre.
+     * Sets the value of the nombre property.
      * 
      * @param value
      *     allowed object is
@@ -96,7 +96,7 @@ public class PermisoDTO
     }
 
     /**
-     * Obtiene el valor de la propiedad descripcion.
+     * Gets the value of the descripcion property.
      * 
      * @return
      *     possible object is
@@ -108,7 +108,7 @@ public class PermisoDTO
     }
 
     /**
-     * Define el valor de la propiedad descripcion.
+     * Sets the value of the descripcion property.
      * 
      * @param value
      *     allowed object is
