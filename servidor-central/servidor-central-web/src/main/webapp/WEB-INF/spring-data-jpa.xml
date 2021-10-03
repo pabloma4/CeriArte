@@ -61,11 +61,20 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 	
-	<bean id = "dataSource" class = "org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<!-- TEST HEROKU DB -->
+	<!--<bean id = "dataSource" class = "org.springframework.jdbc.datasource.DriverManagerDataSource">
 	   <property name = "driverClassName" value = "org.postgresql.Driver"/>
 	   <property name = "url" value = "jdbc:postgresql://ec2-174-129-199-54.compute-1.amazonaws.com:5432/d997q193j2fjap"/>
 	   <property name = "username" value = "fjlhrkozycbqlz"/>
 	   <property name = "password" value = "5d4bf39952eb7cfa2d7f889b38a072ae6afdfdd644daeb08254639e7451e5e3b"/>
+	</bean> -->
+	
+	<!-- PROD HEROKU DB -->
+	<bean id = "dataSource" class = "org.springframework.jdbc.datasource.DriverManagerDataSource">
+	   <property name = "driverClassName" value = "org.postgresql.Driver"/>
+	   <property name = "url" value = "jdbc:    postgres://drdshwsbktjkml:b79fb28901f6b76a32ac5e3d7c3173a0d754e79f2428a3bb100291a05ec30cba@ec2-54-147-126-173.compute-1.amazonaws.com:5432/d9il4urrhpkqhv"/>
+	   <property name = "username" value = "d9il4urrhpkqhv"/>
+	   <property name = "password" value = "b79fb28901f6b76a32ac5e3d7c3173a0d754e79f2428a3bb100291a05ec30cba"/>
 	</bean>
     
     <jpa:repositories base-package="com.ceriarte.central.repository"></jpa:repositories>
