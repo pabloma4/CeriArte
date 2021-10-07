@@ -32,18 +32,20 @@ public class Presupuesto implements java.io.Serializable {
 	private Date fechaModificacion;
 	private Date fechaValidoHasta;
 	private Set<DetallePresupuesto> detalles;
+	private String observaciones;
 	private boolean borrado;
 	
 	public Presupuesto() {
 	}
 
-	public Presupuesto(Cliente cliente, Date fechaValidoHasta, PresupuestoEstado presupuestoEstado) {
+	public Presupuesto(Cliente cliente, Date fechaValidoHasta, PresupuestoEstado presupuestoEstado, String observaciones) {
 		super();
 		this.cliente = cliente;
 		this.fechaCreacion = new Date();
 		this.fechaValidoHasta = fechaValidoHasta;
 		this.detalles = new HashSet<DetallePresupuesto>();
 		this.presupuestoEstado = presupuestoEstado;
+		this.observaciones = observaciones;
 	}
 
 	@Id
@@ -123,5 +125,14 @@ public class Presupuesto implements java.io.Serializable {
 
 	public void setBorrado(boolean borrado) {
 		this.borrado = borrado;
+	}
+	
+	@Column(name = "observaciones", nullable = false, length = 2000)
+	public String getObservaciones() {
+		return this.observaciones;
+	}
+
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
 	}
 }

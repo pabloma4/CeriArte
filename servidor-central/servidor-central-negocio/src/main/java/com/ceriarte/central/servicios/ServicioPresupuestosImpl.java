@@ -61,7 +61,8 @@ public class ServicioPresupuestosImpl implements ServicioPresupuestos{
 		Date fechaValidoHasta = XMLGregorianCalendarConverter.asDate(presupuestoDTO.getFechaValidoHasta());
 		Cliente cliente = null != presupuestoDTO.getCliente() ? ClienteConverter.toCliente(presupuestoDTO.getCliente()) : null; 
 		PresupuestoEstado presupuestoEstado = null != presupuestoDTO.getPresupuestoEstado() ? PresupuestoEstadoConverter.toPresupuestoEstado(presupuestoDTO.getPresupuestoEstado()) : null; 
-				
+		String observaciones = presupuestoDTO.getObservaciones();
+		
 		// Busco el Presupuesto por id, sino lo encuentro creo uno nuevo.
 		Presupuesto presupuesto = presupuestoRepository.findOne(presupuestoDTO.getId());
 		if(null != presupuesto){
@@ -69,9 +70,10 @@ public class ServicioPresupuestosImpl implements ServicioPresupuestos{
 			presupuesto.setFechaValidoHasta(fechaValidoHasta);
 			presupuesto.setFechaModificacion(new Date());
 			presupuesto.setPresupuestoEstado(presupuestoEstado);
+			presupuesto.setObservaciones(observaciones);
 		}else{
 			// Creo un objeto prespuesto
-			presupuesto = new Presupuesto(cliente, fechaValidoHasta, presupuestoEstado);
+			presupuesto = new Presupuesto(cliente, fechaValidoHasta, presupuestoEstado, observaciones);
 		}
 		
 		for (DetallePresupuestoDTO detalleDTO : presupuestoDTO.getDetalles().getDetallePresupuesto()) {

@@ -123,6 +123,7 @@
 			<xs:element name="fechaCreacion" 		type="xs:date" 			  		minOccurs="1" maxOccurs="1" />
 			<xs:element name="fechaValidoHasta" 	type="xs:date" 			  		minOccurs="1" maxOccurs="1" />
 			<xs:element name="detalles"  			type="ae:detallesPresupuesto" 	minOccurs="1" maxOccurs="1" />
+			<xs:element name="observaciones"      	type="xs:string" 	  			minOccurs="1" maxOccurs="1" />
 	   </xs:all>
 	</xs:complexType>
 	

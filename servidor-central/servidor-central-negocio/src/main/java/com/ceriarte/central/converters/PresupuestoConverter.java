@@ -31,6 +31,7 @@ public class PresupuestoConverter {
 			dto.setPresupuestoEstado(PresupuestoEstadoConverter.toPresupuestoEstadoDTO(presupuesto.getPresupuestoEstado()));
 			dto.setFechaValidoHasta(XMLGregorianCalendarConverter.asXMLGregorianCalendar(presupuesto.getFechaValidoHasta()));
 			dto.setFechaCreacion(XMLGregorianCalendarConverter.asXMLGregorianCalendar(presupuesto.getFechaCreacion()));
+			dto.setObservaciones(presupuesto.getObservaciones());
 			
 			DetallesPresupuesto detallesPresupuesto = new DetallesPresupuesto();
 			for (DetallePresupuesto detallePresupuesto : presupuesto.getDetalles()) {
@@ -57,6 +58,7 @@ public class PresupuestoConverter {
 			presupuesto.setCliente(ClienteConverter.toCliente(dto.getCliente()));
 			presupuesto.setFechaValidoHasta(XMLGregorianCalendarConverter.asDate(dto.getFechaValidoHasta()));
 			presupuesto.setPresupuestoEstado(PresupuestoEstadoConverter.toPresupuestoEstado(dto.getPresupuestoEstado()));
+			presupuesto.setObservaciones(dto.getObservaciones());
 			
 			Set<DetallePresupuesto> detalles = new HashSet<DetallePresupuesto>();
 			for (DetallePresupuestoDTO detallePresupuestoDTO : dto.getDetalles().getDetallePresupuesto()) {
@@ -89,6 +91,7 @@ public class PresupuestoConverter {
         	targetDTO.setFechaValidoHasta(sourceDTO.getFechaValidoHasta());
         	targetDTO.setPresupuestoEstado(sourceDTO.getPresupuestoEstado());
         	targetDTO.setDetalles(sourceDTO.getDetalles());
+        	targetDTO.setObservaciones(sourceDTO.getObservaciones());
     	}
     	return targetDTO;
 	}
