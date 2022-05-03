@@ -23,7 +23,8 @@
     <context-param>
         <description>Declaracion de la ubicacion del archivo de configuracion de log4J</description>
         <param-name>log4jConfigLocation</param-name>
-        <param-value>file:${CONFIG_HOME}/servidor-central-ceriarte/log4j.properties</param-value>
+       <!-- <param-value>file:${CONFIG_HOME}/servidor-central-ceriarte/log4j.properties</param-value>-->
+       <param-value>/WEB-INF/log4j.properties</param-value>
     </context-param>
     
     <listener>

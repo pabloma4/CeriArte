@@ -48,6 +48,11 @@
 					<p:outputLabel for="estado" value="#{msg['presupuesto.estado']}:" />  
 	                <p:outputLabel id="estado" value="#{presupuestoController.editable.presupuestoEstado.nombre}"/>
 					<p:message for="estado" />
+					
+					<p:outputLabel for="observaciones" value="#{msg['presupuesto.observaciones']}:" />  
+	                <p:inputTextarea id="observaciones" value="#{presupuestoController.editable.observaciones}" rows="5" 
+	                			     cols="75" maxlength="1000" autoResize="false" />
+	           		<p:message for="observaciones" />
 	            </p:panelGrid>                                                         
            	</p:outputPanel>
            	

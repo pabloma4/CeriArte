@@ -38,6 +38,7 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
  *         &lt;element name="fechaCreacion" type="{http://www.w3.org/2001/XMLSchema}date"/&gt;
  *         &lt;element name="fechaValidoHasta" type="{http://www.w3.org/2001/XMLSchema}date"/&gt;
  *         &lt;element name="detalles" type="{http://www.autoentrada.com/ws/schemas/sc/ae/1_0}detallesPresupuesto"/&gt;
+ *         &lt;element name="observaciones" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *       &lt;/all&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -67,6 +68,8 @@ public class PresupuestoDTO
     protected XMLGregorianCalendar fechaValidoHasta;
     @XmlElement(required = true)
     protected DetallesPresupuesto detalles;
+    @XmlElement(required = true)
+    protected String observaciones;
 
     /**
      * Gets the value of the id property.
@@ -204,6 +207,30 @@ public class PresupuestoDTO
         this.detalles = value;
     }
 
+    /**
+     * Gets the value of the observaciones property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    /**
+     * Sets the value of the observaciones property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setObservaciones(String value) {
+        this.observaciones = value;
+    }
+
     public boolean equals(ObjectLocator thisLocator, ObjectLocator thatLocator, Object object, EqualsStrategy strategy) {
         if (!(object instanceof PresupuestoDTO)) {
             return false;
@@ -266,6 +293,15 @@ public class PresupuestoDTO
                 return false;
             }
         }
+        {
+            String lhsObservaciones;
+            lhsObservaciones = this.getObservaciones();
+            String rhsObservaciones;
+            rhsObservaciones = that.getObservaciones();
+            if (!strategy.equals(LocatorUtils.property(thisLocator, "observaciones", lhsObservaciones), LocatorUtils.property(thatLocator, "observaciones", rhsObservaciones), lhsObservaciones, rhsObservaciones)) {
+                return false;
+            }
+        }
         return true;
     }
 
@@ -305,6 +341,11 @@ public class PresupuestoDTO
             DetallesPresupuesto theDetalles;
             theDetalles = this.getDetalles();
             currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "detalles", theDetalles), currentHashCode, theDetalles);
+        }
+        {
+            String theObservaciones;
+            theObservaciones = this.getObservaciones();
+            currentHashCode = strategy.hashCode(LocatorUtils.property(locator, "observaciones", theObservaciones), currentHashCode, theObservaciones);
         }
         return currentHashCode;
     }
@@ -358,6 +399,11 @@ public class PresupuestoDTO
             DetallesPresupuesto theDetalles;
             theDetalles = this.getDetalles();
             strategy.appendField(locator, this, "detalles", buffer, theDetalles);
+        }
+        {
+            String theObservaciones;
+            theObservaciones = this.getObservaciones();
+            strategy.appendField(locator, this, "observaciones", buffer, theObservaciones);
         }
         return buffer;
     }

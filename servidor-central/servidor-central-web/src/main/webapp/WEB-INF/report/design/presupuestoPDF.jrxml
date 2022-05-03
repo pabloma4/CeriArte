@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="presupuestoPDF" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="66a69b99-4a57-4543-a181-560921762cd2">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="74"/>
+	<property name="ireport.y" value="15"/>
 	<subDataset name="dataset1" uuid="6ddf78c2-b8e3-4c6c-b511-82a572ee3377"/>
 	<parameter name="id" class="java.lang.Integer"/>
 	<parameter name="fechaCreacion" class="java.util.Date"/>
@@ -11,6 +11,7 @@
 	<parameter name="domicilio" class="java.lang.String"/>
 	<parameter name="localidad" class="java.lang.String"/>
 	<parameter name="montoTotal" class="java.lang.Double"/>
+	<parameter name="observaciones" class="java.lang.String"/>
 	<field name="idProducto" class="java.lang.Integer"/>
 	<field name="nombreProducto" class="java.lang.String"/>
 	<field name="descripcionProducto" class="java.lang.String"/>
@@ -68,7 +69,7 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="69">
+		<band height="127">
 			<staticText>
 				<reportElement x="0" y="0" width="106" height="20" uuid="66332319-5f33-4a18-9e30-4c9aab733ad7"/>
 				<textElement textAlignment="Left">
@@ -152,6 +153,30 @@
 					<font size="11" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{localidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="60" width="106" height="20" uuid="298373e3-662e-466d-9955-ea8a864141d2">
+					<printWhenExpression><![CDATA[!$P{observaciones}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Observaciones:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="106" y="60" width="449" height="55" isRemoveLineWhenBlank="true" uuid="6814e3c6-95a4-488b-870f-ea294eec2ec5"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" markup="none">
+					<font size="10" isBold="false" isItalic="false" isStrikeThrough="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{observaciones}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
@@ -268,7 +293,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="21" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToTallestObject" x="499" y="0" width="56" height="20" uuid="725801a1-82e3-410b-9cfb-8695670dbf59"/>
 				<box>
@@ -366,34 +391,34 @@
 		<band/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54">
+		<band height="39">
 			<textField evaluationTime="Report">
-				<reportElement mode="Opaque" x="515" y="34" width="40" height="20" backcolor="#CCCCFF" uuid="823dfcfe-a75f-4264-a8f0-2f98f5c4b051"/>
+				<reportElement mode="Opaque" x="515" y="19" width="40" height="20" backcolor="#CCCCFF" uuid="823dfcfe-a75f-4264-a8f0-2f98f5c4b051"/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="15" width="220" height="19" uuid="66332319-5f33-4a18-9e30-4c9aab733ad7"/>
+				<reportElement x="0" y="0" width="220" height="19" uuid="66332319-5f33-4a18-9e30-4c9aab733ad7"/>
 				<textElement textAlignment="Center">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[El presente presupuesto es válido hasta el día  ]]></text>
 			</staticText>
 			<textField evaluationTime="Report">
-				<reportElement x="220" y="15" width="52" height="19" uuid="26d908ae-175a-4028-8fa4-cddcd629de5d"/>
+				<reportElement x="220" y="0" width="52" height="19" uuid="26d908ae-175a-4028-8fa4-cddcd629de5d"/>
 				<textElement textAlignment="Center">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($P{fechaValidoHasta})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="272" y="15" width="50" height="19" uuid="66332319-5f33-4a18-9e30-4c9aab733ad7"/>
+				<reportElement x="272" y="0" width="50" height="19" uuid="66332319-5f33-4a18-9e30-4c9aab733ad7"/>
 				<textElement textAlignment="Center">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[inclusive.]]></text>
 			</staticText>
 			<textField>
-				<reportElement mode="Opaque" x="0" y="34" width="515" height="20" backcolor="#CCCCFF" uuid="4f1c6f11-7f02-49eb-af03-0ac68bc51757"/>
+				<reportElement mode="Opaque" x="0" y="19" width="515" height="20" backcolor="#CCCCFF" uuid="4f1c6f11-7f02-49eb-af03-0ac68bc51757"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
