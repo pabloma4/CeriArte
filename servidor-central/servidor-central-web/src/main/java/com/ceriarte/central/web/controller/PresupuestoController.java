@@ -423,6 +423,7 @@ public class PresupuestoController extends AbstractReportController implements S
 	    params.put("id", this.editable.getId());
 	    params.put("estado", this.editable.getPresupuestoEstado().getNombre());
 	    params.put("montoTotal", this.getMontoTotal());
+	    params.put("observaciones", this.editable.getObservaciones());
 	    return params;
 	}
 	
