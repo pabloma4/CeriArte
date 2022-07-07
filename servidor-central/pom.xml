@@ -26,7 +26,7 @@
 		<log4j.version>1.2.17</log4j.version>
 		<slf4j.version>1.7.5</slf4j.version>
 		<hibernate.jpa.version>4.3.5.Final</hibernate.jpa.version>
-		<hibernate.validator.version>4.3.1.Final</hibernate.validator.version>
+		<hibernate.validator.version>6.0.23.Final</hibernate.validator.version>
 		<primefaces.version>5.2</primefaces.version>
 		<primefaces.themes.version>1.0.10</primefaces.themes.version>
 		<omnifaces.version>1.8.1</omnifaces.version>
